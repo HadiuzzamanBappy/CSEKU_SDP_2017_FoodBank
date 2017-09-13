@@ -7,8 +7,11 @@ Project Description:
 
 Developed By:
 		Md. Hadiuzzaman Bappy (160219)
-		Rakib Raihan (160220)
+		Rakib Raihan (160220)-(2_1 Term)
+		Arjuman Sreashtho (160214) - (2_2 Term)
 
 Project Manager : Kazi Masudul Alam
 			&
-		  Sarfaraz Newaz
+		  Sarfaraz Newaz (2_1 Term)
+		  	&
+		  Monishankar Mondal (2_2 Term)
