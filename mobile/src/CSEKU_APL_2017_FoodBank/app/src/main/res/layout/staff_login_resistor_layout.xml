@@ -1,0 +1,74 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_app"
+    tools:context="com.example.bappy.foodbank.staff_login_resistor"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="If You Are Already a Staff \nor Admin then Click LOGIN\n\nOtherwise Click REGISTER\n for Registration"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/login"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:background="#aeee"
+        android:text="Login"
+        android:textSize="25sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:onClick="login"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New User???"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="#fff"/>
+
+    <Button
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:background="#aeee"
+        android:text="Registor"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:onClick="registeryou"
+        />
+    <!--<Button-->
+        <!--android:layout_width="270dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Registor for new Restaurent"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:layout_gravity="end"-->
+        <!--android:textSize="20sp"-->
+        <!--android:background="#aeee"-->
+        <!--android:gravity="center"-->
+        <!--android:onClick="resitornewrestaurant"/>-->
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginTop="30dp"
+        android:background="#aeee"
+        android:gravity="center"
+        android:onClick="skipall"
+        android:text="Skip >>"
+        android:textSize="20sp" />
+
+</LinearLayout>

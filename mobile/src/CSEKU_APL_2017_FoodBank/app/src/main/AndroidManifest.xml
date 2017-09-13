@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.bappy.foodbank">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/food_app_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".StaffLogIn" />
+        <activity android:name=".StaffFoodOrder" />
+        <activity android:name=".DisplayFoodList" />
+        <activity android:name=".DisplayRestaurentListView" />
+        <activity android:name=".DisplayRestaurentFoodList" />
+        <activity android:name=".DisplayFoodRestaurentList" />
+        <activity android:name=".Order" />
+        <activity android:name=".SuccessOrder" />
+        <activity android:name=".staff_login_resistor" />
+        <activity android:name=".Staff_Resister" />
+        <activity android:name=".Adminstaff" />
+        <activity android:name=".PendingStaff" />
+        <activity android:name=".AssignSatff" />
+        <activity android:name=".OnlyStaff" />
+        <activity android:name=".FullPaid" />
+        <activity android:name=".SuperAdminLogin" />
+        <activity android:name=".SuperAdminRestaurant" />
+        <activity android:name=".SuperAdminRestaurantStaff" />
+        <activity android:name=".SuperAdminPendingRestaurent" />
+        <activity android:name=".CreateNewRestaurant" />
+        <activity android:name=".CreateNewRestaurantStaff" />
+        <activity android:name=".DecorateRestaurant" />
+        <activity android:name=".AddFood" />
+        <activity android:name=".EditActivity" />
+        <activity android:name=".SuperAdminRestaurantStaffWithoutPending" />
+        <activity android:name=".ShowProfile" />
+        <activity android:name=".EditChangeProfile"></activity>
+    </application>
+
+</manifest>

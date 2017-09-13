@@ -1,0 +1,96 @@
+<resources>
+    //app details info
+    <string name="app_name">Food Bank</string>
+    <string name="ip_address">192.168.0.102</string>
+
+    //food edit delete context menu
+    <string name="title_Edit">Edit</string>
+    <string name="title_Delete">Delete</string>
+
+    //sharedpreferences data variable
+    <string name="NAME">ID_NAME</string>
+    <string name="PASSWORD">ID_PASSWORD</string>
+    <string name="PREF_FILE">APP_PREF_FILE</string>
+    <string name="SAVE_LOGIN">SAVE_LOGIN</string>
+    <string name="RESTAURANT_NAME">RESTAURANT_NAME</string>
+    <string name="SKIP">SKIP</string>
+    <string name="TYPE">ID_TYPE</string>
+
+    //login string
+    <string name="new_user">New User?</string>
+    <string name="super_user">SuperAdmin?</string>
+
+    //order date request
+    <string-array name="quantity">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="day">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+    <string-array name="year">
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+    </string-array>
+    <string-array name="month">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+</resources>
