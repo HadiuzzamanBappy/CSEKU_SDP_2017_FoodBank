@@ -213,15 +213,15 @@ public class SuccessOrder extends AppCompatActivity {
             Intent intent = new Intent(this, DisplayFoodRestaurentList.class);
             intent.putExtra("food_name", food);
             startActivity(intent);
+            finish();
         }
         else
         {
             Intent intent = new Intent(this, DisplayRestaurentFoodList.class);
             intent.putExtra("restaurent_name", restaurent);
             startActivity(intent);
+            finish();
         }
-        finish();
-        //finishing
     }
     //creating activity for back pressing from phone
     public void onBackPressed() {
@@ -229,13 +229,14 @@ public class SuccessOrder extends AppCompatActivity {
             Intent intent = new Intent(this, DisplayFoodRestaurentList.class);
             intent.putExtra("food_name", food);
             startActivity(intent);
+            finish();
         }
         else
         {
             Intent intent = new Intent(this, DisplayRestaurentFoodList.class);
             intent.putExtra("restaurent_name", restaurent);
             startActivity(intent);
+            finish();
         }
-        finish();
     }
 }

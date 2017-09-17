@@ -1,0 +1,27 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/food_app"
+    android:id="@+id/decorate_restaurant"
+    >
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="#aeee"
+        android:text="Add"
+        android:textSize="15sp"
+        android:onClick="addfood"
+        android:layout_marginTop="6dp"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/foodview"
+        android:layout_marginTop="7dp"
+        ></ListView>
+
+</LinearLayout>

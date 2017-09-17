@@ -7,6 +7,7 @@
     android:background="@drawable/food_app"
     tools:context="com.example.bappy.foodbank.staff_login_resistor"
     android:baselineAligned="false"
+    android:id="@+id/staff_login_register"
     android:orientation="vertical">
 
     <TextView

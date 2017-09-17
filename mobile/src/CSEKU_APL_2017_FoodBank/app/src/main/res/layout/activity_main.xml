@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/food_app_home"
+    android:id="@+id/main_app"
     android:orientation="vertical"
     >
 

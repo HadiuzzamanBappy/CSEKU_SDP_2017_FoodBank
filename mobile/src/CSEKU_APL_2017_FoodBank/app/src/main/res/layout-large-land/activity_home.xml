@@ -1,0 +1,63 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/food_app"
+    android:id="@+id/home_app">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Log In"
+        android:layout_gravity="end"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_marginRight="15dp"
+        android:textSize="35sp"
+        android:id="@+id/logger"/>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="FoodBank"
+        android:textColor="#fff"
+        android:textSize="55sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"/>
+
+    <Button
+        android:id="@+id/restaurent"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Restaurant"
+        android:textSize="25sp"
+        android:background="#aeee"
+        android:onClick="parsejsonrestaurent"
+        />
+    <Button
+        android:id="@+id/findfood"
+        android:layout_width="450dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="I Am Hungry For"
+        android:textSize="25sp"
+        android:background="#aeee"
+        android:onClick="parsejsonfood"
+        />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Exit"
+        android:textSize="25sp"
+        android:background="#aeee"
+        android:padding="15dp"
+        />
+</LinearLayout>

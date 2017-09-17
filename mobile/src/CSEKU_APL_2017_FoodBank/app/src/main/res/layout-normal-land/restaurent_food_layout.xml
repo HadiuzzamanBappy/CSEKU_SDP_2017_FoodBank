@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="60dp"
+    android:background="#fff"
+    android:paddingLeft="6dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical"
+    android:id="@+id/restaurant_food">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/foodsearch"
+        android:layout_marginTop="5dp"/>
+    <LinearLayout
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:id="@+id/t_name"
+            android:text="bappy"
+            android:gravity="start"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:id="@+id/t_type"
+            android:text="bappy"
+            android:gravity="start"
+            android:textSize="15sp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="price:"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="bappy"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:id="@+id/t_price"
+            />
+    </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

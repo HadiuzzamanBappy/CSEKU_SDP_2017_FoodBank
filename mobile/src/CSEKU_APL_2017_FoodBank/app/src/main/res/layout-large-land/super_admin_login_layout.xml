@@ -1,0 +1,63 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:id="@+id/super_login"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We Are In SuperAdmin Log-In Page And Please Give Your Information To Log-In"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Username"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="60dp"
+        android:textSize="25sp"
+        android:textColor="#fff"/>
+
+    <EditText
+        android:id="@+id/restaurentpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Enter Your Password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:textSize="25sp"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login as SuperAdmin!! "
+        android:textSize="30sp"
+        android:textColor="@drawable/blue_color"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:text="Log-In"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="#aeee"
+        android:onClick="onLogin"
+        />
+
+    </LinearLayout>

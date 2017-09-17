@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/food_app"
+    android:id="@+id/add_food"
     android:padding="7dp"
     >
 
@@ -23,7 +24,8 @@
         android:hint="Input Your Food Name\nsuch as: Chicken Grill"
         android:gravity="center"
         android:layout_marginTop="40dp"
-        android:id="@+id/foodname"/>
+        android:id="@+id/foodname"
+        android:textColor="#fff"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +34,8 @@
         android:gravity="center"
         android:layout_marginTop="16dp"
         android:inputType="number"
-        android:id="@+id/foodprice"/>
+        android:id="@+id/foodprice"
+        android:textColor="#fff"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

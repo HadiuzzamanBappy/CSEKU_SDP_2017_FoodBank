@@ -1,0 +1,65 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_app"
+    tools:context="com.example.bappy.foodbank.staff_login_resistor"
+    android:baselineAligned="false"
+    android:id="@+id/staff_login_register"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="If You Are Already a Staff or Admin then Click LOGIN\n\nOtherwise Click REGISTER for Registration"
+        android:textColor="#fff"
+        android:textSize="45sp"
+        android:textAlignment="center"
+        android:layout_marginTop="80dp"/>
+    <Button
+        android:id="@+id/login"
+        android:layout_width="460dp"
+        android:layout_height="90dp"
+        android:background="#aeee"
+        android:text="Login"
+        android:textSize="40sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:onClick="login"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New User???"
+        android:textSize="40sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:textStyle="bold"
+        android:textColor="#fff"/>
+
+    <Button
+        android:layout_width="460dp"
+        android:layout_height="90dp"
+        android:background="#aeee"
+        android:text="Registor"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:onClick="registeryou"
+        />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="320dp"
+        android:layout_height="90dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginTop="150dp"
+        android:background="#aeee"
+        android:gravity="center"
+        android:onClick="skipall"
+        android:text="Skip >>"
+        android:textSize="40sp" />
+
+</LinearLayout>

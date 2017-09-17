@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bappy.foodbank.ShowProfile"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:id="@+id/show_profile"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:  "
+        android:textColor="#fff"
+        android:textSize="15sp"/>
+    <TextView
+        android:id="@+id/name_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bappy"
+        android:textColor="#fff"
+        android:textSize="15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PassWord:  "
+            android:textColor="#fff"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/pass_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bappy"
+            android:textColor="#fff"
+            android:textSize="15sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You Are:  "
+            android:textColor="#fff"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/type_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:textColor="#fff"
+            android:textSize="15sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/showrestaurant">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restaurant Name:  "
+            android:textColor="#fff"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/restaurant_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BISTRO-C"
+            android:textColor="#fff"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textSize="15sp"
+        android:text="OK"
+        android:background="@drawable/blue_color"
+        android:layout_marginTop="100dp"
+        android:onClick="okgo"/>
+
+</LinearLayout>

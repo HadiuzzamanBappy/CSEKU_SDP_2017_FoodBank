@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="95dp"
+    android:background="#fff"
+    android:padding="4dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="horizontal"
+    android:id="@+id/food_restaurant">
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/restaurent"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:layout_width="270dp"
+        android:layout_height="match_parent"
+        android:id="@+id/t_name"
+        android:text="bappy"
+        android:gravity="center"
+        android:textSize="30sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="price:"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="bappy"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:id="@+id/t_price"
+            />
+    </LinearLayout>
+
+</LinearLayout>

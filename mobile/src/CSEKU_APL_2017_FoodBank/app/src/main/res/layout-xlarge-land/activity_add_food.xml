@@ -1,0 +1,75 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/food_app"
+    android:id="@+id/add_food"
+    android:padding="7dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="45sp"
+        android:textColor="@drawable/red_color"
+        android:text="Please Fill All The Information to Add \nYour New Food"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#fff"
+        android:hint="Input Your Food Name  such as: Chicken Grill"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:id="@+id/foodname"
+        android:textSize="40sp"
+        android:textColor="#fff"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#fff"
+        android:hint="Input Food Price"
+        android:gravity="center"
+        android:layout_marginTop="36dp"
+        android:inputType="number"
+        android:id="@+id/foodprice"
+        android:textSize="40sp"
+        android:textColor="#fff"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:background="#757575">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Food Type"
+        android:textSize="40sp"
+        android:textColor="#fff"
+        android:gravity="center"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/spinnertype"
+        android:textAlignment="center"
+        android:gravity="center"
+        ></Spinner>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:text="ADD"
+        android:layout_gravity="center"
+        android:textSize="40sp"
+        android:layout_marginTop="70dp"
+        android:background="#aeee"
+        android:onClick="addfood"/>
+
+</LinearLayout>

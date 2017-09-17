@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/food_app"
+    android:id="@+id/decorate_restaurant"
     >
 
     <Button

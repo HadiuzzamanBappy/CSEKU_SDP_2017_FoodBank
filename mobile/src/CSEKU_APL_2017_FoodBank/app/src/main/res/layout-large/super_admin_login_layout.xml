@@ -1,0 +1,75 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:id="@+id/super_login"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We Are In SuperAdmin Log-In Page And Please Give Your Information To Log-In"
+        android:textSize="35sp"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="#00a"
+        android:textSize="30sp"
+        android:layout_marginTop="60dp"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Username"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:textSize="30sp"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textColor="#00a"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"/>
+    <EditText
+        android:id="@+id/restaurentpassword"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:textSize="30sp"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login as SuperAdmin!! "
+        android:textSize="35sp"
+        android:textColor="@drawable/blue_color"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="230dp"
+        android:layout_height="60dp"
+        android:text="Log-In"
+        android:padding="10dp"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:background="#aeee"
+        android:onClick="onLogin"
+        />
+
+    </LinearLayout>

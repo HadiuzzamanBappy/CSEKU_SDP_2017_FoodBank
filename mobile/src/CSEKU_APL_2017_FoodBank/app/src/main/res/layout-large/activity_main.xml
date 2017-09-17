@@ -1,0 +1,29 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/food_app_home"
+    android:id="@+id/main_app"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Expectation Is Our Service"
+        android:layout_gravity="center"
+        android:textSize="55sp"
+        android:gravity="center"
+        android:textColor="#9E9E9E"
+        android:textStyle="bold"
+        android:layout_marginTop="160dp"/>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="150dp"
+        />
+
+</LinearLayout>

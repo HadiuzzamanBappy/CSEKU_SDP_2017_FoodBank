@@ -1,0 +1,110 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/staff_login"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We Are In Staff Log-In Page And Please Give Your Information To Log-In"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Username"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:textSize="35sp"
+        android:textColor="#fff"
+        android:layout_marginTop="50dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="#757575"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Role"
+            android:textColor="#00a"
+            android:textSize="35sp"
+            android:layout_marginTop="6dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/spinnerrole"
+            android:textAlignment="center"
+            ></Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:id="@+id/linearres"
+        android:background="#757575">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restaurant : "
+            android:textColor="#00a"
+            android:textSize="35sp"
+            android:layout_marginTop="6dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/spinnerres"
+            android:textAlignment="center"
+            ></Spinner>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/restaurentpassword"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:textSize="35sp"
+        android:textColor="#fff"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Log-In"
+        android:padding="10dp"
+        android:textSize="35sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:background="#aeee"
+        android:onClick="onLogin"
+        />
+
+    <Button
+        android:layout_width="400dp"
+        android:layout_height="70dp"
+        android:text="i am superadmin"
+        android:textSize="35sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="80dp"
+        android:background="#aeee"
+        android:onClick="onLoginsuperadmin"
+        />
+
+</LinearLayout>

@@ -268,9 +268,9 @@ public class DisplayRestaurentListView extends AppCompatActivity {
             final Restaurent restaurent1=(Restaurent) this.getItem(position);
             restaurentHolder.name.setText(restaurent1.getName());
             restaurentHolder.town.setText(restaurent1.getTown());
-            restaurentHolder.street.setText(restaurent1.getStreet());
-            restaurentHolder.phone.setText(restaurent1.getPhone());
-            restaurentHolder.type.setText(restaurent1.getType());
+            restaurentHolder.street.setText("Place: "+restaurent1.getStreet()+" , ");
+            restaurentHolder.phone.setText("Contact Us: "+restaurent1.getPhone());
+            restaurentHolder.type.setText("( "+restaurent1.getType()+")");
             restaurentview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
