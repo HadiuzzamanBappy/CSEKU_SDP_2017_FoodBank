@@ -1,11 +1,12 @@
 <?php
 $server_name="localhost";
-$user_name="root";
-$password="";
-$database_name="foodbank";
+$user_name="csekua5_feedme";
+$password="Food%^238490232";
+$database_name="csekua5_feedme";
 
 $name=$_POST["name"];
 // $name="Pending";
+// $name="BISTRO-C";
 
 if($name=='Pending')
 {
@@ -27,8 +28,8 @@ while($row=mysqli_fetch_array($result))
         array_push($response,array
             (
             "name"=>$row[1],
-            "town"=>$row[2],
-            "street"=>$row[3],
+            "town"=>$row[3],
+            "street"=>$row[2],
             "phone"=>$row[5],
             "type"=>$row[4]
         ));
