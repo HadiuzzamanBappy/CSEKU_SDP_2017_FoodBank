@@ -1,35 +1,41 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
+    android:layout_height="wrap_content"
     android:background="#fff"
+    android:id="@+id/assign_staff"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/order"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:paddingLeft="5dp">
+            <TextView
+                android:id="@+id/sname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textSize="23sp"
+                />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/sname"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:text="name"
-                android:textSize="23sp"
-                />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Staff:"
-                android:textSize="23sp"
+                android:text="Assign Staff:"
+                android:textSize="20sp"
                 />
             <Spinner
                 android:layout_width="match_parent"
@@ -45,25 +51,20 @@
             android:text="number"
             android:textSize="20sp"
             />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
             <TextView
                 android:id="@+id/sfood"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="food"
                 android:textSize="20sp"
                 />
             <TextView
                 android:id="@+id/squantity"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="quantity"
                 android:textSize="20sp"
                 />
-        </LinearLayout>
         <TextView
             android:id="@+id/sorderdate"
             android:layout_width="match_parent"
@@ -85,31 +86,20 @@
             android:text="deliverytype"
             android:textSize="20sp"
             />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="price : "
-                android:textSize="20sp"
-                />
             <TextView
                 android:id="@+id/sprice"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="price"
                 android:textSize="20sp"
                 />
             <TextView
                 android:id="@+id/spaid"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="paid"
                 android:textSize="20sp"
                 />
-        </LinearLayout>
         <TextView
             android:id="@+id/sorderplace"
             android:layout_width="match_parent"
@@ -119,13 +109,27 @@
             />
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
+            android:text="Show All"
+            android:textSize="12sp"
+            android:id="@+id/showall"
+            android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
             android:text="Assign"
             android:textAlignment="center"
             android:textSize="15sp"
             android:textColor="#fff"
             android:background="@drawable/blue_color"
             android:id="@+id/Assign"
-            android:onClick="gotoass"/>
+            android:onClick="gotoass"
+            android:layout_marginBottom="5dp"/>
     </LinearLayout>
-</LinearLayout>
+    </LinearLayout>

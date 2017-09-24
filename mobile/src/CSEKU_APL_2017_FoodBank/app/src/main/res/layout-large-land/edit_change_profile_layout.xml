@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bappy.foodbank.ShowProfile"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/edit_change_profile">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You Are:  "
+            android:textColor="#fff"
+            android:textSize="25sp"/>
+        <TextView
+            android:id="@+id/type_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:textColor="#fff"
+            android:textSize="25sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/showrestaurant"
+        android:layout_marginTop="2dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restaurant Name:  "
+            android:textColor="#fff"
+            android:textSize="25sp"/>
+        <TextView
+            android:id="@+id/restaurant_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BISTRO-C"
+            android:textColor="#fff"
+            android:textSize="25sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:  "
+            android:textColor="#fff"
+            android:textSize="25sp"/>
+        <EditText
+            android:id="@+id/name_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Username"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:textSize="25sp"/>
+    </LinearLayout>
+        <EditText
+            android:id="@+id/old_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Input your Old Password"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:layout_marginTop="2dp"/>
+    <EditText
+        android:id="@+id/new_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input your New Password"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:layout_marginTop="2dp"/>
+    <EditText
+        android:id="@+id/new_password2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input your New Password Again"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:layout_marginTop="2dp"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:text="OK"
+        android:textSize="25sp"
+        android:background="@drawable/red_color"
+        android:onClick="okchange"/>
+
+</LinearLayout>

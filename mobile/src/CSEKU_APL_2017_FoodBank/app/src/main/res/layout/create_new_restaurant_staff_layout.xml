@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.bappy.foodbank.Staff_Resister"
     android:background="@drawable/food_app"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/creat_new_restaurant_staff">
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
         android:hint="Input Your Username"
         android:textAlignment="center"
         android:textColorHint="#fff"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:textColor="#fff"/>
 
 
     <EditText
@@ -38,7 +40,8 @@
         android:hint="Enter Your Password"
         android:textAlignment="center"
         android:textColorHint="#fff"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"/>
     <EditText
         android:id="@+id/repassword"
         android:inputType="textPassword"
@@ -47,7 +50,8 @@
         android:hint="Enter Your Password Again"
         android:textAlignment="center"
         android:textColorHint="#fff"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

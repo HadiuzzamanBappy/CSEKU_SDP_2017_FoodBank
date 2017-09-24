@@ -1,0 +1,45 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/superadmin_restaurant">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bappy"
+        android:textSize="15sp"
+        android:background="#aeee"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/admintext"/>
+        <Button
+            android:layout_width="222dp"
+            android:layout_height="29dp"
+            android:text="Pending restaurent"
+            android:background="@drawable/blue_color"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:onClick="pendingrestaurant"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Active"
+        android:background="#aeee"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lisview"
+        android:layout_marginTop="5dp"
+        />
+</LinearLayout>

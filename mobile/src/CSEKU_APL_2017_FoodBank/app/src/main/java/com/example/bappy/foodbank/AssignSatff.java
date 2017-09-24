@@ -67,6 +67,7 @@ public class AssignSatff extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    int show_all_value = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,7 +144,7 @@ public class AssignSatff extends AppCompatActivity {
             nameofst="None";
             View stafffoodview;
             stafffoodview = convertView;
-            StaffFoodHolder staffFoodHolder;
+            final StaffFoodHolder staffFoodHolder;
             if (stafffoodview == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 stafffoodview = layoutInflater.inflate(R.layout.assign_staff_list, parent, false);
@@ -165,16 +166,26 @@ public class AssignSatff extends AppCompatActivity {
             }
 
             final StaffFoodAssign staffFood = (StaffFoodAssign) this.getItem(position);
-            staffFoodHolder.clientname.setText(staffFood.getClientname());
-            staffFoodHolder.foodname.setText(staffFood.getFoodname());
-            staffFoodHolder.quantity.setText(staffFood.getQuantity());
-            staffFoodHolder.orderdate.setText(staffFood.getOrderdate());
-            staffFoodHolder.ispaid.setText(staffFood.getIspaid());
-            staffFoodHolder.phone.setText(staffFood.getPhone());
-            staffFoodHolder.deliverydate.setText(staffFood.getDeliverydate());
-            staffFoodHolder.isdelivery.setText(staffFood.getIsdelivery());
-            staffFoodHolder.price.setText(staffFood.getPrice());
-            staffFoodHolder.orderplace.setText(staffFood.getOrderplace());
+            staffFoodHolder.clientname.setText("Name: "+staffFood.getClientname());
+            staffFoodHolder.foodname.setText("Food: "+staffFood.getFoodname());
+            staffFoodHolder.quantity.setText("Quantity: "+staffFood.getQuantity());
+            staffFoodHolder.orderdate.setText("Order Date: "+staffFood.getOrderdate());
+            staffFoodHolder.ispaid.setText("Paid Status: "+staffFood.getIspaid());
+            staffFoodHolder.phone.setText("Phone No: "+staffFood.getPhone());
+            staffFoodHolder.deliverydate.setText("Delivaery  Date: "+staffFood.getDeliverydate());
+            staffFoodHolder.isdelivery.setText("Delivery Status: "+staffFood.getIsdelivery());
+            staffFoodHolder.price.setText("Price: "+staffFood.getPrice());
+            staffFoodHolder.orderplace.setText("Place: "+staffFood.getOrderplace());
+
+            staffFoodHolder.foodname.setVisibility(View.GONE);
+            staffFoodHolder.quantity.setVisibility(View.GONE);
+            staffFoodHolder.orderdate.setVisibility(View.GONE);
+            staffFoodHolder.ispaid.setVisibility(View.GONE);
+            staffFoodHolder.phone.setVisibility(View.GONE);
+            staffFoodHolder.deliverydate.setVisibility(View.GONE);
+            staffFoodHolder.isdelivery.setVisibility(View.GONE);
+            staffFoodHolder.price.setVisibility(View.GONE);
+            staffFoodHolder.orderplace.setVisibility(View.GONE);
             ArrayAdapter arrayAdapter=new ArrayAdapter(AssignSatff.this,android.R.layout.simple_spinner_item,ass);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             staffFoodHolder.spin.setAdapter(arrayAdapter);
@@ -183,7 +194,7 @@ public class AssignSatff extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     TextView mytext=(TextView)view;
-                    Toast.makeText(getBaseContext(), "You Selected "+mytext.getText(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "You Selected "+mytext.getText(), Toast.LENGTH_SHORT).show();
                     nameofst=(String)mytext.getText();
                 }
 
@@ -211,7 +222,39 @@ public class AssignSatff extends AppCompatActivity {
                     }
                 }
             });
-
+            final Button show_all=(Button)stafffoodview.findViewById(R.id.showall);
+            show_all.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(show_all_value==0) {
+                        staffFoodHolder.foodname.setVisibility(View.VISIBLE);
+                        staffFoodHolder.quantity.setVisibility(View.VISIBLE);
+                        staffFoodHolder.orderdate.setVisibility(View.VISIBLE);
+                        staffFoodHolder.ispaid.setVisibility(View.VISIBLE);
+                        staffFoodHolder.phone.setVisibility(View.VISIBLE);
+                        staffFoodHolder.deliverydate.setVisibility(View.VISIBLE);
+                        staffFoodHolder.isdelivery.setVisibility(View.VISIBLE);
+                        staffFoodHolder.price.setVisibility(View.VISIBLE);
+                        staffFoodHolder.orderplace.setVisibility(View.VISIBLE);
+                        show_all.setText("Hide All");
+                        show_all_value =1;
+                    }
+                    else
+                    {
+                        staffFoodHolder.foodname.setVisibility(View.GONE);
+                        staffFoodHolder.quantity.setVisibility(View.GONE);
+                        staffFoodHolder.orderdate.setVisibility(View.GONE);
+                        staffFoodHolder.ispaid.setVisibility(View.GONE);
+                        staffFoodHolder.phone.setVisibility(View.GONE);
+                        staffFoodHolder.deliverydate.setVisibility(View.GONE);
+                        staffFoodHolder.isdelivery.setVisibility(View.GONE);
+                        staffFoodHolder.price.setVisibility(View.GONE);
+                        staffFoodHolder.orderplace.setVisibility(View.GONE);
+                        show_all.setText("Show All");
+                        show_all_value =0;
+                    }
+                }
+            });
             return stafffoodview;
         }
 

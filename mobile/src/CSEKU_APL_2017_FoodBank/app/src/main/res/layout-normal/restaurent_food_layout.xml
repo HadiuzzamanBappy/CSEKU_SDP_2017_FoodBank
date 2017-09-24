@@ -25,7 +25,7 @@
             android:id="@+id/t_name"
             android:text="bappy"
             android:gravity="start"
-            android:textSize="20sp"
+            android:textSize="15sp"
             />
 
         <TextView
@@ -34,7 +34,7 @@
             android:id="@+id/t_type"
             android:text="bappy"
             android:gravity="start"
-            android:textSize="15sp"
+            android:textSize="12sp"
             />
     </LinearLayout>
     <LinearLayout
@@ -46,17 +46,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="price:"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:layout_gravity="center"
             />
+
         <TextView
+            android:id="@+id/t_price"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="bappy"
-            android:textSize="20sp"
             android:layout_gravity="center"
-            android:id="@+id/t_price"
-            />
+            android:text="bappy"
+            android:textSize="15sp" />
     </LinearLayout>
     </LinearLayout>
 

@@ -32,7 +32,8 @@
         android:textAlignment="center"
         android:textColorHint="#fff"
         android:textSize="15sp"
-        android:textColor="#757575"/>
+        android:textColor="#fff"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,7 +50,8 @@
         android:hint="Enter Your Password"
         android:textAlignment="center"
         android:textColorHint="#fff"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:textColor="#fff"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +65,6 @@
         android:layout_width="150dp"
         android:layout_height="35dp"
         android:text="Log-In"
-        android:padding="10dp"
         android:textSize="15sp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/creat_new_restaurant">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Make Your Restaurant Registration\nSuccessfull By Filling All Field"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Restaurant Name\n(InCapital)"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="1dp"
+        android:textSize="12sp"
+        android:textColor="#fff"/>
+    <EditText
+        android:id="@+id/street"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Restaurant Street"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="1dp"
+        android:textSize="12sp"
+        android:textColor="#fff"/>
+    <EditText
+        android:id="@+id/town"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Town"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="1dp"
+        android:textSize="12sp"
+        android:textColor="#fff"/>
+
+    <EditText
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Restaurant Type\nsuch : Cafe/Chinese"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="1dp"
+        android:textSize="12sp"
+        android:textColor="#fff"/>
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Restaurant Phone Number"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="1dp"
+        android:textSize="12sp"
+        android:textColor="#fff"/>
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Restaurant Password"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="1dp"
+        android:textSize="12sp"
+        android:textColor="#fff"/>
+    <EditText
+        android:id="@+id/passwordagain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Password again"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="1dp"
+        android:textSize="12sp"
+        android:textColor="#fff"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:text="Next"
+        android:background="#aeee"
+        android:textSize="15sp"
+        android:layout_marginTop="30dp"
+        android:onClick="onrestaurentresistor"
+        android:layout_marginBottom="20dp" />
+    </LinearLayout>
+</ScrollView>

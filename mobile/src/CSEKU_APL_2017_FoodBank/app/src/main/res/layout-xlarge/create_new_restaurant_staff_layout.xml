@@ -1,0 +1,79 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bappy.foodbank.Staff_Resister"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/creat_new_restaurant_staff"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Make Your Registration\nSuccessfull By Filling All Field\nIf Valid Then Request Will Be\n Sent To Admin For Enterence"
+        android:textSize="45sp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Username"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="50dp"
+        android:textColor="#fff"
+        android:textSize="45dp"/>
+
+
+    <EditText
+        android:id="@+id/password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="20dp"
+        android:textColor="#fff"
+        android:textSize="45dp"/>
+    <EditText
+        android:id="@+id/repassword"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password Again"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="20dp"
+        android:textColor="#fff"
+        android:textSize="45dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registration As Admin"
+        android:textSize="45sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@drawable/blue_color"/>
+
+    <Button
+        android:id="@+id/resistor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resister"
+        android:textSize="45sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="#aeee"
+        android:onClick="onResister"
+        android:layout_weight="0.08" />
+
+</LinearLayout>

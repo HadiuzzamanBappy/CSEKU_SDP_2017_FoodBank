@@ -1,0 +1,121 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bappy.foodbank.Adminstaff"
+    android:orientation="vertical"
+    android:background="@drawable/food_app"
+    android:id="@+id/adminstaff">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="bappy"
+            android:textSize="15sp"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:id="@+id/name"
+            android:layout_marginTop="10dp"/>
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:background="#aeee"
+            android:textColor="@drawable/blue_color"
+            android:textAlignment="center"
+            android:text="All order"
+            android:textSize="12sp"
+            android:onClick="allorder"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bappy"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:id="@+id/date"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/getdate"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:background="#aeee"
+        android:textAlignment="center"
+        android:text="Get date"
+        android:textSize="12sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="25dp"/>
+    <Button
+        android:onClick="getfullprice"
+        android:layout_width="140dp"
+        android:layout_height="27dp"
+        android:background="#aeee"
+        android:textAlignment="center"
+        android:text="Get full price"
+        android:textSize="12sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:layout_width="188dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="25dp"
+        android:background="#aeee"
+        android:id="@+id/orderlist"
+        android:text="order list"
+        android:textSize="12sp"
+        android:onClick="orderlist"/>
+
+    <Button
+        android:layout_width="188dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="10dp"
+        android:background="#aeee"
+        android:id="@+id/deliverylist"
+        android:text="delivery list"
+        android:textSize="12sp"
+        android:onClick="deliverylist"/>
+
+    <Button
+        android:id="@+id/assignstaff"
+        android:layout_width="140dp"
+        android:layout_height="34dp"
+        android:background="#aeee"
+        android:textAlignment="center"
+        android:text="assign staff"
+        android:textSize="12sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="25dp"
+        android:onClick="assignstaff"/>
+    <Button
+        android:id="@+id/pendingstaff"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
+        android:background="#aeee"
+        android:textAlignment="center"
+        android:text="pending staff"
+        android:textSize="12sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"
+        android:onClick="pending"/>
+    <Button
+        android:id="@+id/decorate"
+        android:layout_width="184dp"
+        android:layout_height="30dp"
+        android:background="#aeee"
+        android:textAlignment="center"
+        android:text="decorate your menu"
+        android:textSize="12sp"
+        android:layout_gravity="start"
+        android:onClick="decoraterestaurant"
+        android:layout_marginTop="25dp"
+        />
+</LinearLayout>

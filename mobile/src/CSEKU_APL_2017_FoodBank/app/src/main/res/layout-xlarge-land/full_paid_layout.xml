@@ -1,0 +1,112 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/full_paid"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bappy"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="#fff"
+        android:id="@+id/txtviw"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/red_color">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paid price :   "
+            android:textSize="35sp"
+            android:textColor="#fff"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="250"
+            android:textSize="35sp"
+            android:id="@+id/paidprice"
+            android:textColor="#fff"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Taka"
+            android:textSize="35sp"
+            android:textColor="#fff"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#aeee">
+        <TextView
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:text="29-6-17"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:id="@+id/startdateview"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Start date"
+            android:id="@+id/startdate"
+            android:textSize="28sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#aeee">
+
+        <TextView
+            android:id="@+id/enddateview"
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="29-6-17"
+            android:textSize="35sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="End date"
+            android:id="@+id/enddate"
+            android:textSize="28sp"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/getprice"
+        android:text="getprice"
+        android:textSize="30sp"
+        android:onClick="getpriceindate"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#aeee"
+        android:text="All Order Price"
+        android:textSize="30sp"
+        android:gravity="center"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/foodstafflist"
+        ></ListView>
+</LinearLayout>

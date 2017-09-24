@@ -1,0 +1,132 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bappy.foodbank.Staff_Resister"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/staff_resister">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Make Your Registration Successfull By Filling All Field\nIf Valid Then Request Will Be Sent To Admin For Enterence"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Username"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="20dp"
+        android:textColor="#fff"
+        android:textSize="25sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:background="#757575">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Role"
+            android:textColor="#00a"
+            android:textSize="25sp"
+            android:layout_marginTop="6dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/spinnerrole"
+            android:textAlignment="center"
+            ></Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:id="@+id/linearres"
+        android:background="#757575">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant : "
+        android:textColor="#00a"
+        android:textSize="25sp"
+        android:layout_marginTop="6dp"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/spinnerres"
+        android:textAlignment="center"
+        ></Spinner>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/restaurentpassword"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Restaurent Password"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="5dp"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        />
+
+    <EditText
+        android:id="@+id/password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="5dp"
+        android:textColor="#fff"
+        android:textSize="25sp"/>
+    <EditText
+        android:id="@+id/repassword"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password Again"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="5dp"
+        android:textColor="#fff"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/resistor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resister"
+        android:textSize="25sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#aeee"
+        android:onClick="onResister"
+        android:layout_marginBottom="20dp"
+        />
+    </LinearLayout>
+</ScrollView>

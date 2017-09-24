@@ -40,7 +40,7 @@ import java.util.List;
 
 public class SuperAdminRestaurantStaffWithoutPending extends AppCompatActivity {
 
-    String resname,name,type;
+    String resname,name,type,allres;
     JSONObject jsonObject;
     JSONArray jsonArray;
     RestaurentAdapter restaurentAdapter;
@@ -62,6 +62,7 @@ public class SuperAdminRestaurantStaffWithoutPending extends AppCompatActivity {
         resname=getIntent().getExtras().getString("restaurent_name");
         name=getIntent().getExtras().getString("username");
         type=getIntent().getExtras().getString("role");
+        allres=getIntent().getExtras().getString("allres");
 
         txt=(TextView)findViewById(R.id.admintext);
         txt.setText(resname);
@@ -283,7 +284,7 @@ public class SuperAdminRestaurantStaffWithoutPending extends AppCompatActivity {
         Intent intent = new Intent(SuperAdminRestaurantStaffWithoutPending.this, SuperAdminPendingRestaurent.class);
         intent.putExtra("username", name);
         intent.putExtra("role", "SuperAdmin");
-        intent.putExtra("restaurant",resname);
+        intent.putExtra("restaurant",allres);
         startActivity(intent);
         finish();
     }

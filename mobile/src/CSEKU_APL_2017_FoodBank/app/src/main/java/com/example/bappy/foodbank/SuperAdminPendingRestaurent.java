@@ -237,10 +237,10 @@ public class SuperAdminPendingRestaurent extends AppCompatActivity {
             final Restaurent restaurent1 = (Restaurent) this.getItem(position);
             restaurentHolder.name.setText(restaurent1.getName());
             restaurentHolder.town.setText(restaurent1.getTown());
-            restaurentHolder.street.setText(restaurent1.getStreet());
-            restaurentHolder.phone.setText(restaurent1.getPhone());
-            restaurentHolder.type.setText(restaurent1.getType());
-            restaurentHolder.admin.setText(restaurent1.getAdmin());
+            restaurentHolder.street.setText("Place: "+restaurent1.getStreet()+" , ");
+            restaurentHolder.phone.setText("Contact Us: "+restaurent1.getPhone());
+            restaurentHolder.type.setText("( "+restaurent1.getType()+")");
+            restaurentHolder.admin.setText("Admin: "+restaurent1.getAdmin());
             restaurentview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -250,6 +250,7 @@ public class SuperAdminPendingRestaurent extends AppCompatActivity {
                     intent.putExtra("restaurent_name",st);
                     intent.putExtra("username", name);
                     intent.putExtra("role", "SuperAdmin");
+                    intent.putExtra("allres", restaurent);
                     startActivity(intent);
                     finish();
                 }
@@ -276,7 +277,7 @@ public class SuperAdminPendingRestaurent extends AppCompatActivity {
                 public void onClick(View v) {
                     View vt=v;
                     AlertDialog.Builder resbuilder = new AlertDialog.Builder(SuperAdminPendingRestaurent.this);
-                    View mview=getLayoutInflater().inflate(R.layout.spinner_layout,null);
+                    View mview=getLayoutInflater().inflate(R.layout.spinner_layout_superadmin_pending,null);
                     resbuilder.setTitle("Select your Merging Restaurent ");
                     final Spinner rspinner=(Spinner)mview.findViewById(R.id.spinnerres);
                     ArrayAdapter arrayAdapter=new ArrayAdapter(SuperAdminPendingRestaurent.this,android.R.layout.simple_spinner_item,ass);
