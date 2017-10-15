@@ -1,7 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/food_app"
     android:id="@+id/edit_layout"
@@ -22,7 +22,7 @@
         android:textColorHint="#fff"
         android:hint="Input Your Food Name\nsuch as: Chicken Grill"
         android:gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:id="@+id/foodname"
         android:textColor="#fff"
         android:textSize="30sp"/>
@@ -32,7 +32,7 @@
         android:textColor="#fff"
         android:hint="Input Food Price"
         android:gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:inputType="number"
         android:id="@+id/foodprice"
         android:textColorHint="#fff"
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="#757575">
         <TextView
             android:layout_width="wrap_content"
@@ -61,15 +61,22 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="400dp"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit"
         android:layout_gravity="center"
         android:textSize="35sp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:background="#aeee"
         android:onClick="editfood"
+        app:cornerRadius="17dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@drawable/red_color"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         />
 
 </LinearLayout>

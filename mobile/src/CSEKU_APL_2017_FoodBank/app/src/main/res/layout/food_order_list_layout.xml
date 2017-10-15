@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:layout_margin="5dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/foodnameorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="food name"
+                android:textColor="#000"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/quantityorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="quantity"
+                android:textColor="#000"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="price"
+            android:textColor="#000"
+            android:id="@+id/priceorder"/>
+    </LinearLayout>
+
+</LinearLayout>

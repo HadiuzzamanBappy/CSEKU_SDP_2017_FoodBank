@@ -107,8 +107,8 @@
         android:textSize="15sp"
         android:layout_marginTop="2dp"/>
 
-    <Button
-        android:layout_width="100dp"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
@@ -116,7 +116,15 @@
         android:textSize="15sp"
         android:background="@drawable/red_color"
         android:onClick="okchange"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@drawable/red_color"
+        />
 
     </LinearLayout>
 </ScrollView>

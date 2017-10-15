@@ -1,4 +1,4 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,6 +9,14 @@
     android:background="@drawable/food_app"
     android:id="@+id/adminstaff"
     android:weightSum="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="220dp"
             android:layout_height="wrap_content"
@@ -19,19 +27,26 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/name"
-            android:layout_marginTop="20dp"/>
-        <Button
+            android:layout_weight="0.12" />
+        <info.hoang8f.widget.FButton
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:background="#aeee"
-            android:textColor="@drawable/blue_color"
+            android:textColor="#000"
             android:textAlignment="center"
             android:text="All order"
             android:textSize="35sp"
             android:onClick="allorder"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:layout_weight="0.10" />
+            android:layout_weight="0.10"
+            app:buttonColor="@color/buttoncolor"
+            android:shadowColor="#000"
+            app:shadowHeight="4dp"
+            app:shadowEnabled="true"
+            app:cornerRadius="17dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,42 +56,46 @@
         android:textAlignment="center"
         android:id="@+id/date"
         android:layout_marginTop="25dp"/>
-    <Button
-        android:id="@+id/getdate"
-        android:layout_width="433dp"
-        android:layout_height="wrap_content"
-        android:background="#aeee"
-        android:textAlignment="center"
-        android:text="Get date"
-        android:textSize="35sp"
-        android:layout_gravity="end"
-        android:layout_marginTop="0dp"
-        android:layout_weight="0.15" />
-    <Button
-        android:onClick="getfullprice"
-        android:layout_width="433dp"
-        android:layout_height="wrap_content"
-        android:background="#aeee"
-        android:textAlignment="center"
-        android:text="Get full price"
-        android:textSize="35sp"
-        android:layout_gravity="end"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.12" />
 
-    <Button
-        android:layout_width="433dp"
+    <info.hoang8f.widget.FButton
+        android:id="@+id/getdate"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="30dp"
+        android:layout_weight="0.15"
+        android:background="#aeee"
+        android:text="Get date"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="17dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="#aeee"
         android:id="@+id/orderlist"
         android:text="order list"
         android:textSize="35sp"
         android:onClick="orderlist"
-        android:layout_weight="0.14" />
+        android:layout_weight="0.14"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="17dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
 
-    <Button
-        android:layout_width="433dp"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="#aeee"
@@ -84,23 +103,56 @@
         android:text="delivery list"
         android:textSize="35sp"
         android:onClick="deliverylist"
-        android:layout_weight="0.09" />
+        android:layout_weight="0.09"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="17dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
 
-    <Button
+        <info.hoang8f.widget.FButton
+            android:onClick="getfullprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#aeee"
+            android:textAlignment="center"
+            android:text="Get full price"
+            android:textSize="35sp"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.12"
+            app:buttonColor="@color/buttoncolor"
+            android:shadowColor="#000"
+            app:shadowHeight="4dp"
+            app:shadowEnabled="true"
+            app:cornerRadius="17dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
+
+    <info.hoang8f.widget.FButton
         android:id="@+id/assignstaff"
-        android:layout_width="433dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#aeee"
         android:textAlignment="center"
         android:text="assign staff"
         android:textSize="35sp"
         android:layout_gravity="end"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:onClick="assignstaff"
-        android:layout_weight="0.08" />
-    <Button
+        android:layout_weight="0.08"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="17dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+    <info.hoang8f.widget.FButton
         android:id="@+id/pendingstaff"
-        android:layout_width="433dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#aeee"
         android:textAlignment="center"
@@ -109,10 +161,17 @@
         android:layout_gravity="end"
         android:layout_marginTop="10dp"
         android:onClick="pending"
-        android:layout_weight="0.08" />
-    <Button
+        android:layout_weight="0.08"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="17dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+    <info.hoang8f.widget.FButton
         android:id="@+id/decorate"
-        android:layout_width="433dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#aeee"
         android:textAlignment="center"
@@ -120,7 +179,16 @@
         android:textSize="35sp"
         android:layout_gravity="start"
         android:onClick="decoraterestaurant"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.17" />
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0.17"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="17dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -42,7 +45,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisplayRestaurentFoodList extends AppCompatActivity {
+import static android.R.id.list;
+
+public class DisplayRestaurentFoodList extends AppCompatActivity{
     TextView txt;
     String restaurent_name;
     JSONObject jsonObject;
@@ -50,13 +55,21 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
     RestaurentFoodAdapter restaurentfoodAdapter;
     ListView listView;
 
+    RestaurentFoodAdapter2 restaurentFoodAdapter2;
+
     ArrayList<RestaurentFood> addRestaurantFood;
+    ArrayList<RestaurentFood> addRestaurantFood2;
+
+    String pressname,presstype,pressprice;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Boolean save_login;
+    Boolean have;
 
     String name,resname,pass,type;
+    AlertDialog.Builder orderbuilder;
+    AlertDialog mydialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +86,8 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
         restaurent_name = getIntent().getExtras().getString("restaurent_name");
 
         addRestaurantFood=new ArrayList<>();
+        addRestaurantFood2=new ArrayList<>();
+
         new BackgroundTask().execute(restaurent_name);
 
         txt = (TextView) findViewById(R.id.txt);
@@ -80,6 +95,165 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lisview);
         restaurentfoodAdapter = new RestaurentFoodAdapter(this, R.layout.restaurent_food_layout,restaurent_name,addRestaurantFood);
         listView.setAdapter(restaurentfoodAdapter);
+    }
+
+    public void addNewNoteFunction(View view) {
+        ListView listViewOrder = new ListView(this);
+        restaurentFoodAdapter2 = new RestaurentFoodAdapter2(this, R.layout.order_cart_layout, restaurent_name, addRestaurantFood2);
+        listViewOrder.setAdapter(restaurentFoodAdapter2);
+        //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
+        orderbuilder = new AlertDialog.Builder(this);
+        orderbuilder.setCancelable(true);
+        orderbuilder.setTitle("Order Cart");
+        if (addRestaurantFood2.isEmpty())
+            orderbuilder.setMessage("You Didn't add any item to the Cart");
+        else
+            orderbuilder.setView(listViewOrder);
+        //setting activity for negative state button
+        if(addRestaurantFood2.isEmpty())
+        {
+            orderbuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        }
+        else {
+            orderbuilder.setPositiveButton("Later", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            orderbuilder.setNegativeButton("Order", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(DisplayRestaurentFoodList.this, OrderMultiple.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("addRestaurantFood", addRestaurantFood2);
+                    intent.putExtra("restaurent_name", restaurent_name);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+        //alertdialog create
+        mydialog = orderbuilder.create();
+        //for working the alertdialog state
+        mydialog.show();
+
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+
+        switch(item.getItemId()) {
+            case R.id.id_single_order:
+                if(addRestaurantFood2.isEmpty()) {
+                    AlertDialog.Builder paidbuilder = new AlertDialog.Builder(DisplayRestaurentFoodList.this);
+                    //setting the alertdialog title
+                    paidbuilder.setTitle("Attention");
+                    //setting the body message
+                    paidbuilder.setMessage("Do You Want To Order It?");
+                    //set state for cancelling state
+                    paidbuilder.setCancelable(true);
+
+                    //setting activity for positive state button
+                    paidbuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (!isNetworkAvilabe())
+                                nointernet();
+                            else {
+                                if (save_login) {
+                                    Intent intent = new Intent(DisplayRestaurentFoodList.this, Order.class);
+                                    intent.putExtra("restaurant", restaurent_name);
+                                    intent.putExtra("food", pressname);
+                                    intent.putExtra("price", pressprice);
+                                    intent.putExtra("resfood", "2");
+                                    startActivity(intent);
+                                    finish();
+                                } else
+                                    Toast.makeText(DisplayRestaurentFoodList.this, "OPPS Sorry,U didn't SIGN IN as User", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    //setting activity for negative state button
+                    paidbuilder.setNegativeButton("NO, Later", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    //alertdialog create
+                    AlertDialog mydialog = paidbuilder.create();
+                    //for working the alertdialog state
+                    mydialog.show();
+                }
+                else
+                {
+                    AlertDialog.Builder paidbuilder = new AlertDialog.Builder(DisplayRestaurentFoodList.this);
+                    //setting the alertdialog title
+                    paidbuilder.setTitle("Attention");
+                    //setting the body message
+                    paidbuilder.setMessage("You Already Made Cart,Are You Sure to Proceed");
+                    //set state for cancelling state
+                    paidbuilder.setCancelable(true);
+
+                    //setting activity for positive state button
+                    paidbuilder.setPositiveButton("YES, Order", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (!isNetworkAvilabe())
+                                nointernet();
+                            else {
+                                if (save_login) {
+                                    Intent intent = new Intent(DisplayRestaurentFoodList.this, Order.class);
+                                    intent.putExtra("restaurant", restaurent_name);
+                                    intent.putExtra("food", pressname);
+                                    intent.putExtra("price", pressprice);
+                                    intent.putExtra("resfood", "2");
+                                    startActivity(intent);
+                                    addRestaurantFood2.clear();
+                                    finish();
+                                } else
+                                    Toast.makeText(DisplayRestaurentFoodList.this, "OPPS Sorry,U didn't SIGN IN as User", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    //setting activity for negative state button
+                    paidbuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    //alertdialog create
+                    AlertDialog mydialog = paidbuilder.create();
+                    //for working the alertdialog state
+                    mydialog.show();
+                }
+                return true;
+            case R.id.id_add_to_cart:
+                have=false;
+                if (save_login) {
+                    for(RestaurentFood res:addRestaurantFood2)
+                        if(res.getName().equals(pressname))
+                            have=true;
+                    if(have)
+                        Toast.makeText(this, "You Have Already Add This Item", Toast.LENGTH_SHORT).show();
+                    else {
+                        RestaurentFood restaurentFood = new RestaurentFood(pressname, pressprice);
+                        addRestaurantFood2.add(restaurentFood);
+                    }
+                } else
+                    Toast.makeText(DisplayRestaurentFoodList.this, "OPPS Sorry,U didn't SIGN IN as User", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
@@ -214,7 +388,6 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
         }
     }
 
-
     public class RestaurentFoodAdapter extends ArrayAdapter {
         ArrayList<RestaurentFood> list=new ArrayList();
         Context ct;
@@ -272,48 +445,17 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
             restaurentfoodview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ffood=restaurentfood.getName();
-                    fprice=restaurentfood.getPrice();
-                    AlertDialog.Builder paidbuilder = new AlertDialog.Builder(ct);
-                    //setting the alertdialog title
-                    paidbuilder.setTitle("Attention");
-                    //setting the body message
-                    paidbuilder.setMessage("Do You Want To Order It?");
-                    //set state for cancelling state
-                    paidbuilder.setCancelable(true);
-
-                    //setting activity for positive state button
-                    paidbuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if(!isNetworkAvilabe())
-                                nointernet();
-                            else {
-                                if(save_login) {
-                                    Intent intent = new Intent(ct, Order.class);
-                                    intent.putExtra("restaurant", frestarant);
-                                    intent.putExtra("food", ffood);
-                                    intent.putExtra("price", fprice);
-                                    intent.putExtra("resfood", "2");
-                                    ct.startActivity(intent);
-                                    finish();
-                                }
-                                else
-                                    Toast.makeText(ct, "OPPS Sorry,U didn't SIGN IN as User", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                    //setting activity for negative state button
-                    paidbuilder.setNegativeButton("NO, Later", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    //alertdialog create
-                    AlertDialog mydialog = paidbuilder.create();
-                    //for working the alertdialog state
-                    mydialog.show();
+                    Toast.makeText(ct, "Press Long For Getting Options", Toast.LENGTH_SHORT).show();
+                }
+            });
+            restaurentfoodview.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                @Override
+                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                    pressname=restaurentfood.getName();
+                    presstype=restaurentfood.getType();
+                    pressprice=restaurentfood.getPrice();
+                    MenuInflater menuInflater=getMenuInflater();
+                    menuInflater.inflate(R.menu.food_order,menu);
                 }
             });
             return restaurentfoodview;
@@ -324,6 +466,78 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
             TextView name,type,price;
         }
     }
+    public class RestaurentFoodAdapter2 extends ArrayAdapter {
+        ArrayList<RestaurentFood> list=new ArrayList();
+        Context ct;
+        String frestarant,ffood,fprice;
+
+        public RestaurentFoodAdapter2(@NonNull Context context, @LayoutRes int resource, String s,ArrayList<RestaurentFood> string) {
+            super(context, resource);
+            ct=context;
+            this.frestarant=s;
+            list=string;
+        }
+
+        @Override
+        public void add(@Nullable Object object) {
+            super.add(object);
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Nullable
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @NonNull
+        @Override
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+            View restaurentfoodview;
+            restaurentfoodview=convertView;
+            RestaurentfoodHolder restaurentfoodHolder;
+            if(restaurentfoodview==null)
+            {
+                LayoutInflater layoutInflater=(LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                restaurentfoodview=layoutInflater.inflate(R.layout.order_cart_layout,parent,false);
+                restaurentfoodHolder=new RestaurentfoodHolder();
+                restaurentfoodHolder.name=(TextView)restaurentfoodview.findViewById(R.id.name);
+                restaurentfoodHolder.price=(TextView)restaurentfoodview.findViewById(R.id.price);
+                restaurentfoodview.setTag(restaurentfoodHolder);
+            }
+            else
+            {
+                restaurentfoodHolder=(RestaurentfoodHolder) restaurentfoodview.getTag();
+            }
+
+            final RestaurentFood restaurentfood=(RestaurentFood) this.getItem(position);
+            restaurentfoodHolder.name.setText(restaurentfood.getName());
+            restaurentfoodHolder.price.setText(restaurentfood.getPrice());
+            final String name=restaurentfood.getName();
+            ImageButton image=(ImageButton)restaurentfoodview.findViewById(R.id.imageButton);
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(ct,name, Toast.LENGTH_SHORT).show();
+                    addRestaurantFood2.remove(getItem(position));
+                    restaurentFoodAdapter2.notifyDataSetChanged();
+                    if(addRestaurantFood2.isEmpty())
+                        mydialog.dismiss();
+                }
+            });
+            return restaurentfoodview;
+        }
+
+        class RestaurentfoodHolder
+        {
+            TextView name,price;
+        }
+    }
 
     class BackgroundTask extends AsyncTask<String,Void,Boolean>
     {
@@ -331,7 +545,6 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
         String json_url;
         String JSON_STRING;
         String name;
-
         @Override
         protected void onPreExecute() {
             json_url="http://"+getString(R.string.ip_address)+"/FoodBank/RestaurentFood.php";
@@ -404,40 +617,6 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
         }
     }
 
-    public class RestaurentFood {
-
-        private String name,type,price;
-
-        public RestaurentFood(String name, String type, String price) {
-            this.name = name;
-            this.type = type;
-            this.price = price;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getPrice() {
-            return price;
-        }
-
-        public void setPrice(String price) {
-            this.price = price;
-        }
-    }
     private boolean isNetworkAvilabe()
     {
         ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -477,8 +656,33 @@ public class DisplayRestaurentFoodList extends AppCompatActivity {
     }
     //creating activity for back pressing from phone
     public void onBackPressed() {
-        Intent intent=new Intent(DisplayRestaurentFoodList.this,DisplayRestaurentListView.class);
-        startActivity(intent);
-        finish();
+        if(addRestaurantFood2.isEmpty()) {
+            Intent intent = new Intent(DisplayRestaurentFoodList.this, DisplayRestaurentListView.class);
+            startActivity(intent);
+            finish();
+        }
+        else
+        {
+            AlertDialog.Builder alert =new AlertDialog.Builder(this);
+            alert.setTitle("Attention");
+            alert.setMessage("You Add Some Item To The Cart,Are You Sure to Cancel??");
+            alert.setCancelable(true);
+            alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(DisplayRestaurentFoodList.this, DisplayRestaurentListView.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog al=alert.create();
+            al.show();
+        }
     }
 }

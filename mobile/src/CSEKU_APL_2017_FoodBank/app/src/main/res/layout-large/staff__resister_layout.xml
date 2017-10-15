@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +8,6 @@
     android:background="@drawable/food_app"
     android:orientation="vertical"
     android:id="@+id/staff_resister">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,10 +15,17 @@
         android:text="Make Your Registration\nSuccessfull By Filling All Field\nIf Valid Then Request Will Be\n Sent To Admin For Enterence"
         android:textSize="30sp"
         android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="21dp"
         android:textColor="@color/colorAccent"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_above="@+id/linearLayout18"
+        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout18">
 
     <EditText
         android:id="@+id/username"
@@ -111,17 +117,25 @@
         android:layout_marginTop="20dp"
         android:textColor="#fff"
         android:textSize="25sp"/>
+    </LinearLayout>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/resistor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Resister"
         android:textSize="25sp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
         android:background="#aeee"
         android:onClick="onResister"
-        />
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@color/buttoncolor"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp" />
 
-</LinearLayout>
+</RelativeLayout>

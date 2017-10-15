@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/food_app"
     android:id="@+id/order_layout">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,17 +74,25 @@
             android:textColor="#fff"
             android:textSize="40sp"/>
     </LinearLayout>
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#fff"
-        android:hint="Enter Your Name"
         android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/cname"
-        android:textColor="#fff"
-        android:textSize="40sp"
-        />
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name : "
+            android:textColor="@color/colorAccent"
+            android:textSize="40sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:id="@+id/name"
+            android:textColor="#fff"
+            android:textSize="40sp"/>
+    </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
@@ -219,14 +230,22 @@
                 />
         </RadioGroup>
     </LinearLayout>
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="70dp"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Order"
         android:onClick="order"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:background="#aeee"
         android:textSize="40sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:buttonColor="@color/buttoncolor"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        android:shadowColor="#000"
+        app:cornerRadius="7dp"
+        android:layout_margin="20dp"
+        />
 </LinearLayout>
+</ScrollView>

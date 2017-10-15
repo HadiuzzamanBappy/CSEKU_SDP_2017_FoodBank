@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/food_app"
     android:id="@+id/order_layout">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:id="@+id/linearLayout2">
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,17 +78,24 @@
             android:textColor="#fff"
             android:textSize="25sp"/>
     </LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="#fff"
-        android:hint="Enter Your Name"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/cname"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name : "
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:id="@+id/name"
+                android:textColor="#fff"
+                android:textSize="25sp"/>
+        </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
@@ -90,7 +103,7 @@
         android:textColorHint="#fff"
         android:hint="Enter Your Phone Number"
         android:gravity="center"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="27dp"
         android:id="@+id/cphone"
         android:textColor="#fff"
         android:inputType="number"
@@ -100,7 +113,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#757575">
+        android:background="#757575"
+        android:layout_marginTop="17dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,7 +164,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#757575">
+        android:background="#757575"
+        android:layout_marginTop="17dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -178,57 +193,70 @@
         android:textColorHint="#fff"
         android:textSize="25sp" />
 
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout2"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="15dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="17dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Is It Home Delivery?"
-            android:textSize="25sp"
-            android:textColor="@drawable/red_color"/>
+            android:textColor="@drawable/red_color"
+            android:textSize="25sp" />
+
         <RadioGroup
+            android:id="@+id/radiogroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radiogroup"
             android:orientation="horizontal">
 
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes"
-                android:layout_marginLeft="4dp"
-                android:textColor="#fff"
                 android:id="@+id/yes"
-                android:checked="false"
-                android:onClick="rbclick"
-                android:textSize="25sp"
-                />
-            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No"
                 android:layout_marginLeft="4dp"
-                android:id="@+id/no"
                 android:checked="false"
                 android:onClick="rbclick"
-                android:textSize="25sp"
+                android:text="Yes"
                 android:textColor="#fff"
-                />
+                android:textSize="25sp" />
+
+            <RadioButton
+                android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:checked="false"
+                android:onClick="rbclick"
+                android:text="No"
+                android:textColor="#fff"
+                android:textSize="25sp" />
         </RadioGroup>
     </LinearLayout>
-    <Button
-        android:layout_width="230dp"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Order"
         android:onClick="order"
         android:layout_gravity="center"
-        android:layout_marginTop="75dp"
-        android:background="#aeee"
         android:textSize="25sp"
-        android:textStyle="bold"/>
-</LinearLayout>
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000000"
+        app:cornerRadius="8dp"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        />
+</RelativeLayout>

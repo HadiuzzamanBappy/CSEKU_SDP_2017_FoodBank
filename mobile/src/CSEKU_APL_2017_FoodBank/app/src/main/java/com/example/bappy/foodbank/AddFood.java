@@ -35,7 +35,7 @@ import java.net.URLEncoder;
 
 public class AddFood extends AppCompatActivity {
 
-    String resname,foodtype="None";
+    String resname,foodtype="None",name,role;
     EditText foodname,foodprice;
 
     Spinner spinnertype;
@@ -53,7 +53,10 @@ public class AddFood extends AppCompatActivity {
             sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
             editor=sharedPreferences.edit();
 
-            resname = getIntent().getExtras().getString("resname");
+            name=getIntent().getExtras().getString("username");
+            resname=getIntent().getExtras().getString("resname");
+            role=getIntent().getExtras().getString("role");
+
             foodname = (EditText) findViewById(R.id.foodname);
             foodprice = (EditText) findViewById(R.id.foodprice);
 
@@ -112,9 +115,11 @@ public class AddFood extends AppCompatActivity {
             nointernet();
         else {
             Intent intent = new Intent(AddFood.this, DecorateRestaurant.class);
+            intent.putExtra("username", name);
             intent.putExtra("resname", resname);
-            finish();
+            intent.putExtra("role", role);
             startActivity(intent);
+            finish();
         }
     }
     public void addfood(View view){
@@ -207,7 +212,9 @@ public class AddFood extends AppCompatActivity {
                             nointernet();
                         else {
                             Intent intent = new Intent(AddFood.this, DecorateRestaurant.class);
+                            intent.putExtra("username", name);
                             intent.putExtra("resname", resname);
+                            intent.putExtra("role", role);
                             startActivity(intent);
                             finish();
                         }

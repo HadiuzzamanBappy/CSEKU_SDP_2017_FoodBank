@@ -1,11 +1,10 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
-    android:id="@+id/full_paid"
-    >
+    android:id="@+id/full_paid">
 
 
     <TextView
@@ -47,7 +46,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,13 +65,17 @@
             android:gravity="center"
             android:id="@+id/startdateview"
             />
-        <Button
+        <info.hoang8f.widget.FButton
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Start date"
             android:id="@+id/startdate"
             android:textSize="12sp"
             android:layout_gravity="center"
+            android:shadowColor="#000"
+            app:shadowEnabled="true"
+            app:shadowHeight="4dp"
+            app:buttonColor="#aeee"
             />
     </LinearLayout>
 
@@ -89,23 +93,33 @@
             android:text="29-6-17"
             android:textSize="15sp" />
 
-        <Button
+        <info.hoang8f.widget.FButton
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="End date"
             android:id="@+id/enddate"
             android:textSize="12sp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:shadowColor="#000"
+            app:shadowEnabled="true"
+            app:shadowHeight="4dp"
+            app:buttonColor="#aeee" />
     </LinearLayout>
     </LinearLayout>
-        <Button
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/getprice"
+            app:buttonColor="#aeee"
+            app:cornerRadius="17dp"
+            app:shadowEnabled="true"
+            app:shadowHeight="4dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/getprice"
-            android:text="getprice"
-            android:textSize="12sp"
+            android:layout_margin="5dp"
             android:onClick="getpriceindate"
-            />
+            android:shadowColor="#000"
+            android:text="getprice"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <TextView
@@ -115,7 +129,8 @@
         android:background="#aeee"
         android:gravity="center"
         android:text="All Order Price"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:layout_marginTop="5dp"/>
 
     <ListView
         android:layout_width="match_parent"

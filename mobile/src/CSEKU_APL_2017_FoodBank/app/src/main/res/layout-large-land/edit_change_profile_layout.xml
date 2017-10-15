@@ -103,14 +103,21 @@
         android:textSize="25sp"
         android:layout_marginTop="2dp"/>
 
-    <Button
-        android:layout_width="200dp"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:text="OK"
         android:textSize="25sp"
         android:background="@drawable/red_color"
-        android:onClick="okchange"/>
+        android:onClick="okchange"
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@drawable/red_color"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"/>
 
 </LinearLayout>

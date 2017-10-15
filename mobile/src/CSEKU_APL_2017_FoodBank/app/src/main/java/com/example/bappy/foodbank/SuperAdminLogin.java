@@ -35,6 +35,8 @@ public class SuperAdminLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.super_admin_login_layout);
+
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setLogo(R.drawable.ic_android_white_24dp);
@@ -42,7 +44,6 @@ public class SuperAdminLogin extends AppCompatActivity {
         loginPreferences =getSharedPreferences(getString(R.string.PREF_FILE), 0);
         loginPrefsEditor = loginPreferences.edit();
 
-        setContentView(R.layout.super_admin_login_layout);
         username=(EditText) findViewById(R.id.username);
         password=(EditText) findViewById(R.id.restaurentpassword);
     }
@@ -50,15 +51,30 @@ public class SuperAdminLogin extends AppCompatActivity {
     public void onLogin(View view){
         user=username.getText().toString();
         pass=password.getText().toString();
-        String type="login";
-        new LoginBackground().execute(type,user,pass);
+        if(user.equals("") || pass.equals(""))
+            Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
+        else
+            new LoginBackground().execute("login",user,pass);
     }
-    public class LoginBackground extends AsyncTask<String,Void,Boolean> {
+
+    public class LoginBackground extends AsyncTask<String,Void,String> {
 
         AlertDialog alert;
+        String password;
 
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected void onPreExecute() {
+            alert = new AlertDialog.Builder(SuperAdminLogin.this).create();
+            alert.setTitle("Login Status");
+        }
+
+        @Override
+        protected void onProgressUpdate (Void...values){
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
             String type = params[0];
             String loginurl = "http://"+getString(R.string.ip_address)+"/FoodBank/superadminlogin.php";
             if (type.equals("login")) {
@@ -90,25 +106,19 @@ public class SuperAdminLogin extends AppCompatActivity {
                     bufferdreader.close();
                     inputstream.close();
                     httpurlconnection.disconnect();
-                    return true;
+                    return result;
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            return false;
+            return null;
         }
 
         @Override
-        protected void onPreExecute() {
-            alert = new AlertDialog.Builder(SuperAdminLogin.this).create();
-            alert.setTitle("Login Status");
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            if (result) {
+        protected void onPostExecute(String result) {
+            if (result.equals("true")) {
                 loginPrefsEditor.putBoolean(getString(R.string.SAVE_LOGIN), true);
                 loginPrefsEditor.putString(getString(R.string.NAME), name);
                 loginPrefsEditor.putString(getString(R.string.PASSWORD), pass);
@@ -124,11 +134,8 @@ public class SuperAdminLogin extends AppCompatActivity {
                 alert.show();
             }
         }
-        @Override
-        protected void onProgressUpdate (Void...values){
-            super.onProgressUpdate(values);
-        }
     }
+
 
     @Override
     public void onBackPressed() {

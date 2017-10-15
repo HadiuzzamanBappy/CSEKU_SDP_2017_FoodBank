@@ -1,128 +1,143 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fff"
-    >
+    android:background="#fff">
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/order"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp">
+
         <TextView
             android:id="@+id/sname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="name"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Staff:"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/staff"
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:text="name"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/snumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="number"
-            android:textSize="15sp"
-        />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="4">
-            <TextView
-                android:id="@+id/sfood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="food"
-                android:textSize="15sp"
-                android:layout_weight="2"
-                />
-            <TextView
-                android:id="@+id/squantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="quantity"
-                android:textSize="15sp"
-                android:layout_weight="2"
-                />
-        </LinearLayout>
+            android:textSize="15sp" />
+
         <TextView
             android:id="@+id/sorderdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="orderdate"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
+
         <TextView
             android:id="@+id/sdeliverydate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="deliverydate"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
+
         <TextView
             android:id="@+id/sdeliverytype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="deliverytype"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="4">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="price : "
-                android:textSize="15sp"
-                />
+
             <TextView
                 android:id="@+id/sprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="price"
-                android:textSize="15sp"
                 android:layout_weight="2"
-                />
+                android:text="price"
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/spaid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="paid"
-                android:textSize="15sp"
                 android:layout_weight="2"
-                />
+                android:text="paid"
+                android:textSize="15sp" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/sorderplace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="orderplace"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/foodlist"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="5"
+                android:shadowColor="#000"
+                android:text="Food List"
+                android:textAllCaps="false"
+                android:textSize="10sp"
+                app:buttonColor="@color/buttoncolor"
+                app:cornerRadius="17dp"
+                app:shadowEnabled="true"
+                app:shadowHeight="4dp" />
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/showall"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="5"
+                android:shadowColor="#000"
+                android:text="Show All"
+                android:textAllCaps="false"
+                android:textSize="10sp"
+                app:buttonColor="@color/buttoncolor"
+                app:cornerRadius="17dp"
+                app:shadowEnabled="true"
+                app:shadowHeight="4dp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

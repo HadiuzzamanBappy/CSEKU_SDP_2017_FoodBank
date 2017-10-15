@@ -1,4 +1,4 @@
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,10 +8,6 @@
     android:background="@drawable/food_app"
     android:orientation="vertical"
     android:id="@+id/staff_resister">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,10 +16,19 @@
         android:text="Make Your Registration Successfull By Filling All Field\nIf Valid Then Request Will Be Sent To Admin For Enterence"
         android:textSize="40sp"
         android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="52dp"
         android:textColor="@color/colorAccent"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_above="@+id/linearLayout20"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout20">
 
     <EditText
         android:id="@+id/username"
@@ -40,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="#757575">
         <TextView
             android:layout_width="wrap_content"
@@ -51,18 +56,17 @@
             android:layout_marginTop="6dp"/>
 
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
             android:id="@+id/spinnerrole"
-            android:textAlignment="center"
-            ></Spinner>
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:textAlignment="center"></Spinner>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/linearres"
         android:background="#757575">
     <TextView
@@ -75,7 +79,7 @@
 
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="55dp"
         android:id="@+id/spinnerres"
         android:textAlignment="center"
         ></Spinner>
@@ -88,7 +92,7 @@
         android:hint="Enter Your Restaurent Password"
         android:textAlignment="center"
         android:textColorHint="#fff"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textColor="#fff"
         android:textSize="35sp"
         />
@@ -101,7 +105,7 @@
         android:hint="Enter Your Password"
         android:textAlignment="center"
         android:textColorHint="#fff"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textColor="#fff"
         android:textSize="35sp"/>
     <EditText
@@ -112,20 +116,28 @@
         android:hint="Enter Your Password Again"
         android:textAlignment="center"
         android:textColorHint="#fff"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textColor="#fff"
         android:textSize="35sp"/>
+    </LinearLayout>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/resistor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:text="Resister"
         android:textSize="35sp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
         android:background="#aeee"
         android:onClick="onResister"
-        />
-    </LinearLayout>
-</ScrollView>
+        app:cornerRadius="17dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@color/buttoncolor"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="57dp" />
+
+</RelativeLayout>

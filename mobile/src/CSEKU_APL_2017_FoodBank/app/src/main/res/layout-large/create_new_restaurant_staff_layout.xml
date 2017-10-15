@@ -64,7 +64,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@drawable/blue_color"/>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/resistor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,6 +74,13 @@
         android:layout_marginTop="60dp"
         android:background="#aeee"
         android:onClick="onResister"
-        android:layout_weight="0.08" />
+        android:layout_weight="0.08"
+        app:buttonColor="@color/buttoncolor"
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
 </LinearLayout>

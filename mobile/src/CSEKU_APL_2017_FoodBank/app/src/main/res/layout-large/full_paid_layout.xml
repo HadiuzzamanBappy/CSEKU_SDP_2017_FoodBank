@@ -1,11 +1,10 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
-    android:id="@+id/full_paid"
-    >
+    android:id="@+id/full_paid">
 
 
     <TextView
@@ -57,12 +56,16 @@
             android:gravity="center"
             android:id="@+id/startdateview"
             />
-        <Button
+        <info.hoang8f.widget.FButton
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Start date"
             android:id="@+id/startdate"
             android:textSize="18sp"
+            android:shadowColor="#000"
+            app:shadowEnabled="true"
+            app:shadowHeight="4dp"
+            app:buttonColor="#aeee"
             />
     </LinearLayout>
 
@@ -80,20 +83,30 @@
             android:text="29-6-17"
             android:textSize="25sp" />
 
-        <Button
+        <info.hoang8f.widget.FButton
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="End date"
             android:id="@+id/enddate"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:shadowColor="#000"
+            app:shadowEnabled="true"
+            app:shadowHeight="4dp"
+            app:buttonColor="#aeee" />
     </LinearLayout>
-    <Button
+    <info.hoang8f.widget.FButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/getprice"
         android:text="getprice"
         android:textSize="20sp"
         android:onClick="getpriceindate"
+        app:cornerRadius="7dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="#fff"
+        android:layout_margin="10dp"
         />
 
     <TextView

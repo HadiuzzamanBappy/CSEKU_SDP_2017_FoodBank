@@ -1,12 +1,11 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/food_app"
     android:id="@+id/add_food"
-    android:padding="7dp"
-    >
+    android:padding="7dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,14 +61,18 @@
 
     </LinearLayout>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:text="ADD"
         android:layout_gravity="center"
         android:textSize="40sp"
         android:layout_marginTop="70dp"
-        android:background="#aeee"
-        android:onClick="addfood"/>
+        app:buttonColor="@color/buttoncolor"
+        android:onClick="addfood"
+        app:cornerRadius="6dp"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        android:shadowColor="#000000"/>
 
 </LinearLayout>

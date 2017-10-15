@@ -43,6 +43,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.bappy.foodbank.R.id.showall;
+
 public class StaffFoodOrder extends AppCompatActivity {
 
     TextView txt;
@@ -55,12 +57,22 @@ public class StaffFoodOrder extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    int show_all_value = 0;
+
+    FoodOrderListAdapter foodOrderListAdapter;
+    AlertDialog.Builder orderbuilder;
+    AlertDialog mydialog;
+
+    ArrayList<FoodOrderListClass> addfoodorder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_food_order);
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
+
+        addfoodorder=new ArrayList<FoodOrderListClass>();
 
         type=getIntent().getExtras().getString("type");
         name=getIntent().getExtras().getString("username");
@@ -79,13 +91,12 @@ public class StaffFoodOrder extends AppCompatActivity {
             jsonArray=jsonObject.getJSONArray("Server_response");
 
             int count=0;
-            String clientname,foodname,quantity,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff;
+            String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff;
             while(count<jsonArray.length())
             {
                 JSONObject jo=jsonArray.getJSONObject(count);
+                clientid=jo.getString("clientid");
                 clientname=jo.getString("clientname");
-                foodname=jo.getString("foodname");
-                quantity=jo.getString("quantity");
                 orderdate=jo.getString("orderdate");
                 ispaid=jo.getString("ispaid");
                 phone=jo.getString("phonenumber");
@@ -94,7 +105,7 @@ public class StaffFoodOrder extends AppCompatActivity {
                 price=jo.getString("price");
                 orderfrom=jo.getString("orderplace");
                 staff=jo.getString("staffrole");
-                StaffFood staffFood=new StaffFood(clientname,foodname,quantity,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff);
+                StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff);
                 staffFoodAdapter.add(staffFood);
                 count++;
             }
@@ -137,7 +148,7 @@ public class StaffFoodOrder extends AppCompatActivity {
     public class StaffFoodAdapter extends ArrayAdapter {
         List list = new ArrayList();
         Context ct;
-        String username, price, quantity, phone, address, orderdate;
+        String username, price, quantity, phone, address, deliverydate;
         int quantityy, fullprice;
 
         public StaffFoodAdapter(@NonNull Context context, @LayoutRes int resource) {
@@ -174,8 +185,6 @@ public class StaffFoodOrder extends AppCompatActivity {
                 stafffoodview = layoutInflater.inflate(R.layout.staff_food_layout, parent, false);
                 staffFoodHolder = new StaffFoodHolder();
                 staffFoodHolder.clientname = (TextView) stafffoodview.findViewById(R.id.sname);
-                staffFoodHolder.foodname = (TextView) stafffoodview.findViewById(R.id.sfood);
-                staffFoodHolder.quantity = (TextView) stafffoodview.findViewById(R.id.squantity);
                 staffFoodHolder.orderdate = (TextView) stafffoodview.findViewById(R.id.sorderdate);
                 staffFoodHolder.ispaid = (TextView) stafffoodview.findViewById(R.id.spaid);
                 staffFoodHolder.phone = (TextView) stafffoodview.findViewById(R.id.snumber);
@@ -191,16 +200,22 @@ public class StaffFoodOrder extends AppCompatActivity {
 
             final StaffFood staffFood = (StaffFood) this.getItem(position);
             staffFoodHolder.clientname.setText(staffFood.getClientname());
-            staffFoodHolder.foodname.setText(staffFood.getFoodname());
-            staffFoodHolder.quantity.setText(staffFood.getQuantity());
             staffFoodHolder.orderdate.setText(staffFood.getOrderdate());
             staffFoodHolder.ispaid.setText(staffFood.getIspaid());
             staffFoodHolder.phone.setText(staffFood.getPhone());
             staffFoodHolder.deliverydate.setText(staffFood.getDeliverydate());
             staffFoodHolder.isdelivery.setText(staffFood.getIsdelivery());
-            staffFoodHolder.price.setText(staffFood.getPrice());
+            staffFoodHolder.price.setText("Price: "+staffFood.getPrice());
             staffFoodHolder.orderplace.setText(staffFood.getOrderplace());
             staffFoodHolder.staffrole.setText(staffFood.getStaff());
+
+            staffFoodHolder.orderdate.setVisibility(View.GONE);
+            staffFoodHolder.ispaid.setVisibility(View.GONE);
+            staffFoodHolder.phone.setVisibility(View.GONE);
+            staffFoodHolder.deliverydate.setVisibility(View.GONE);
+            staffFoodHolder.isdelivery.setVisibility(View.GONE);
+            staffFoodHolder.price.setVisibility(View.GONE);
+            staffFoodHolder.orderplace.setVisibility(View.GONE);
             stafffoodview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -220,16 +235,12 @@ public class StaffFoodOrder extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     username = staffFood.getClientname();
                                     price = staffFood.getPrice();
-                                    quantity = staffFood.getQuantity();
                                     phone = staffFood.getPhone();
                                     address = staffFood.getOrderplace();
-                                    orderdate = staffFood.getOrderdate();
+                                    deliverydate = staffFood.getOrderdate();
                                     quantityy = Integer.parseInt(quantity);
-                                    fullprice = Integer.parseInt(price);
-                                    fullprice = (fullprice * quantityy);
-                                    price = Integer.toString(fullprice);
                                     staffFoodHolder.ispaid.setText("Paid");
-                                    new BackgroundTask2().execute(username, price, quantity, phone, address, orderdate);
+                                    new BackgroundTask2().execute(username, price, phone, address, deliverydate);
                                 }
                             });
                             //setting activity for negative state button
@@ -250,14 +261,242 @@ public class StaffFoodOrder extends AppCompatActivity {
                     } else {
                         Toast.makeText(getContext(), "Clicked on " + staffFood.getClientname() + "\nit is paided...", Toast.LENGTH_SHORT).show();
                     }
+                }
+            });
+            final Button show_all=(Button)stafffoodview.findViewById(showall);
+            show_all.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(show_all_value==0) {
+                        staffFoodHolder.orderdate.setVisibility(View.VISIBLE);
+                        staffFoodHolder.ispaid.setVisibility(View.VISIBLE);
+                        staffFoodHolder.phone.setVisibility(View.VISIBLE);
+                        staffFoodHolder.deliverydate.setVisibility(View.VISIBLE);
+                        staffFoodHolder.isdelivery.setVisibility(View.VISIBLE);
+                        staffFoodHolder.price.setVisibility(View.VISIBLE);
+                        staffFoodHolder.orderplace.setVisibility(View.VISIBLE);
+                        show_all.setText("Hide All");
+                        show_all_value =1;
+                    }
+                    else
+                    {
+                        staffFoodHolder.orderdate.setVisibility(View.GONE);
+                        staffFoodHolder.ispaid.setVisibility(View.GONE);
+                        staffFoodHolder.phone.setVisibility(View.GONE);
+                        staffFoodHolder.deliverydate.setVisibility(View.GONE);
+                        staffFoodHolder.isdelivery.setVisibility(View.GONE);
+                        staffFoodHolder.price.setVisibility(View.GONE);
+                        staffFoodHolder.orderplace.setVisibility(View.GONE);
+                        show_all.setText("Show All");
+                        show_all_value =0;
+                    }
+                }
+            });
 
+            Button foodlist=(Button)stafffoodview.findViewById(R.id.foodlist);
+            foodlist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    String id=staffFood.getClientid();
+                    new FoodOrderList().execute(id);
                 }
             });
             return stafffoodview;
         }
 
         class StaffFoodHolder {
-            TextView clientname, foodname, quantity, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace, staffrole;
+            TextView clientname,orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace, staffrole;
+        }
+    }
+
+    public class FoodOrderList extends AsyncTask<String,Void,Boolean>
+    {
+
+        String json_url;
+        String JSON_STRING;
+
+        @Override
+        protected void onPreExecute() {
+            json_url="http://"+getString(R.string.ip_address)+"/FoodBank/FoodOrderList.php";
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            try {
+                String clientid=params[0];
+                URL url=new URL(json_url);
+                HttpURLConnection httpURLConnection=(HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputstream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedwritter = new BufferedWriter(new OutputStreamWriter(outputstream, "UTF-8"));
+                String postdata = URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(clientid, "UTF-8");
+                bufferedwritter.write(postdata);
+                bufferedwritter.flush();
+                bufferedwritter.close();
+                outputstream.close();
+                InputStream inputStream=httpURLConnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder stringBuilder=new StringBuilder();
+                while((JSON_STRING=bufferedReader.readLine())!=null){
+                    stringBuilder.append(JSON_STRING+"\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                String OrderList = stringBuilder.toString().trim();
+
+                jsonObject = new JSONObject(OrderList);
+                jsonArray = jsonObject.getJSONArray("Server_response");
+
+                int count = 0;
+                String foodname,quantity,price;
+                while (count < jsonArray.length()) {
+                    JSONObject jo = jsonArray.getJSONObject(count);
+                    foodname=jo.getString("foodname");
+                    quantity = jo.getString("quantity");
+                    price = jo.getString("price");
+                    FoodOrderListClass foodOrderListClass=new FoodOrderListClass(foodname,quantity,price);
+                    addfoodorder.add(foodOrderListClass);
+                    count++;
+                }
+                return true;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+
+            ListView listViewOrder = new ListView(StaffFoodOrder.this);
+            foodOrderListAdapter = new FoodOrderListAdapter(StaffFoodOrder.this, R.layout.food_order_list_layout, addfoodorder);
+            listViewOrder.setAdapter(foodOrderListAdapter);
+            //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
+            orderbuilder = new AlertDialog.Builder(StaffFoodOrder.this);
+            orderbuilder.setCancelable(true);
+            orderbuilder.setTitle("Order List");
+            if (addfoodorder.isEmpty())
+                orderbuilder.setMessage("it can't read any read any item");
+            else
+                orderbuilder.setView(listViewOrder);
+
+            orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    addfoodorder.clear();
+                    dialog.cancel();
+                }
+            });
+            //alertdialog create
+            mydialog = orderbuilder.create();
+            //for working the alertdialog state
+            mydialog.show();
+
+        }
+    }
+
+    public class FoodOrderListClass{
+        String foodname,quantity,price;
+
+        public FoodOrderListClass(String foodname, String quantity, String price) {
+            this.foodname = foodname;
+            this.quantity = quantity;
+            this.price = price;
+        }
+
+        public String getFoodname() {
+            return foodname;
+        }
+
+        public void setFoodname(String foodname) {
+            this.foodname = foodname;
+        }
+
+        public String getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(String quantity) {
+            this.quantity = quantity;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
+    }
+
+    public class FoodOrderListAdapter extends ArrayAdapter {
+        ArrayList<FoodOrderListClass> list = new ArrayList();
+        Context ct;
+
+        public FoodOrderListAdapter(@NonNull Context context, @LayoutRes int resource,ArrayList<FoodOrderListClass> string) {
+            super(context, resource);
+            ct = context;
+            list=string;
+        }
+
+        @Override
+        public void add(@Nullable Object object) {
+            super.add(object);
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Nullable
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+            View foodorderlistview;
+            foodorderlistview = convertView;
+            final FoodOrderHolder foodOrderHolder;
+            if (foodorderlistview == null) {
+                LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                foodorderlistview = layoutInflater.inflate(R.layout.food_order_list_layout, parent, false);
+                foodOrderHolder = new FoodOrderHolder();
+                foodOrderHolder.foodname = (TextView) foodorderlistview.findViewById(R.id.foodnameorder);
+                foodOrderHolder.quantity = (TextView) foodorderlistview.findViewById(R.id.quantityorder);
+                foodOrderHolder.price = (TextView) foodorderlistview.findViewById(R.id.priceorder);
+                foodorderlistview.setTag(foodOrderHolder);
+            } else {
+                foodOrderHolder = (FoodOrderHolder) foodorderlistview.getTag();
+            }
+
+            final FoodOrderListClass foodOrderListClass = (FoodOrderListClass) this.getItem(position);
+            foodOrderHolder.foodname.setText("Food Name: "+foodOrderListClass.getFoodname());
+            foodOrderHolder.quantity.setText("Quantity: "+foodOrderListClass.getQuantity());
+            foodOrderHolder.price.setText("Price: "+foodOrderListClass.getPrice());
+
+            return foodorderlistview;
+        }
+
+        class FoodOrderHolder {
+            TextView foodname,quantity,price;
         }
     }
 
@@ -280,10 +519,9 @@ public class StaffFoodOrder extends AppCompatActivity {
                 try {
                     String username = params[0];
                     String price = params[1];
-                    String quantity = params[2];
-                    String phone=params[3];
-                    String address=params[4];
-                    String orderdate=params[5];
+                    String phone=params[2];
+                    String address=params[3];
+                    String deliveryrdate=params[4];
                     URL url = new URL(json_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -293,10 +531,9 @@ public class StaffFoodOrder extends AppCompatActivity {
                     BufferedWriter bufferedwritter = new BufferedWriter(new OutputStreamWriter(outputstream, "UTF-8"));
                     String postdata = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8")
                             + "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8")
-                            + "&" + URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(quantity, "UTF-8")
                             + "&" + URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8")
                             + "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8")
-                            + "&" + URLEncoder.encode("orderdate", "UTF-8") + "=" + URLEncoder.encode(orderdate, "UTF-8");
+                            + "&" + URLEncoder.encode("deliveryrdate", "UTF-8") + "=" + URLEncoder.encode(deliveryrdate, "UTF-8");
                     bufferedwritter.write(postdata);
                     bufferedwritter.flush();
                     bufferedwritter.close();
@@ -345,12 +582,11 @@ public class StaffFoodOrder extends AppCompatActivity {
 
     public class StaffFood {
 
-        String clientname,foodname,quantity,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff;
+        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff;
 
-        public StaffFood(String clientname, String foodname, String quantity, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price,String orderplace,String dateti) {
+        public StaffFood(String clientid,String clientname, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price,String orderplace,String dateti) {
+            this.clientid=clientid;
             this.clientname = clientname;
-            this.foodname = foodname;
-            this.quantity = quantity;
             this.orderdate = orderdate;
             this.ispaid = ispaid;
             this.phone = phone;
@@ -361,28 +597,20 @@ public class StaffFoodOrder extends AppCompatActivity {
             this.staff=dateti;
         }
 
+        public String getClientid() {
+            return clientid;
+        }
+
+        public void setClientid(String clientid) {
+            this.clientid = clientid;
+        }
+
         public String getClientname() {
             return clientname;
         }
 
         public void setClientname(String clientname) {
             this.clientname = clientname;
-        }
-
-        public String getFoodname() {
-            return foodname;
-        }
-
-        public void setFoodname(String foodname) {
-            this.foodname = foodname;
-        }
-
-        public String getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(String quantity) {
-            this.quantity = quantity;
         }
 
         public String getOrderdate() {

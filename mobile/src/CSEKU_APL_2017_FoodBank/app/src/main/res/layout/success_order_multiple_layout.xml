@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/success">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Order Succesfully Delivered"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:layout_above="@+id/linearLayout16"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="31dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout16">
+
+    <ListView
+        android:layout_width="252dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:id="@+id/lisview"></ListView>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="name"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/restaurent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="restaurant"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="phone"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/deliverydate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="deliverydate"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="address"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/deliverytype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="deliverytype"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="price"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="#aeee"
+        android:onClick="homepage"
+        android:text="OK!!!"
+        android:textSize="15sp"
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@color/buttoncolor"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp" />
+</RelativeLayout>

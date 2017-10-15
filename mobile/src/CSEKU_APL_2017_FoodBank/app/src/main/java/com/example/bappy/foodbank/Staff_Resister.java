@@ -293,4 +293,10 @@ public class Staff_Resister extends AppCompatActivity {
             super.onProgressUpdate(values);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(Staff_Resister.this,staff_login_resistor.class));
+        finish();
+    }
 }

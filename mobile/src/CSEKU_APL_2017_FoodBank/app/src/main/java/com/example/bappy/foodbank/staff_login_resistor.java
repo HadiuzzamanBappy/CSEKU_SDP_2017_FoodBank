@@ -65,7 +65,7 @@ public class staff_login_resistor extends AppCompatActivity {
         alert=new AlertDialog.Builder(staff_login_resistor.this);
         alert.setTitle("Attention");
         alert.setMessage("You are skipping all register or login page \n and you won't able to order any kinda item");//set state for cancelling state
-        alert.setCancelable(false);
+        alert.setCancelable(true);
 
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -75,6 +75,12 @@ public class staff_login_resistor extends AppCompatActivity {
                     Intent intent = new Intent(staff_login_resistor.this, HomeActivity.class);
                     startActivity(intent);
                 finish();
+            }
+        });
+        alert.setNegativeButton("No,Later", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
             }
         });
         //alertdialog create

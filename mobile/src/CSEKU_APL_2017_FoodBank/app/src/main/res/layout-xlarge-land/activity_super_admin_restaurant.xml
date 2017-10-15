@@ -1,7 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
     android:id="@+id/superadmin_restaurant">
@@ -15,16 +15,20 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:id="@+id/admintext"/>
-        <Button
+        <info.hoang8f.widget.FButton
             android:layout_width="520dp"
             android:layout_height="wrap_content"
             android:text="Pending restaurent"
-            android:background="@drawable/blue_color"
             android:textColor="#fff"
             android:textSize="40sp"
             android:onClick="pendingrestaurant"
             android:layout_gravity="right"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            app:buttonColor="@drawable/blue_color"
+            app:shadowEnabled="true"
+            app:cornerRadius="7dp"
+            app:shadowHeight="4dp"
+            android:shadowColor="#000"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShowProfile extends AppCompatActivity {
 
@@ -77,7 +78,7 @@ public class ShowProfile extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
+                Toast.makeText(this, "Your Are Already Seeing Your Profile Dear "+name, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.new_restaurant:
                 startActivity(new Intent(this, CreateNewRestaurant.class));

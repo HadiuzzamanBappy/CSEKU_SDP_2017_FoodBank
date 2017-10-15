@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -75,17 +75,24 @@
             android:textColor="#fff"
             android:textSize="20sp"/>
     </LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="#fff"
-        android:hint="Enter Your Name"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/cname"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name : "
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:id="@+id/name"
+                android:textColor="#fff"
+                android:textSize="15sp"/>
+        </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
@@ -93,7 +100,7 @@
             android:textColorHint="#fff"
             android:hint="Enter Your Phone Number"
             android:gravity="center"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="13dp"
             android:id="@+id/cphone"
             android:textColor="#fff"
             android:inputType="number"
@@ -224,15 +231,21 @@
                 />
         </RadioGroup>
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
         android:text="Order"
         android:onClick="order"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:background="#aeee"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:buttonColor="@color/buttoncolor"
+        android:layout_margin="10dp"
+        app:shadowEnabled="true"
+        android:shadowColor="#000000"
+        app:shadowHeight="4dp"
+        app:cornerRadius="7dp"/>
     </LinearLayout>
 </ScrollView>

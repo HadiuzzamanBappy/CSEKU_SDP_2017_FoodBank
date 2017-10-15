@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/food_app"
-    android:id="@+id/home_app">
+    android:id="@+id/home_app"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="1">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,51 +16,59 @@
         android:textSize="15sp"
         android:layout_marginRight="15dp"
         android:id="@+id/logger"/>
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="FoodBank"
-        android:textColor="#fff"
-        android:textSize="35sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/restaurent"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:text="Restaurant"
-        android:textSize="20sp"
-        android:background="#aeee"
-        android:onClick="parsejsonrestaurent"
-        />
-    <Button
-        android:id="@+id/findfood"
+    <ImageView
         android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/home_icon" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/restaurent"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="I Am Hungry For"
-        android:textSize="20sp"
-        android:background="#aeee"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:onClick="parsejsonfood"
+        android:text="Restaurant"
+        android:textSize="15sp"
+        app:buttonColor="@color/buttoncolor"
+        android:onClick="parsejsonrestaurent"
+        android:shadowColor="@color/shadowcolor"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        app:cornerRadius="6dp"
         />
 
-    <Button
+    <info.hoang8f.widget.FButton
+        android:id="@+id/findfood"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:onClick="parsejsonfood"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="I Am Hungry For"
+        android:textSize="15sp"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="@color/shadowcolor"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        app:cornerRadius="6dp"/>
+
+    <info.hoang8f.widget.FButton
         android:id="@+id/exit"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Exit"
-        android:textSize="20sp"
-        android:background="#aeee"
+        android:textSize="15sp"
+        app:buttonColor="@color/buttoncolor"
         android:padding="5dp"
+        android:shadowColor="@color/shadowcolor"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        app:cornerRadius="6dp"
         />
 
 </LinearLayout>

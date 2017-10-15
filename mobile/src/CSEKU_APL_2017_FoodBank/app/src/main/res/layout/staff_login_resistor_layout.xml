@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,66 +10,89 @@
     android:id="@+id/staff_login_register"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="If You Are Already a Staff \nor Admin then Click LOGIN\n\nOtherwise Click REGISTER\n for Registration"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_marginTop="20dp"/>
-    <Button
-        android:id="@+id/login"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:background="#aeee"
-        android:text="Login"
-        android:textSize="25sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:onClick="login"/>
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:id="@+id/foodlinear"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="56dp">
 
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/home_icon"
+            android:layout_marginBottom="40dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="If You Are Already a Staff \nor Admin then Click LOGIN\nOtherwise Click REGISTER\n for Registration"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New User???"
+        android:text="@string/skip"
+        android:textColor="#ffffff"
         android:textSize="20sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:textColor="#fff"/>
-
-    <Button
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:background="#aeee"
-        android:text="Registor"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:onClick="registeryou"
-        />
-    <!--<Button-->
-        <!--android:layout_width="270dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Registor for new Restaurent"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:layout_gravity="end"-->
-        <!--android:textSize="20sp"-->
-        <!--android:background="#aeee"-->
-        <!--android:gravity="center"-->
-        <!--android:onClick="resitornewrestaurant"/>-->
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginTop="30dp"
-        android:background="#aeee"
-        android:gravity="center"
+        android:layout_marginBottom="45dp"
+        android:layout_above="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:textIsSelectable="false"
+        android:textStyle="bold|italic"
         android:onClick="skipall"
-        android:text="Skip >>"
-        android:textSize="20sp" />
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/linearLayout">
 
-</LinearLayout>
+        <info.hoang8f.widget.FButton
+            android:id="@+id/login"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:onClick="login"
+            android:text="Login"
+            android:textSize="15sp"
+            android:layout_weight="1"
+            app:cornerRadius="6dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="4dp"
+            android:shadowColor="@color/shadowcolor"
+            app:buttonColor="@color/colorPrimary"
+            app:shadowHeight="4dp"
+            app:shadowEnabled="true"
+            android:textColor="#ffffff"/>
+
+        <info.hoang8f.widget.FButton
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:text="Sign Up"
+            android:textSize="15sp"
+            android:onClick="registeryou"
+            android:layout_weight="1"
+            app:cornerRadius="6dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="2dp"
+            android:shadowColor="@color/shadowcolor"
+            app:buttonColor="@color/red"
+            app:shadowHeight="4dp"
+            app:shadowEnabled="true"
+            android:textColor="#ffffff"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

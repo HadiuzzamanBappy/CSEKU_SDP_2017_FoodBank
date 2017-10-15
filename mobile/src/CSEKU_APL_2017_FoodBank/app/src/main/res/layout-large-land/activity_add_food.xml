@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:background="@drawable/food_app"
     android:id="@+id/add_food"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <TextView
@@ -58,14 +59,18 @@
 
     </LinearLayout>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="ADD"
         android:layout_gravity="center"
         android:textSize="20sp"
         android:layout_marginTop="45dp"
-        android:background="#aeee"
-        android:onClick="addfood"/>
+        android:onClick="addfood"
+        app:buttonColor="@color/buttoncolor"
+        app:cornerRadius="6dp"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        android:shadowColor="#000000"/>
 
 </LinearLayout>

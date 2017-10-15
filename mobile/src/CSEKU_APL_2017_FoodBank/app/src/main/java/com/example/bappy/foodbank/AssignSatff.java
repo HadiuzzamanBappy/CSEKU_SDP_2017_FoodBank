@@ -49,6 +49,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.bappy.foodbank.R.id.assignstaff;
+import static com.example.bappy.foodbank.R.id.foodname;
+import static com.example.bappy.foodbank.R.id.price;
+import static com.example.bappy.foodbank.R.id.showall;
 
 public class AssignSatff extends AppCompatActivity {
 
@@ -60,14 +63,20 @@ public class AssignSatff extends AppCompatActivity {
     JSONArray jsonArray,jsonArray2;
     ListView listView;
     StaffFoodAdapter staffFoodAdapter;
+    FoodOrderListAdapter foodOrderListAdapter;
 
     ArrayList<StaffFoodAssign> addstafffood;
+
+    ArrayList<FoodOrderListClass> addfoodorder;
 
     ArrayList<String> ass=new ArrayList<String>();
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
     int show_all_value = 0;
+
+    AlertDialog.Builder orderbuilder;
+    AlertDialog mydialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +85,8 @@ public class AssignSatff extends AppCompatActivity {
         editor=sharedPreferences.edit();
 
         addstafffood=new ArrayList<StaffFoodAssign>();
+
+        addfoodorder=new ArrayList<FoodOrderListClass>();
 
         name=getIntent().getExtras().getString("username");
         role=getIntent().getExtras().getString("role");
@@ -150,8 +161,6 @@ public class AssignSatff extends AppCompatActivity {
                 stafffoodview = layoutInflater.inflate(R.layout.assign_staff_list, parent, false);
                 staffFoodHolder = new StaffFoodHolder();
                 staffFoodHolder.clientname = (TextView) stafffoodview.findViewById(R.id.sname);
-                staffFoodHolder.foodname = (TextView) stafffoodview.findViewById(R.id.sfood);
-                staffFoodHolder.quantity = (TextView) stafffoodview.findViewById(R.id.squantity);
                 staffFoodHolder.orderdate = (TextView) stafffoodview.findViewById(R.id.sorderdate);
                 staffFoodHolder.ispaid = (TextView) stafffoodview.findViewById(R.id.spaid);
                 staffFoodHolder.phone = (TextView) stafffoodview.findViewById(R.id.snumber);
@@ -167,8 +176,6 @@ public class AssignSatff extends AppCompatActivity {
 
             final StaffFoodAssign staffFood = (StaffFoodAssign) this.getItem(position);
             staffFoodHolder.clientname.setText("Name: "+staffFood.getClientname());
-            staffFoodHolder.foodname.setText("Food: "+staffFood.getFoodname());
-            staffFoodHolder.quantity.setText("Quantity: "+staffFood.getQuantity());
             staffFoodHolder.orderdate.setText("Order Date: "+staffFood.getOrderdate());
             staffFoodHolder.ispaid.setText("Paid Status: "+staffFood.getIspaid());
             staffFoodHolder.phone.setText("Phone No: "+staffFood.getPhone());
@@ -176,9 +183,6 @@ public class AssignSatff extends AppCompatActivity {
             staffFoodHolder.isdelivery.setText("Delivery Status: "+staffFood.getIsdelivery());
             staffFoodHolder.price.setText("Price: "+staffFood.getPrice());
             staffFoodHolder.orderplace.setText("Place: "+staffFood.getOrderplace());
-
-            staffFoodHolder.foodname.setVisibility(View.GONE);
-            staffFoodHolder.quantity.setVisibility(View.GONE);
             staffFoodHolder.orderdate.setVisibility(View.GONE);
             staffFoodHolder.ispaid.setVisibility(View.GONE);
             staffFoodHolder.phone.setVisibility(View.GONE);
@@ -218,17 +222,15 @@ public class AssignSatff extends AppCompatActivity {
                     }
                     else
                     {
-                        goassign(v,nameofst,staffFood.getClientname(),staffFood.getPrice(),staffFood.getQuantity(),staffFood.getPhone(),staffFood.getOrderplace());
+                        goassign(v,nameofst,staffFood.getClientname(),staffFood.getPrice(),staffFood.getPhone(),staffFood.getOrderplace());
                     }
                 }
             });
-            final Button show_all=(Button)stafffoodview.findViewById(R.id.showall);
+            final Button show_all=(Button)stafffoodview.findViewById(showall);
             show_all.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(show_all_value==0) {
-                        staffFoodHolder.foodname.setVisibility(View.VISIBLE);
-                        staffFoodHolder.quantity.setVisibility(View.VISIBLE);
                         staffFoodHolder.orderdate.setVisibility(View.VISIBLE);
                         staffFoodHolder.ispaid.setVisibility(View.VISIBLE);
                         staffFoodHolder.phone.setVisibility(View.VISIBLE);
@@ -241,8 +243,6 @@ public class AssignSatff extends AppCompatActivity {
                     }
                     else
                     {
-                        staffFoodHolder.foodname.setVisibility(View.GONE);
-                        staffFoodHolder.quantity.setVisibility(View.GONE);
                         staffFoodHolder.orderdate.setVisibility(View.GONE);
                         staffFoodHolder.ispaid.setVisibility(View.GONE);
                         staffFoodHolder.phone.setVisibility(View.GONE);
@@ -255,38 +255,131 @@ public class AssignSatff extends AppCompatActivity {
                     }
                 }
             });
+
+            Button foodlist=(Button)stafffoodview.findViewById(R.id.foodlist);
+            foodlist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    String id=staffFood.getClientid();
+                    new FoodOrderList().execute(id);
+                }
+            });
+
             return stafffoodview;
         }
 
         class StaffFoodHolder {
-            TextView clientname, foodname, quantity, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace;
+            TextView clientname, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace;
             Spinner spin;
         }
     }
 
-    public class StaffFoodAssign {
+    public class FoodOrderList extends AsyncTask<String,Void,Boolean>
+    {
 
-        String clientname,foodname,quantity,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace;
+        String json_url;
+        String JSON_STRING;
 
-        public StaffFoodAssign(String clientname, String foodname, String quantity, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price,String orderplace) {
-            this.clientname = clientname;
+        @Override
+        protected void onPreExecute() {
+            json_url="http://"+getString(R.string.ip_address)+"/FoodBank/FoodOrderList.php";
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            try {
+                String clientid=params[0];
+                URL url=new URL(json_url);
+                HttpURLConnection httpURLConnection=(HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputstream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedwritter = new BufferedWriter(new OutputStreamWriter(outputstream, "UTF-8"));
+                String postdata = URLEncoder.encode("clientid", "UTF-8") + "=" + URLEncoder.encode(clientid, "UTF-8");
+                bufferedwritter.write(postdata);
+                bufferedwritter.flush();
+                bufferedwritter.close();
+                outputstream.close();
+                InputStream inputStream=httpURLConnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder stringBuilder=new StringBuilder();
+                while((JSON_STRING=bufferedReader.readLine())!=null){
+                    stringBuilder.append(JSON_STRING+"\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                String OrderList = stringBuilder.toString().trim();
+
+                jsonObject = new JSONObject(OrderList);
+                jsonArray = jsonObject.getJSONArray("Server_response");
+
+                int count = 0;
+                String foodname,quantity,price;
+                while (count < jsonArray.length()) {
+                    JSONObject jo = jsonArray.getJSONObject(count);
+                    foodname=jo.getString("foodname");
+                    quantity = jo.getString("quantity");
+                    price = jo.getString("price");
+                    FoodOrderListClass foodOrderListClass=new FoodOrderListClass(foodname,quantity,price);
+                    addfoodorder.add(foodOrderListClass);
+                    count++;
+                }
+                return true;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+
+            ListView listViewOrder = new ListView(AssignSatff.this);
+            foodOrderListAdapter = new FoodOrderListAdapter(AssignSatff.this, R.layout.food_order_list_layout, addfoodorder);
+            listViewOrder.setAdapter(foodOrderListAdapter);
+            //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
+            orderbuilder = new AlertDialog.Builder(AssignSatff.this);
+            orderbuilder.setCancelable(true);
+            orderbuilder.setTitle("Order List");
+            if (addfoodorder.isEmpty())
+                orderbuilder.setMessage("it can't read any read any item");
+            else
+                orderbuilder.setView(listViewOrder);
+
+                orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        addfoodorder.clear();
+                        dialog.cancel();
+                    }
+                });
+            //alertdialog create
+            mydialog = orderbuilder.create();
+            //for working the alertdialog state
+            mydialog.show();
+
+        }
+    }
+
+    public class FoodOrderListClass{
+        String foodname,quantity,price;
+
+        public FoodOrderListClass(String foodname, String quantity, String price) {
             this.foodname = foodname;
             this.quantity = quantity;
-            this.orderdate = orderdate;
-            this.ispaid = ispaid;
-            this.phone = phone;
-            this.deliverydate = deliverydate;
-            this.isdelivery = isdelivery;
             this.price = price;
-            this.orderplace=orderplace;
-        }
-
-        public String getClientname() {
-            return clientname;
-        }
-
-        public void setClientname(String clientname) {
-            this.clientname = clientname;
         }
 
         public String getFoodname() {
@@ -303,6 +396,105 @@ public class AssignSatff extends AppCompatActivity {
 
         public void setQuantity(String quantity) {
             this.quantity = quantity;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
+    }
+
+    public class FoodOrderListAdapter extends ArrayAdapter {
+        ArrayList<FoodOrderListClass> list = new ArrayList();
+        Context ct;
+
+        public FoodOrderListAdapter(@NonNull Context context, @LayoutRes int resource,ArrayList<FoodOrderListClass> string) {
+            super(context, resource);
+            ct = context;
+            list=string;
+        }
+
+        @Override
+        public void add(@Nullable Object object) {
+            super.add(object);
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Nullable
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+            View foodorderlistview;
+            foodorderlistview = convertView;
+            final FoodOrderHolder foodOrderHolder;
+            if (foodorderlistview == null) {
+                LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                foodorderlistview = layoutInflater.inflate(R.layout.food_order_list_layout, parent, false);
+                foodOrderHolder = new FoodOrderHolder();
+                foodOrderHolder.foodname = (TextView) foodorderlistview.findViewById(R.id.foodnameorder);
+                foodOrderHolder.quantity = (TextView) foodorderlistview.findViewById(R.id.quantityorder);
+                foodOrderHolder.price = (TextView) foodorderlistview.findViewById(R.id.priceorder);
+                foodorderlistview.setTag(foodOrderHolder);
+            } else {
+                foodOrderHolder = (FoodOrderHolder) foodorderlistview.getTag();
+            }
+
+            final FoodOrderListClass foodOrderListClass = (FoodOrderListClass) this.getItem(position);
+            foodOrderHolder.foodname.setText("Food Name: "+foodOrderListClass.getFoodname());
+            foodOrderHolder.quantity.setText("Quantity: "+foodOrderListClass.getQuantity());
+            foodOrderHolder.price.setText("Price: "+foodOrderListClass.getPrice());
+
+            return foodorderlistview;
+        }
+
+        class FoodOrderHolder {
+            TextView foodname,quantity,price;
+        }
+    }
+
+    public class StaffFoodAssign {
+
+        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace;
+
+        public StaffFoodAssign(String clientid,String clientname,String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price,String orderplace) {
+            this.clientid=clientid;
+            this.clientname = clientname;
+            this.orderdate = orderdate;
+            this.ispaid = ispaid;
+            this.phone = phone;
+            this.deliverydate = deliverydate;
+            this.isdelivery = isdelivery;
+            this.price = price;
+            this.orderplace=orderplace;
+        }
+
+        public String getClientid() {
+            return clientid;
+        }
+
+        public void setClientid(String clientid) {
+            this.clientid = clientid;
+        }
+
+        public String getClientname() {
+            return clientname;
+        }
+
+        public void setClientname(String clientname) {
+            this.clientname = clientname;
         }
 
         public String getOrderdate() {
@@ -404,12 +596,11 @@ public class AssignSatff extends AppCompatActivity {
                     jsonArray = jsonObject.getJSONArray("Server_response");
 
                     int count = 0;
-                    String clientname, foodname, quantity, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom;
+                    String clienid,clientname, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom;
                     while (count < jsonArray.length()) {
                         JSONObject jo = jsonArray.getJSONObject(count);
+                        clienid=jo.getString("clientid");
                         clientname = jo.getString("clientname");
-                        foodname = jo.getString("foodname");
-                        quantity = jo.getString("quantity");
                         orderdate = jo.getString("orderdate");
                         ispaid = jo.getString("ispaid");
                         phone = jo.getString("phonenumber");
@@ -417,7 +608,7 @@ public class AssignSatff extends AppCompatActivity {
                         isdelivery = jo.getString("isdelivery");
                         price = jo.getString("price");
                         orderfrom = jo.getString("orderplace");
-                        StaffFoodAssign staffFood = new StaffFoodAssign(clientname, foodname, quantity, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom);
+                        StaffFoodAssign staffFood = new StaffFoodAssign(clienid,clientname,orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom);
                         addstafffood.add(staffFood);
                         count++;
                 }
@@ -446,11 +637,11 @@ public class AssignSatff extends AppCompatActivity {
         }
     }
 
-    public void goassign(View v,String staff,String username,String price,String quantity,String phone,String address){
+    public void goassign(View v,String staff,String username,String price,String phone,String address){
         if(!isNetworkAvilabe())
             nointernet();
         else
-            new BackgroundTask2().execute(username,price,quantity,phone,address,staff);
+            new BackgroundTask2().execute(username,price,phone,address,staff);
     }
 
     class BackgroundTask2 extends AsyncTask<String,Void,Boolean>
@@ -471,10 +662,9 @@ public class AssignSatff extends AppCompatActivity {
             try {
                 String username = params[0];
                 String price = params[1];
-                String quantity = params[2];
-                String phone=params[3];
-                String address=params[4];
-                String staff=params[5];
+                String phone=params[2];
+                String address=params[3];
+                String staff=params[4];
                 URL url = new URL(json_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -484,7 +674,6 @@ public class AssignSatff extends AppCompatActivity {
                 BufferedWriter bufferedwritter = new BufferedWriter(new OutputStreamWriter(outputstream, "UTF-8"));
                 String postdata = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8")
                         + "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8")
-                        + "&" + URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(quantity, "UTF-8")
                         + "&" + URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8")
                         + "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8")
                         + "&" + URLEncoder.encode("staff", "UTF-8") + "=" + URLEncoder.encode(staff, "UTF-8");

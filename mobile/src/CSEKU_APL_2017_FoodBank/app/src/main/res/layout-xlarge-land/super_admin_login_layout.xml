@@ -1,12 +1,11 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
     android:padding="10dp"
-    android:id="@+id/super_login"
-    >
+    android:id="@+id/super_login">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,16 +46,23 @@
         android:textSize="40sp"
         android:textColor="@drawable/blue_color"/>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/login"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="Log-In"
         android:textSize="40sp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:background="#aeee"
         android:onClick="onLogin"
+        app:cornerRadius="17dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@color/buttoncolor"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         />
 
     </LinearLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
     android:id="@+id/creat_new_restaurant">
@@ -96,7 +96,7 @@
         android:textSize="25sp"
         android:textColor="#fff"/>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Next"
@@ -104,6 +104,13 @@
         android:textSize="25sp"
         android:layout_marginTop="30dp"
         android:onClick="onrestaurentresistor"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        app:buttonColor="@color/buttoncolor"
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
     </LinearLayout>
 </ScrollView>

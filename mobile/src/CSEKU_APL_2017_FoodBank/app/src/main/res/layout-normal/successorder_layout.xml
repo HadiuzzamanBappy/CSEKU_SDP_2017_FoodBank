@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
-    android:id="@+id/success"
-    >
+    android:id="@+id/success">
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,7 +15,15 @@
         android:text="Order Succesfully Delivered"
         android:textSize="20sp"
         android:textColor="#fff"
-        android:layout_marginTop="20dp"/>
+        android:layout_above="@+id/linearLayout14"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="34dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout14">
 
     <TextView
         android:id="@+id/name"
@@ -99,14 +106,23 @@
         android:textSize="15sp"
         android:textColor="#fff"
         android:layout_marginTop="10dp"/>
+    </LinearLayout>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:layout_marginTop="30dp"
         android:background="#aeee"
         android:onClick="homepage"
         android:text="OK!!!"
-        android:textSize="15sp"/>
-</LinearLayout>
+        android:textSize="15sp"
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@color/buttoncolor"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp" />
+</RelativeLayout>

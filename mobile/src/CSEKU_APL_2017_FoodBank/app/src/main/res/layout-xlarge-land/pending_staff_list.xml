@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
-    android:id="@+id/pending_staff_list"
-    >
+    android:id="@+id/pending_staff_list">
 
     <ImageView
         android:layout_width="100dp"
@@ -43,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/approve"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
@@ -53,9 +52,14 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/blue_color"
         android:layout_marginBottom="10dp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        app:buttonColor="@drawable/blue_color"
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"/>
 
-        <Button
+        <info.hoang8f.widget.FButton
             android:id="@+id/delete"
             android:layout_width="320dp"
             android:layout_height="match_parent"
@@ -65,7 +69,12 @@
             android:background="@drawable/red_color"
             android:text="delete"
             android:textColor="#fff"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            app:buttonColor="@drawable/red_color"
+            app:cornerRadius="12dp"
+            android:shadowColor="#000"
+            app:shadowEnabled="true"
+            app:shadowHeight="4dp"/>
     </LinearLayout>
 
     </LinearLayout>

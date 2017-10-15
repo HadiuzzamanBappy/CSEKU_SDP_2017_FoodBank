@@ -1,12 +1,11 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
     android:padding="10dp"
-    android:id="@+id/super_login"
-    >
+    android:id="@+id/super_login">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,15 +13,23 @@
         android:textSize="35sp"
         android:textAlignment="center"
         android:textColor="#fff"
-        android:layout_marginTop="50dp"/>
+        android:layout_above="@+id/linearLayout10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="61dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout10">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
         android:textColor="#00a"
-        android:textSize="30sp"
-        android:layout_marginTop="60dp"/>
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/username"
@@ -40,7 +47,7 @@
         android:text="Password"
         android:textColor="#00a"
         android:textSize="30sp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="40dp"/>
     <EditText
         android:id="@+id/restaurentpassword"
         android:inputType="textPassword"
@@ -57,19 +64,27 @@
         android:layout_height="wrap_content"
         android:text="Login as SuperAdmin!! "
         android:textSize="35sp"
-        android:textColor="@drawable/blue_color"/>
+        android:textColor="@drawable/blue_color"
+        android:layout_marginTop="30dp"/>
+    </LinearLayout>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/login"
-        android:layout_width="230dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="Log-In"
         android:padding="10dp"
         android:textSize="30sp"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
         android:background="#aeee"
         android:onClick="onLogin"
-        />
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@color/buttoncolor"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp" />
 
-    </LinearLayout>
+    </RelativeLayout>

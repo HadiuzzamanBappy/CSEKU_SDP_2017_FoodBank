@@ -6,6 +6,7 @@
     android:background="@drawable/food_app_home"
     android:id="@+id/main_app"
     android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <TextView
@@ -20,10 +21,24 @@
         android:textStyle="bold"
         android:layout_marginTop="90dp"/>
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="150dp"
+    <!--<ProgressBar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_marginTop="150dp"-->
+        <!--/>-->
+
+    <io.netopen.hotbitmapgg.library.view.RingProgressBar
+        android:layout_width="80dp"
+        android:layout_height="82dp"
+        android:id="@+id/ringProgress"
+        app:max="50"
+        app:ringColor="@color/colorPrimary"
+        app:ringProgressColor="@color/colorPrimaryDark"
+        app:style="FILL"
+        app:textColor="@color/colorPrimary"
+        app:textIsShow="true"
+        app:textSize="15sp"
+
         />
 
 </LinearLayout>

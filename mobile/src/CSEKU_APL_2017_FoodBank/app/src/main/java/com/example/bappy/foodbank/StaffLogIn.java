@@ -190,17 +190,23 @@ public class StaffLogIn extends AppCompatActivity{
         String restaurent=res;
         String pass=password.getText().toString();
         String role=rolestaff;
-        if(role.equals("Admin") || role.equals("Staff"))
-            if(restaurent.equals("None"))
-                Toast.makeText(this, "Please check your Restaurant Mr. Admin", Toast.LENGTH_SHORT).show();
+        if(user.equals("") || pass.equals(""))
+            Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
         else {
+            if (role.equals("Admin") || role.equals("Staff"))
+                if (restaurent.equals("None"))
+                    if (role.equals("Admin"))
+                        Toast.makeText(this, "Please check your Restaurant Mr. Admin", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(this, "Please check your Restaurant Mr. Staff", Toast.LENGTH_SHORT).show();
+                else {
+                    String type = "login";
+                    new LoginBackground().execute(type, user, restaurent, role, pass);
+                }
+            else {
                 String type = "login";
-                new LoginBackground().execute(type, user, restaurent, role, pass);
+                new LoginBackground().execute(type, user, "None", role, pass);
             }
-            else
-        {
-            String type = "login";
-            new LoginBackground().execute(type, user, "None", role, pass);
         }
     }
     public class LoginBackground extends AsyncTask<String,Void,String> {

@@ -1,7 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/food_app"
     android:id="@+id/edit_layout"
@@ -15,14 +15,21 @@
         android:textSize="15sp"
         android:textColor="@drawable/red_color"
         android:text="Please Fill All The Information to\nAdd Your New Food"
-        android:layout_marginTop="10dp"/>
+        android:layout_above="@+id/linearLayout8"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout8">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="#fff"
         android:hint="Input Your Food Name\nsuch as: Chicken Grill"
         android:gravity="center"
-        android:layout_marginTop="60dp"
         android:id="@+id/foodname"
         android:textColor="#fff"
         android:textSize="15sp"/>
@@ -32,7 +39,7 @@
         android:textColor="#fff"
         android:hint="Input Food Price"
         android:gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:inputType="number"
         android:id="@+id/foodprice"
         android:textColorHint="#fff"
@@ -41,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:background="#757575">
         <TextView
             android:layout_width="wrap_content"
@@ -60,16 +67,23 @@
             ></Spinner>
 
     </LinearLayout>
+    </LinearLayout>
 
-    <Button
-        android:layout_width="200dp"
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
         android:layout_height="34dp"
         android:text="Edit"
         android:layout_gravity="center"
         android:textSize="15sp"
-        android:layout_marginTop="75dp"
         android:background="#aeee"
         android:onClick="editfood"
-        />
+        app:cornerRadius="17dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@drawable/red_color"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp" />
 
-</LinearLayout>
+</RelativeLayout>

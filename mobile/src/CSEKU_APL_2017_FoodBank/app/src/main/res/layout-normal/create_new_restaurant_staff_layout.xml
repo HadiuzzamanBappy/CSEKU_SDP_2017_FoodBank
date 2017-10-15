@@ -1,0 +1,96 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.bappy.foodbank.Staff_Resister"
+    android:background="@drawable/food_app"
+    android:orientation="vertical"
+    android:id="@+id/creat_new_restaurant_staff"
+    android:weightSum="1">
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Make Your Registration\nSuccessfull By Filling All Field\nIf Valid Then Request Will Be\n Sent To Admin For Enterence"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        >
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Your Username"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"
+        android:textSize="15dp"/>
+
+
+    <EditText
+        android:id="@+id/password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="35dp"
+        android:textColor="#fff"
+        android:textSize="15dp"/>
+    <EditText
+        android:id="@+id/repassword"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password Again"
+        android:textAlignment="center"
+        android:textColorHint="#fff"
+        android:layout_marginTop="35dp"
+        android:textColor="#fff"
+        android:textSize="15dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registration As Admin"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:textColor="@drawable/blue_color"/>
+
+    </LinearLayout>
+    <info.hoang8f.widget.FButton
+        android:id="@+id/resistor"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="Resister"
+        android:textSize="15sp"
+        android:layout_gravity="center"
+        android:background="#aeee"
+        android:onClick="onResister"
+        android:layout_weight="0.00"
+        app:buttonColor="@color/buttoncolor"
+        app:cornerRadius="7dp"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+</RelativeLayout>

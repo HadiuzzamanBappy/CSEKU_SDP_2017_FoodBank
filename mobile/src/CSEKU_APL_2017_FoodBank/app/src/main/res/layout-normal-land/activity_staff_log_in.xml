@@ -1,11 +1,10 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
-    android:id="@+id/staff_login"
-    >
+    android:id="@+id/staff_login">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -89,9 +88,9 @@
         android:textSize="15sp"
         android:textColor="#fff"/>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/login"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
         android:text="Log-In"
         android:textSize="20sp"
@@ -99,9 +98,15 @@
         android:layout_marginTop="20dp"
         android:background="#aeee"
         android:onClick="onLogin"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="7dp"
+        android:layout_margin="10dp"
         />
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:layout_width="250dp"
         android:layout_height="35dp"
         android:text="i am superadmin"
@@ -110,6 +115,12 @@
         android:layout_marginTop="20dp"
         android:background="#aeee"
         android:onClick="onLoginsuperadmin"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="7dp"
+        android:layout_margin="10dp"
         />
     </LinearLayout>
 

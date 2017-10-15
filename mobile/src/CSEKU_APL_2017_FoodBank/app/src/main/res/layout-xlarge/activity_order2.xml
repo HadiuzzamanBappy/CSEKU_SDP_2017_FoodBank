@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +25,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +44,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +64,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,17 +80,25 @@
             android:textColor="#fff"
             android:textSize="30sp"/>
     </LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="#fff"
-        android:hint="Enter Your Name"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/cname"
-        android:textColor="#fff"
-        android:textSize="30sp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name : "
+                android:textColor="@color/colorAccent"
+                android:textSize="30sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:id="@+id/name"
+                android:textColor="#fff"
+                android:textSize="30sp"/>
+        </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
@@ -93,7 +106,7 @@
         android:textColorHint="#fff"
         android:hint="Enter Your Phone Number"
         android:gravity="center"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="27dp"
         android:id="@+id/cphone"
         android:textColor="#fff"
         android:inputType="number"
@@ -104,7 +117,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#757575"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="30dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -154,7 +167,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="#757575">
     <TextView
         android:layout_width="wrap_content"
@@ -179,7 +192,7 @@
         android:textColorHint="#fff"
         android:hint="Enter Your Exact Address\nlike Gollamari,2/3 road,3 no house."
         android:gravity="center"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="27dp"
         android:id="@+id/caddress"
         android:textColor="#fff"
         android:textSize="30sp"/>
@@ -189,7 +202,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="30dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -226,15 +239,24 @@
                 />
         </RadioGroup>
     </LinearLayout>
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="60dp"
+    </LinearLayout>
+    <info.hoang8f.widget.FButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Order"
         android:onClick="order"
         android:layout_gravity="center"
         android:layout_marginTop="55dp"
         android:background="#aeee"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
-    </LinearLayout>
-</ScrollView>
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:cornerRadius="7dp"
+        app:shadowEnabled="true"
+        />
+</RelativeLayout>

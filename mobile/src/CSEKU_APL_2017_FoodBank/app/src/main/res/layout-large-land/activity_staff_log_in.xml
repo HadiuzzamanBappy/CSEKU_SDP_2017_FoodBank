@@ -1,12 +1,11 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/food_app"
     android:orientation="vertical"
     android:padding="10dp"
-    android:id="@+id/staff_login"
-    >
+    android:id="@+id/staff_login">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,6 +31,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
+        android:background="#757575"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +54,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:id="@+id/linearres">
+        android:id="@+id/linearres"
+        android:background="#757575">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,9 +84,9 @@
         android:textSize="25sp"
         android:textColor="#fff"/>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/login"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Log-In"
         android:padding="10dp"
@@ -94,10 +95,15 @@
         android:layout_marginTop="10dp"
         android:background="#aeee"
         android:onClick="onLogin"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="7dp"
         />
 
-    <Button
-        android:layout_width="wrap_content"
+    <info.hoang8f.widget.FButton
+        android:layout_width="454dp"
         android:layout_height="wrap_content"
         android:text="i am superadmin"
         android:padding="10dp"
@@ -106,6 +112,11 @@
         android:layout_marginTop="10dp"
         android:background="#aeee"
         android:onClick="onLoginsuperadmin"
+        app:buttonColor="@color/buttoncolor"
+        android:shadowColor="#000"
+        app:shadowHeight="4dp"
+        app:shadowEnabled="true"
+        app:cornerRadius="7dp"
         />
 
 </LinearLayout>

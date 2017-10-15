@@ -116,7 +116,7 @@
         android:textColor="#fff"
         android:textSize="35sp"/>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/resistor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -127,6 +127,11 @@
         android:background="#aeee"
         android:onClick="onResister"
         android:layout_marginBottom="20dp"
+        app:cornerRadius="17dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@color/buttoncolor"
         />
     </LinearLayout>
 </ScrollView>

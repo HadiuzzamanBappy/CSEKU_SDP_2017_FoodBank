@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/food_app"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/home_app">
     <TextView
         android:layout_width="wrap_content"
@@ -14,51 +15,59 @@
         android:textSize="45sp"
         android:layout_marginRight="25dp"
         android:id="@+id/logger"/>
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:text="FoodBank"
-        android:textColor="#fff"
-        android:textSize="95sp"
-        android:textStyle="bold"
-        android:layout_marginTop="105dp"/>
+        android:layout_marginTop="100dp"
+        android:background="@drawable/home_icon" />
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/restaurent"
-        android:layout_width="400dp"
+        android:layout_width="450dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:text="Restaurant"
         android:textSize="45sp"
-        android:background="#aeee"
         android:onClick="parsejsonrestaurent"
+        android:shadowColor="@color/shadowcolor"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        app:cornerRadius="9dp"
+        app:buttonColor="@color/buttoncolor"
         />
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/findfood"
-        android:layout_width="500dp"
+        android:layout_width="450dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
         android:layout_marginTop="80dp"
         android:text="I Am Hungry For"
         android:textSize="45sp"
-        android:background="#aeee"
         android:padding="15dp"
         android:onClick="parsejsonfood"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        app:cornerRadius="9dp"
+        app:buttonColor="@color/buttoncolor"
         />
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/exit"
         android:layout_width="250dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="160dp"
         android:text="Exit"
         android:textSize="45sp"
         android:background="#aeee"
         android:padding="15dp"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp"
+        app:cornerRadius="9dp"
+        app:buttonColor="@color/buttoncolor"
         />
 
 </LinearLayout>

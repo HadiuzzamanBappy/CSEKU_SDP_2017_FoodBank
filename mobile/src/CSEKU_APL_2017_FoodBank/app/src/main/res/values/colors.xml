@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <drawable name="red_color">#F40303</drawable>
     <drawable name="blue_color">#1703F4</drawable>
+    <color name="buttoncolor">#bca7a6</color>
+    <color name="shadowcolor">#000000</color>
+    <color name="red">#85302b</color>
 </resources>

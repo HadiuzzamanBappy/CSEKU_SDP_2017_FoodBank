@@ -36,7 +36,19 @@
         android:textColor="#fff"
         android:textSize="25sp"/>
 
-    <LinearLayout
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Enter Your Password"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="25sp" />
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -93,18 +105,7 @@
         android:textSize="25sp"
         />
 
-    <EditText
-        android:id="@+id/password"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Your Password"
-        android:textAlignment="center"
-        android:textColorHint="#fff"
-        android:layout_marginTop="5dp"
-        android:textColor="#fff"
-        android:textSize="25sp"/>
-    <EditText
+        <EditText
         android:id="@+id/repassword"
         android:inputType="textPassword"
         android:layout_width="match_parent"
@@ -116,7 +117,7 @@
         android:textColor="#fff"
         android:textSize="25sp"/>
 
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/resistor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -127,6 +128,13 @@
         android:background="#aeee"
         android:onClick="onResister"
         android:layout_marginBottom="20dp"
+        app:cornerRadius="12dp"
+        android:shadowColor="#000"
+        app:shadowEnabled="true"
+        app:shadowHeight="4dp"
+        app:buttonColor="@color/buttoncolor"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         />
     </LinearLayout>
 </ScrollView>

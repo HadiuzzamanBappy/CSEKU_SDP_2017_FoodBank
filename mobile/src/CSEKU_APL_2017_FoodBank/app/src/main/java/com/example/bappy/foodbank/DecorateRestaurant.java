@@ -203,7 +203,9 @@ public class DecorateRestaurant extends AppCompatActivity {
             nointernet();
         else {
             Intent intent = new Intent(DecorateRestaurant.this, AddFood.class);
+            intent.putExtra("username", name);
             intent.putExtra("resname", resname);
+            intent.putExtra("role", role);
             startActivity(intent);
             finish();
         }

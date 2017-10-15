@@ -1,11 +1,10 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
-    android:id="@+id/assign_staff"
-    >
+    android:id="@+id/assign_staff">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,20 +51,7 @@
             android:text="number"
             android:textSize="15sp"
             />
-            <TextView
-                android:id="@+id/sfood"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="food"
-                android:textSize="15sp"
-                />
-            <TextView
-                android:id="@+id/squantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="quantity"
-                android:textSize="15sp"
-                />
+
         <TextView
             android:id="@+id/sorderdate"
             android:layout_width="match_parent"
@@ -108,20 +94,51 @@
             android:text="orderplace"
             android:textSize="15sp"
             />
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:text="Show All"
-            android:textSize="10sp"
-            android:id="@+id/showall"
-            android:layout_marginBottom="5dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <info.hoang8f.widget.FButton
+                android:layout_weight="5"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Food List"
+                android:textSize="10sp"
+                android:id="@+id/foodlist"
+                android:layout_marginBottom="5dp"
+                app:buttonColor="@color/buttoncolor"
+                android:shadowColor="#000"
+                app:shadowHeight="4dp"
+                app:shadowEnabled="true"
+                app:cornerRadius="17dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:textAllCaps="false"/>
+            <info.hoang8f.widget.FButton
+                android:textAllCaps="false"
+                android:layout_weight="5"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Show All"
+                android:textSize="10sp"
+                android:id="@+id/showall"
+                android:layout_marginBottom="5dp"
+                app:buttonColor="@color/buttoncolor"
+                android:shadowColor="#000"
+                app:shadowHeight="4dp"
+                app:shadowEnabled="true"
+                app:cornerRadius="17dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
         </LinearLayout>
         </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
+        <info.hoang8f.widget.FButton
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:text="Assign"
@@ -131,6 +148,13 @@
             android:background="@drawable/blue_color"
             android:id="@+id/Assign"
             android:onClick="gotoass"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            app:buttonColor="@drawable/blue_color"
+            android:shadowColor="#000"
+            app:shadowHeight="4dp"
+            app:shadowEnabled="true"
+            app:cornerRadius="7dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
     </LinearLayout>
