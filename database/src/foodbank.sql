@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2017 at 08:30 AM
+-- Generation Time: Sep 15, 2017 at 08:00 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -32,7 +32,6 @@ CREATE TABLE `fooditems` (
   `type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 --
 -- Dumping data for table `fooditems`
 --
@@ -57,7 +56,13 @@ INSERT INTO `fooditems` (`id`, `name`, `type`) VALUES
 (19, 'Beef(per piece)', 'Spicy'),
 (20, 'Chicken(per piece)', 'Spicy'),
 (21, 'Mutton(per piece)', 'Spicy'),
-(22, 'Rice(Per Plate)', 'General');
+(22, 'Rice(Per Plate)', 'General'),
+(29, 'Ice Cream', 'Desert'),
+(30, 'Ice Cream', 'Desert'),
+(31, 'vb', 'Desert'),
+(32, 'bnb', 'Desert'),
+(33, 'hsjb', 'Meals'),
+(34, 'der', 'Spicy');
 
 -- --------------------------------------------------------
 
@@ -86,7 +91,12 @@ INSERT INTO `foodorder` (`id`, `name`, `restaurantid`, `restaurantfoodid`, `orde
 (30, 'lotif', 1, 6, 44, 3, '360', 10),
 (31, 'arju', 1, 3, 45, 3, '180', 10),
 (32, 'rakib', 1, 2, 46, 3, '240', 10),
-(33, 'foysal', 1, 6, 47, 2, '240', 10);
+(33, 'foysal', 1, 6, 47, 2, '240', 10),
+(34, 'Fuck', 2, 10, 48, 1, '60', 0),
+(35, 'ffjjfjfjj', 3, 12, 49, 10, '700', 0),
+(36, 'tuki', 1, 1, 50, 2, '500', 10),
+(37, 'fdf', 1, 5, 51, 1, '105', 0),
+(38, 'adas', 1, 1, 52, 1, '250', 0);
 
 -- --------------------------------------------------------
 
@@ -114,7 +124,12 @@ INSERT INTO `orderdetails` (`id`, `OrderDate`, `ispaid`, `phonenumber`, `deliver
 (44, '2017-04-10 19:38:53', 0, '01987564576', '2017-04-11', 1, 'khaba holer pisone'),
 (45, '2017-04-10 23:10:45', 0, '01943567434', '2017-04-12', 1, 'gollamari,green road'),
 (46, '2017-04-16 11:23:06', 1, '01973852628', '2017-04-17', 1, 'boira'),
-(47, '2017-04-16 12:44:33', 1, '01963528352', '2017-04-18', 1, 'gollamari');
+(47, '2017-04-16 12:44:33', 1, '01963528352', '2017-04-18', 1, 'gollamari'),
+(48, '2017-08-15 20:58:01', 0, '01777777777777', '2017-09-07', 1, '\n5\n\n'),
+(49, '2017-08-15 21:00:46', 0, '466466656566565', '2018-01-01', 1, 'hdhshshdhdh\n'),
+(50, '2017-08-28 18:40:11', 0, '019262', '2017-01-01', 1, 'dasdad'),
+(51, '2017-08-28 18:45:11', 0, '0868', '2017-01-01', 1, 'dgdh'),
+(52, '2017-08-28 18:46:16', 0, '121', '2019-08-18', 1, 'sff');
 
 -- --------------------------------------------------------
 
@@ -142,7 +157,7 @@ INSERT INTO `restaurant` (`id`, `name`, `street`, `town`, `type`, `phone`, `pass
 (1, 'BISTRO-C', 'Royel Mor', 'Khulna', 'Cafe & Party', '+8801943567453', 'bistro', 1, 4),
 (2, 'WE HUNGRY', 'Royel Mor', 'Khulna', 'Chinese & FastFood', '+8801674985357', 'hungry', 1, 5),
 (3, 'MEJBAN BARI', 'Zero-Point,In Front of KU', 'Khulna', 'Regional Special Restaurant', '+8801765354767', 'mejban', 1, 6),
-(4, 'hskb', 'bnb', 'gjb', 'gjbg', 'ghh', 'gjv', 0, 11);
+(4, 'fghf', 'yfgf', 'fygfgf', 'tfhgf', 'rytfg', 'rtd', 0, 38);
 
 -- --------------------------------------------------------
 
@@ -165,7 +180,6 @@ INSERT INTO `restaurantfood` (`id`, `restaurantid`, `foodid`, `foodprice`) VALUE
 (1, 1, 1, 250),
 (2, 1, 2, 80),
 (3, 1, 5, 60),
-(4, 1, 6, 120),
 (5, 1, 7, 105),
 (6, 1, 13, 120),
 (7, 1, 11, 90),
@@ -176,7 +190,7 @@ INSERT INTO `restaurantfood` (`id`, `restaurantid`, `foodid`, `foodprice`) VALUE
 (12, 3, 19, 70),
 (13, 3, 20, 65),
 (14, 3, 21, 90),
-(15, 3, 22, 10);
+(16, 1, 6, 120);
 
 -- --------------------------------------------------------
 
@@ -202,7 +216,10 @@ INSERT INTO `staffdetails` (`id`, `name`, `restaurantid`, `activerole`, `roletyp
 (5, 'aakash', 2, 1, 2, 'aakash'),
 (6, 'siam', 3, 1, 2, 'siam'),
 (10, 'fahim', 1, 1, 3, 'fahim'),
-(11, 'hjg', 4, 0, 2, 'g');
+(35, 'baby', NULL, 1, 1, 'baby'),
+(36, 'sabbir', 1, 1, 2, 'sabbir'),
+(37, 'sabbir', NULL, 1, 1, 'sabbir'),
+(38, 'gghf', 4, 0, 2, 'fgfg');
 
 -- --------------------------------------------------------
 
@@ -220,6 +237,7 @@ CREATE TABLE `staffrole` (
 --
 
 INSERT INTO `staffrole` (`id`, `role`) VALUES
+(1, 'User'),
 (2, 'Admin'),
 (3, 'Staff');
 
@@ -240,7 +258,7 @@ CREATE TABLE `superadmin` (
 --
 
 INSERT INTO `superadmin` (`id`, `name`, `password`) VALUES
-(1, 'restaurant', 'restaurant');
+(1, 'admin', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -308,17 +326,17 @@ ALTER TABLE `superadmin`
 -- AUTO_INCREMENT for table `fooditems`
 --
 ALTER TABLE `fooditems`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `foodorder`
 --
 ALTER TABLE `foodorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `restaurant`
 --
@@ -328,12 +346,12 @@ ALTER TABLE `restaurant`
 -- AUTO_INCREMENT for table `restaurantfood`
 --
 ALTER TABLE `restaurantfood`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `staffdetails`
 --
 ALTER TABLE `staffdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `staffrole`
 --
