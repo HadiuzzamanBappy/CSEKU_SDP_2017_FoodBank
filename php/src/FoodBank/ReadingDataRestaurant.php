@@ -1,8 +1,5 @@
 <?php
-$server_name="localhost";
-$user_name="csekua5_feedme";
-$password="Food%^238490232";
-$database_name="csekua5_feedme";
+require "connectiontest.php";
 
 $name=$_POST["name"];
 // $name="Pending";
@@ -16,8 +13,6 @@ else
 {
     $sql="SELECT * FROM restaurant where activity like '1'";
 }
-
-$conn=new mysqli($server_name,$user_name,$password,$database_name);
 
 $result=mysqli_query($conn,$sql);
 
