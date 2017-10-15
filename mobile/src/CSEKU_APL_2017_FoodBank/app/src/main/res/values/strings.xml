@@ -1,7 +1,7 @@
 <resources>
     //app details info
     <string name="app_name">Food Bank</string>
-    <string name="ip_address">192.168.0.101</string>
+    <string name="ip_address">restaurant.dgted.com</string>
 
     //restaurant.dgted.com
 
