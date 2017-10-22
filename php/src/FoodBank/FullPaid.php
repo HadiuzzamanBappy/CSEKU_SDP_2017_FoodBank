@@ -19,18 +19,25 @@ $result2=mysqli_query($conn,$mysql_qry2);
 $response=array();
 
 while($row3=$result2->fetch_assoc()){
-    while($row6=$result6->fetch_assoc()){
-        if($row3['staffid']==$row6['id'])
-        {
-            $staffrole=$row6['name'];
+    $staffid=$row3['staffid'];
+    $chefid=$row3['chefid'];
+     $mysql_qry6="SELECT * FROM staffdetails where id like '$staffid'";
+     $result6=mysqli_query($conn,$mysql_qry6);
+     if($row6=$result6->fetch_assoc())
+         $staffrole=$row6['name'];
+     else
+        $staffrole="Not Set Yet";
+    $mysql_qry6="SELECT * FROM staffdetails where id like '$chefid'";
+     $result6=mysqli_query($conn,$mysql_qry6);
+     if($row6=$result6->fetch_assoc())
+         $chefrole=$row6['name'];
+
             if($row3['ispaid']=="1" && $row3['ishomedelivery']=="0"){
-                array_push($response,array("clientid"=>$row3['id'],"clientname"=>$row3['name'],"orderdate"=>$row3['orderdate'],"ispaid"=>"Paid","phonenumber"=>$row3['phonenumber'],"deliverydate"=>$row3['deliverydate'],"isdelivery"=>"Just Cook","price"=>$row3['price'],"orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole));
+                array_push($response,array("clientid"=>$row3['id'],"clientname"=>$row3['name'],"orderdate"=>$row3['orderdate'],"ispaid"=>"Paid","phonenumber"=>$row3['phonenumber'],"deliverydate"=>$row3['deliverydate'],"isdelivery"=>"Just Cook","price"=>$row3['price'],"orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole));
             }
             else if($row3['ispaid']=="1" && $row3['ishomedelivery']=="1"){
-                array_push($response,array("clientid"=>$row3['id'],"clientname"=>$row3['name'],"orderdate"=>$row3['orderdate'],"ispaid"=>"Paid","phonenumber"=>$row3['phonenumber'],"deliverydate"=>$row3['deliverydate'],"isdelivery"=>"Home Delivery","price"=>$row3['price'],"orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole));
+                array_push($response,array("clientid"=>$row3['id'],"clientname"=>$row3['name'],"orderdate"=>$row3['orderdate'],"ispaid"=>"Paid","phonenumber"=>$row3['phonenumber'],"deliverydate"=>$row3['deliverydate'],"isdelivery"=>"Home Delivery","price"=>$row3['price'],"orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole));
             }
-        }
-    }
 }
 
 echo json_encode(array("Server_response"=>$response));

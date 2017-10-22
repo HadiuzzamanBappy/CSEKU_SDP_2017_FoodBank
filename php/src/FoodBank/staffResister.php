@@ -27,8 +27,10 @@ $result2=mysqli_query($conn,$mysql_qry2);
 
 if($role=="Admin")
             $id4="2";
-            else
+else if($role=="Staff")
             $id4="3";
+else
+    $id4="4";
 
 $mysql_qry4="SELECT * from staffdetails where name like '$name' and password like '$pass'";
 $result4=mysqli_query($conn,$mysql_qry4);
@@ -61,9 +63,11 @@ $result2=mysqli_query($conn,$mysql_qry2);
 if($row2=$result2->fetch_assoc()){
     $id3=$row2['id'];
     if($role=="Admin")
-    $id4="2";
+        $id4="2";
+    else if($role=="Staff")
+        $id4="3";
     else
-    $id4="3";
+        $id4="4";
     $mysql_qry3="INSERT into staffdetails(name,restaurantid,activerole,roletype,password)
             values('$name','$id3','0','$id4','$pass')";
     if($result=mysqli_query($conn,$mysql_qry3))
