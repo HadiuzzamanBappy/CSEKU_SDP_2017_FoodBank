@@ -51,7 +51,10 @@
         <activity android:name=".ShowProfile" />
         <activity android:name=".EditChangeProfile" />
         <activity android:name=".OrderMultiple" />
-        <activity android:name=".SuccessOrderMultiple"></activity>
+        <activity android:name=".SuccessOrderMultiple" />
+        <activity android:name=".UserFoodDetails" />
+        <activity android:name=".AssignChef" />
+        <activity android:name=".ChefWork"></activity>
     </application>
 
 </manifest>

@@ -38,6 +38,24 @@
                 android:textSize="35sp"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chef:"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/chef"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textSize="35sp" />
+        </LinearLayout>
         <TextView
             android:id="@+id/snumber"
             android:layout_width="match_parent"

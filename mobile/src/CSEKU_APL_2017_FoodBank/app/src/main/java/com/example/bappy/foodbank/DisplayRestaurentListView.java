@@ -135,6 +135,9 @@ public class DisplayRestaurentListView extends AppCompatActivity {
                 AlertDialog al=alert.create();
                 al.show();
                 return true;
+            case R.id.myorder:
+                startActivity(new Intent(this,UserFoodDetails.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

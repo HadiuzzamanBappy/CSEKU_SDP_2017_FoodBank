@@ -131,25 +131,53 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"/>
 
-    <info.hoang8f.widget.FButton
-        android:id="@+id/assignstaff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#aeee"
-        android:textAlignment="center"
-        android:text="assign staff"
-        android:textSize="35sp"
-        android:layout_gravity="end"
-        android:layout_marginTop="20dp"
-        android:onClick="assignstaff"
-        android:layout_weight="0.08"
-        app:buttonColor="@color/buttoncolor"
-        android:shadowColor="#000"
-        app:shadowHeight="4dp"
-        app:shadowEnabled="true"
-        app:cornerRadius="17dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/assignstaff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#aeee"
+                android:textAlignment="center"
+                android:text="Assign Staff"
+                android:textSize="35sp"
+                android:layout_gravity="end"
+                android:onClick="assignstaff"
+                app:buttonColor="@color/buttoncolor"
+                android:shadowColor="#000"
+                app:shadowHeight="4dp"
+                app:shadowEnabled="true"
+                app:cornerRadius="7dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:textAllCaps="false"
+                android:layout_weight="5"
+                />
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/assignchef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="5"
+                android:background="#aeee"
+                android:onClick="assignchef"
+                android:shadowColor="#000"
+                android:text="Assign Chef"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="35sp"
+                app:buttonColor="@color/buttoncolor"
+                app:cornerRadius="7dp"
+                app:shadowEnabled="true"
+                app:shadowHeight="4dp" />
+        </LinearLayout>
     <info.hoang8f.widget.FButton
         android:id="@+id/pendingstaff"
         android:layout_width="match_parent"

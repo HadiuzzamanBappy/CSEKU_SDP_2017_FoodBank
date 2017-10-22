@@ -15,6 +15,10 @@
         android:id="@+id/delete_profile"
         android:title="Delete Profile"
         app:showAsAction="never"></item>
+    <item
+        android:id="@+id/myorder"
+        android:title="My Order"
+        app:showAsAction="never"></item>
 
     <item
         android:id="@+id/Logout"

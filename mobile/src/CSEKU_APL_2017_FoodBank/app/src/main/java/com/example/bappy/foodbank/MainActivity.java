@@ -114,6 +114,16 @@ public class MainActivity extends AppCompatActivity {
                             //starting the activity
                             startActivity(newintent);
                         }
+                        else if(type.equals("Chef"))
+                        {
+                            //creating intent and going to the home activity
+                            Intent intent = new Intent(MainActivity.this, ChefWork.class);
+                            intent.putExtra("username", name);
+                            intent.putExtra("resname", resname);
+                            intent.putExtra("role", "Chef");
+                            //starting the activity
+                            startActivity(intent);
+                        }
                         else if(type.equals("Admin"))
                         {
                             //creating intent and going to the home activity

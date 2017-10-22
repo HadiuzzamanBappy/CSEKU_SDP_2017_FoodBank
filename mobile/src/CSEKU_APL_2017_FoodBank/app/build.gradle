@@ -29,7 +29,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:23.1.0'
     compile 'com.github.HotBitmapGG:RingProgressBar:V1.2.2'
-    testCompile 'junit:junit:4.12'
     compile 'info.hoang8f:fbutton:1.0.5'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    testCompile 'junit:junit:4.12'
 }

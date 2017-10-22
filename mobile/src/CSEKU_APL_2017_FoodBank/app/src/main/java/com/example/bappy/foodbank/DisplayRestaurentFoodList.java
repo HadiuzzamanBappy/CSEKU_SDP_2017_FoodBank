@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.id;
 import static android.R.id.list;
 
 public class DisplayRestaurentFoodList extends AppCompatActivity{
@@ -70,6 +72,8 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
     String name,resname,pass,type;
     AlertDialog.Builder orderbuilder;
     AlertDialog mydialog;
+
+    FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +86,11 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
         name=sharedPreferences.getString(getString(R.string.NAME),"None");
         pass=sharedPreferences.getString(getString(R.string.PASSWORD),"None");
         resname=sharedPreferences.getString(getString(R.string.RESTAURANT_NAME),"None");
+
+        floatingActionButton=(FloatingActionButton)findViewById(R.id.myFAB);
+
+        if(name.equals("None"))
+            floatingActionButton.setVisibility(View.GONE);
 
         restaurent_name = getIntent().getExtras().getString("restaurent_name");
 
@@ -445,19 +454,24 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
             restaurentfoodview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ct, "Press Long For Getting Options", Toast.LENGTH_SHORT).show();
+                    if(name.equals("None"))
+                        Toast.makeText(ct, "Please Login to Get Options", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(ct, "Press Long For Getting Options", Toast.LENGTH_SHORT).show();
                 }
             });
-            restaurentfoodview.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-                @Override
-                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                    pressname=restaurentfood.getName();
-                    presstype=restaurentfood.getType();
-                    pressprice=restaurentfood.getPrice();
-                    MenuInflater menuInflater=getMenuInflater();
-                    menuInflater.inflate(R.menu.food_order,menu);
-                }
-            });
+            if(!name.equals("None")) {
+                restaurentfoodview.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                    @Override
+                    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                        pressname = restaurentfood.getName();
+                        presstype = restaurentfood.getType();
+                        pressprice = restaurentfood.getPrice();
+                        MenuInflater menuInflater = getMenuInflater();
+                        menuInflater.inflate(R.menu.food_order, menu);
+                    }
+                });
+            }
             return restaurentfoodview;
         }
 

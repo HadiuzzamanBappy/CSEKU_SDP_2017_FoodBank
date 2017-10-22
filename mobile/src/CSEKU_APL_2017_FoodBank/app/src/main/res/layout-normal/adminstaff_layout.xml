@@ -14,7 +14,8 @@
         android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +40,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="4dp"
                 android:onClick="allorder"
-                android:text="All order"
+                android:text="All Order"
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="12sp"
@@ -47,7 +48,8 @@
                 android:shadowColor="#000"
                 app:shadowHeight="4dp"
                 app:shadowEnabled="true"
-                app:cornerRadius="7dp"/>
+                app:cornerRadius="7dp"
+                android:textAllCaps="false"/>
         </LinearLayout>
 
 
@@ -64,10 +66,10 @@
         <info.hoang8f.widget.FButton
             android:id="@+id/getdate"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="30dp"
             android:background="#aeee"
             android:textAlignment="center"
-            android:text="Get date"
+            android:text="Get Date"
             android:textSize="12sp"
             android:layout_gravity="end"
             android:layout_marginTop="20dp"
@@ -77,15 +79,16 @@
             app:shadowEnabled="true"
             app:cornerRadius="7dp"
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp"
+            android:textAllCaps="false"/>
 
         <info.hoang8f.widget.FButton
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="30dp"
             android:layout_marginTop="15dp"
             android:background="#aeee"
             android:id="@+id/orderlist"
-            android:text="order list"
+            android:text="Order List"
             android:textSize="12sp"
             android:onClick="orderlist"
             app:buttonColor="@color/buttoncolor"
@@ -94,17 +97,38 @@
             app:shadowEnabled="true"
             app:cornerRadius="7dp"
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_weight="0.01"
+            android:textAllCaps="false"/>
 
         <info.hoang8f.widget.FButton
+            android:id="@+id/deliverylist"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:background="#aeee"
-            android:id="@+id/deliverylist"
-            android:text="delivery list"
-            android:textSize="12sp"
             android:onClick="deliverylist"
+            android:shadowColor="#000"
+            android:text="Delivery List"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:buttonColor="@color/buttoncolor"
+            app:cornerRadius="7dp"
+            app:shadowEnabled="true"
+            app:shadowHeight="4dp" />
+
+        <info.hoang8f.widget.FButton
+            android:onClick="getfullprice"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#aeee"
+            android:textAlignment="center"
+            android:text="Get Full Price"
+            android:textSize="12sp"
+            android:layout_gravity="end"
+            android:layout_marginTop="15dp"
             app:buttonColor="@color/buttoncolor"
             android:shadowColor="#000"
             app:shadowHeight="4dp"
@@ -112,36 +136,22 @@
             app:cornerRadius="7dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            />
-
-        <info.hoang8f.widget.FButton
-            android:onClick="getfullprice"
+            android:textAllCaps="false"/>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:background="#aeee"
-            android:textAlignment="center"
-            android:text="Get full price"
-            android:textSize="12sp"
-            android:layout_gravity="end"
-            android:layout_marginTop="15dp"
-            app:buttonColor="@color/buttoncolor"
-            android:shadowColor="#000"
-            app:shadowHeight="4dp"
-            app:shadowEnabled="true"
-            app:cornerRadius="7dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
 
         <info.hoang8f.widget.FButton
             android:id="@+id/assignstaff"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:background="#aeee"
             android:textAlignment="center"
-            android:text="assign staff"
+            android:text="Assign Staff"
             android:textSize="12sp"
             android:layout_gravity="end"
-            android:layout_marginTop="15dp"
             android:onClick="assignstaff"
             app:buttonColor="@color/buttoncolor"
             android:shadowColor="#000"
@@ -149,7 +159,31 @@
             app:shadowEnabled="true"
             app:cornerRadius="7dp"
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp"
+            android:textAllCaps="false"
+            android:layout_weight="5"
+            />
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/assignchef"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="5"
+                android:background="#aeee"
+                android:onClick="assignchef"
+                android:shadowColor="#000"
+                android:text="Assign Chef"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                app:buttonColor="@color/buttoncolor"
+                app:cornerRadius="7dp"
+                app:shadowEnabled="true"
+                app:shadowHeight="4dp" />
+        </LinearLayout>
 
         <info.hoang8f.widget.FButton
             android:id="@+id/pendingstaff"
@@ -157,7 +191,7 @@
             android:layout_height="30dp"
             android:background="#aeee"
             android:textAlignment="center"
-            android:text="pending staff"
+            android:text="Pending Staff"
             android:textSize="12sp"
             android:layout_gravity="end"
             android:layout_marginTop="10dp"
@@ -168,7 +202,8 @@
             app:shadowEnabled="true"
             app:cornerRadius="7dp"
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
     <info.hoang8f.widget.FButton
@@ -177,7 +212,7 @@
         android:layout_height="30dp"
         android:background="#aeee"
         android:textAlignment="center"
-        android:text="decorate your menu"
+        android:text="Decorate Your Menu"
         android:textSize="12sp"
         android:layout_gravity="start"
         android:onClick="decoraterestaurant"
@@ -191,6 +226,7 @@
         android:layout_marginLeft="20dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
+        android:textAllCaps="false"
         />
 
 </RelativeLayout>

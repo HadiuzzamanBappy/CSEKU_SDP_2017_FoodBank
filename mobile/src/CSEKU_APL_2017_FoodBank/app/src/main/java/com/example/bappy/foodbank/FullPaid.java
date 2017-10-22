@@ -111,7 +111,7 @@ public class FullPaid extends AppCompatActivity {
         jsonArray=jsonObject.getJSONArray("Server_response");
 
         int count=0;
-        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff;
+        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef;
         while(count<jsonArray.length())
         {
             JSONObject jo=jsonArray.getJSONObject(count);
@@ -125,10 +125,11 @@ public class FullPaid extends AppCompatActivity {
             price=jo.getString("price");
             orderfrom=jo.getString("orderplace");
             staff=jo.getString("staffrole");
+            chef=jo.getString("chefname");
             int price3=Integer.parseInt(price);
             price2=price2+price3;
 
-            StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff);
+            StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef);
             staffFoodAdapter.add(staffFood);
             count++;
         }
@@ -306,6 +307,7 @@ public class FullPaid extends AppCompatActivity {
                 staffFoodHolder.price = (TextView) stafffoodview.findViewById(R.id.sprice);
                 staffFoodHolder.orderplace = (TextView) stafffoodview.findViewById(R.id.sorderplace);
                 staffFoodHolder.staffrole = (TextView) stafffoodview.findViewById(R.id.staff);
+                staffFoodHolder.chef = (TextView) stafffoodview.findViewById(R.id.chef);
                 stafffoodview.setTag(staffFoodHolder);
             } else {
                 staffFoodHolder = (StaffFoodHolder) stafffoodview.getTag();
@@ -321,6 +323,7 @@ public class FullPaid extends AppCompatActivity {
             staffFoodHolder.price.setText("Price: "+staffFood.getPrice());
             staffFoodHolder.orderplace.setText(staffFood.getOrderplace());
             staffFoodHolder.staffrole.setText(staffFood.getStaff());
+            staffFoodHolder.chef.setText(staffFood.getChef());
 
             staffFoodHolder.orderdate.setVisibility(View.GONE);
             staffFoodHolder.ispaid.setVisibility(View.GONE);
@@ -379,7 +382,7 @@ public class FullPaid extends AppCompatActivity {
         }
 
         class StaffFoodHolder {
-            TextView clientname,  orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace,staffrole;
+            TextView clientname,  orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace,staffrole,chef;
         }
     }
 
@@ -575,10 +578,10 @@ public class FullPaid extends AppCompatActivity {
 
     public class StaffFood {
 
-        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff;
+        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff,chef;
 
-        public StaffFood(String clientid,String clientname, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price,String orderplace,String dateti) {
-            this.clientid=clientid;
+        public StaffFood(String clientid, String clientname, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price, String orderplace, String staff, String chef) {
+            this.clientid = clientid;
             this.clientname = clientname;
             this.orderdate = orderdate;
             this.ispaid = ispaid;
@@ -586,8 +589,17 @@ public class FullPaid extends AppCompatActivity {
             this.deliverydate = deliverydate;
             this.isdelivery = isdelivery;
             this.price = price;
-            this.orderplace=orderplace;
-            this.staff=dateti;
+            this.orderplace = orderplace;
+            this.staff = staff;
+            this.chef = chef;
+        }
+
+        public String getChef() {
+            return chef;
+        }
+
+        public void setChef(String chef) {
+            this.chef = chef;
         }
 
         public String getClientid() {
@@ -750,7 +762,7 @@ public class FullPaid extends AppCompatActivity {
                 jsonArray=jsonObject.getJSONArray("Server_response");
 
                 int count=0;
-                String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff;
+                String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef;
                 while(count<jsonArray.length())
                 {
                     JSONObject jo=jsonArray.getJSONObject(count);
@@ -764,10 +776,11 @@ public class FullPaid extends AppCompatActivity {
                     price=jo.getString("price");
                     orderfrom=jo.getString("orderplace");
                     staff=jo.getString("staffrole");
+                    chef=jo.getString("chefname");
                     int price3=Integer.parseInt(price);
                     price2=price2+price3;
 
-                    StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff);
+                    StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef);
                     staffFoodAdapter.add(staffFood);
                     count++;
                 }

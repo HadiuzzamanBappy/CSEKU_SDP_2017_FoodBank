@@ -53,7 +53,7 @@ public class StaffLogIn extends AppCompatActivity{
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-    String[] role={"User","Staff","Admin"};
+    String[] role={"User","Admin","Staff","Chef"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +80,7 @@ public class StaffLogIn extends AppCompatActivity{
                 TextView mytext=(TextView)view;
                 // Toast.makeText(getBaseContext(), "You Selected "+mytext.getText(), Toast.LENGTH_SHORT).show();
                 rolestaff=(String)mytext.getText();
-                if(rolestaff.equals("Staff") || rolestaff.equals("Admin"))
+                if(rolestaff.equals("Staff") || rolestaff.equals("Admin") || rolestaff.equals("Chef"))
                     linearLayout.setVisibility(View.VISIBLE);
                 else
                     linearLayout.setVisibility(View.GONE);
@@ -193,12 +193,14 @@ public class StaffLogIn extends AppCompatActivity{
         if(user.equals("") || pass.equals(""))
             Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
         else {
-            if (role.equals("Admin") || role.equals("Staff"))
+            if (role.equals("Admin") || role.equals("Staff") || role.equals("Chef"))
                 if (restaurent.equals("None"))
                     if (role.equals("Admin"))
                         Toast.makeText(this, "Please check your Restaurant Mr. Admin", Toast.LENGTH_SHORT).show();
-                    else
+                    else if(role.equals("Staff"))
                         Toast.makeText(this, "Please check your Restaurant Mr. Staff", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(this, "Please check your Restaurant Mr. Chef", Toast.LENGTH_SHORT).show();
                 else {
                     String type = "login";
                     new LoginBackground().execute(type, user, restaurent, role, pass);
@@ -288,6 +290,21 @@ public class StaffLogIn extends AppCompatActivity{
                 else if(rolestaff.equals("Staff"))
                 {
                     Intent intent = new Intent(StaffLogIn.this, OnlyStaff.class);
+                    editor.putBoolean(getString(R.string.SAVE_LOGIN), true);
+                    editor.putString(getString(R.string.NAME), name);
+                    editor.putString(getString(R.string.PASSWORD), password);
+                    editor.putString(getString(R.string.RESTAURANT_NAME), resname);
+                    editor.putString(getString(R.string.TYPE), rolestaff);
+                    editor.commit();
+                    intent.putExtra("username", name);
+                    intent.putExtra("resname", resname);
+                    intent.putExtra("role", rolestaff);
+                    startActivity(intent);
+                    finish();
+                }
+                else if(rolestaff.equals("Chef"))
+                {
+                    Intent intent = new Intent(StaffLogIn.this, ChefWork.class);
                     editor.putBoolean(getString(R.string.SAVE_LOGIN), true);
                     editor.putString(getString(R.string.NAME), name);
                     editor.putString(getString(R.string.PASSWORD), password);

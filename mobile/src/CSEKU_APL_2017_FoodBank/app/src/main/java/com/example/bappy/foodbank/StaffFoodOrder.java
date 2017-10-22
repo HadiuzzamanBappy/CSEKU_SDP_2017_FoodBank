@@ -91,7 +91,7 @@ public class StaffFoodOrder extends AppCompatActivity {
             jsonArray=jsonObject.getJSONArray("Server_response");
 
             int count=0;
-            String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff;
+            String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef;
             while(count<jsonArray.length())
             {
                 JSONObject jo=jsonArray.getJSONObject(count);
@@ -105,7 +105,8 @@ public class StaffFoodOrder extends AppCompatActivity {
                 price=jo.getString("price");
                 orderfrom=jo.getString("orderplace");
                 staff=jo.getString("staffrole");
-                StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff);
+                chef=jo.getString("chefname");
+                StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef);
                 staffFoodAdapter.add(staffFood);
                 count++;
             }
@@ -193,6 +194,7 @@ public class StaffFoodOrder extends AppCompatActivity {
                 staffFoodHolder.price = (TextView) stafffoodview.findViewById(R.id.sprice);
                 staffFoodHolder.orderplace = (TextView) stafffoodview.findViewById(R.id.sorderplace);
                 staffFoodHolder.staffrole = (TextView) stafffoodview.findViewById(R.id.staff);
+                staffFoodHolder.chefname = (TextView) stafffoodview.findViewById(R.id.chef);
                 stafffoodview.setTag(staffFoodHolder);
             } else {
                 staffFoodHolder = (StaffFoodHolder) stafffoodview.getTag();
@@ -208,6 +210,7 @@ public class StaffFoodOrder extends AppCompatActivity {
             staffFoodHolder.price.setText("Price: "+staffFood.getPrice());
             staffFoodHolder.orderplace.setText(staffFood.getOrderplace());
             staffFoodHolder.staffrole.setText(staffFood.getStaff());
+            staffFoodHolder.chefname.setText(staffFood.getChef());
 
             staffFoodHolder.orderdate.setVisibility(View.GONE);
             staffFoodHolder.ispaid.setVisibility(View.GONE);
@@ -306,7 +309,7 @@ public class StaffFoodOrder extends AppCompatActivity {
         }
 
         class StaffFoodHolder {
-            TextView clientname,orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace, staffrole;
+            TextView clientname,orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace, staffrole,chefname;
         }
     }
 
@@ -389,7 +392,7 @@ public class StaffFoodOrder extends AppCompatActivity {
             orderbuilder.setCancelable(true);
             orderbuilder.setTitle("Order List");
             if (addfoodorder.isEmpty())
-                orderbuilder.setMessage("it can't read any read any item");
+                orderbuilder.setMessage("it can't read any item");
             else
                 orderbuilder.setView(listViewOrder);
 
@@ -582,10 +585,10 @@ public class StaffFoodOrder extends AppCompatActivity {
 
     public class StaffFood {
 
-        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff;
+        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff,chef;
 
-        public StaffFood(String clientid,String clientname, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price,String orderplace,String dateti) {
-            this.clientid=clientid;
+        public StaffFood(String clientid, String clientname, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price, String orderplace, String staff, String chef) {
+            this.clientid = clientid;
             this.clientname = clientname;
             this.orderdate = orderdate;
             this.ispaid = ispaid;
@@ -593,8 +596,17 @@ public class StaffFoodOrder extends AppCompatActivity {
             this.deliverydate = deliverydate;
             this.isdelivery = isdelivery;
             this.price = price;
-            this.orderplace=orderplace;
-            this.staff=dateti;
+            this.orderplace = orderplace;
+            this.staff = staff;
+            this.chef = chef;
+        }
+
+        public String getChef() {
+            return chef;
+        }
+
+        public void setChef(String chef) {
+            this.chef = chef;
         }
 
         public String getClientid() {
@@ -682,6 +694,13 @@ public class StaffFoodOrder extends AppCompatActivity {
     public void onBackPressed() {
         if(staff_admin.equals("2")) {
             Intent intent = new Intent(StaffFoodOrder.this, OnlyStaff.class);
+            intent.putExtra("username", name);
+            intent.putExtra("resname", res);
+            intent.putExtra("role", role);
+            startActivity(intent);
+        }
+        if(staff_admin.equals("3")) {
+            Intent intent = new Intent(StaffFoodOrder.this, ChefWork.class);
             intent.putExtra("username", name);
             intent.putExtra("resname", res);
             intent.putExtra("role", role);

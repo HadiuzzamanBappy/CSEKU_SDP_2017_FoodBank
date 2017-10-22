@@ -88,6 +88,10 @@ public class ShowProfile extends AppCompatActivity {
                 intent.putExtra("op_type","Edit");
                 startActivity(intent);
                 return true;
+            case R.id.myorder:
+                startActivity(new Intent(this,UserFoodDetails.class));
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

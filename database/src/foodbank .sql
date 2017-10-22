@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2017 at 08:00 AM
+-- Generation Time: Oct 15, 2017 at 10:50 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -72,31 +72,26 @@ INSERT INTO `fooditems` (`id`, `name`, `type`) VALUES
 
 CREATE TABLE `foodorder` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `restaurantid` int(11) NOT NULL,
-  `restaurantfoodid` int(11) DEFAULT NULL,
-  `orderid` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `price` varchar(20) NOT NULL,
-  `staffid` int(11) NOT NULL DEFAULT '0'
+  `name` varchar(255) DEFAULT NULL,
+  `phonenumber` varchar(255) DEFAULT NULL,
+  `orderfrom` varchar(255) DEFAULT NULL,
+  `orderdate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `deliverydate` varchar(255) DEFAULT NULL,
+  `restaurantid` int(10) DEFAULT NULL,
+  `ishomedelivery` tinyint(10) DEFAULT '0',
+  `ispaid` int(10) DEFAULT '0',
+  `price` varchar(25) DEFAULT NULL,
+  `staffid` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `foodorder`
 --
 
-INSERT INTO `foodorder` (`id`, `name`, `restaurantid`, `restaurantfoodid`, `orderid`, `quantity`, `price`, `staffid`) VALUES
-(28, 'baji', 1, 2, 42, 2, '160', 10),
-(29, 'riaz', 1, 6, 43, 3, '360', 10),
-(30, 'lotif', 1, 6, 44, 3, '360', 10),
-(31, 'arju', 1, 3, 45, 3, '180', 10),
-(32, 'rakib', 1, 2, 46, 3, '240', 10),
-(33, 'foysal', 1, 6, 47, 2, '240', 10),
-(34, 'Fuck', 2, 10, 48, 1, '60', 0),
-(35, 'ffjjfjfjj', 3, 12, 49, 10, '700', 0),
-(36, 'tuki', 1, 1, 50, 2, '500', 10),
-(37, 'fdf', 1, 5, 51, 1, '105', 0),
-(38, 'adas', 1, 1, 52, 1, '250', 0);
+INSERT INTO `foodorder` (`id`, `name`, `phonenumber`, `orderfrom`, `orderdate`, `deliverydate`, `restaurantid`, `ishomedelivery`, `ispaid`, `price`, `staffid`) VALUES
+(1, 'foysal', '01932089409', 'gollamari', '2017-10-11 00:04:58', '2017-10-17', 1, 1, 1, '160', 10),
+(3, 'arju', '01765987643', 'Gollamary,khulna', '2017-10-11 12:12:17', '2017-10-11', 1, 1, 0, '200', 10),
+(9, 'sabbir', '9885', 'fncv', '2017-10-15 22:43:46', '2017-10-15', 1, 1, 0, '1830', 0);
 
 -- --------------------------------------------------------
 
@@ -106,30 +101,22 @@ INSERT INTO `foodorder` (`id`, `name`, `restaurantid`, `restaurantfoodid`, `orde
 
 CREATE TABLE `orderdetails` (
   `id` int(11) NOT NULL,
-  `OrderDate` datetime DEFAULT CURRENT_TIMESTAMP,
-  `ispaid` int(10) DEFAULT NULL,
-  `phonenumber` varchar(20) DEFAULT NULL,
-  `deliverydate` varchar(255) DEFAULT NULL,
-  `ishomedelivery` tinyint(1) DEFAULT NULL,
-  `orderfrom` varchar(255) NOT NULL
+  `orderid` int(25) DEFAULT NULL,
+  `restaurantfoodid` int(25) DEFAULT NULL,
+  `foodprice` int(25) DEFAULT NULL,
+  `quantity` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orderdetails`
 --
 
-INSERT INTO `orderdetails` (`id`, `OrderDate`, `ispaid`, `phonenumber`, `deliverydate`, `ishomedelivery`, `orderfrom`) VALUES
-(42, '2017-04-08 12:35:16', 1, '01985363836', '2017-04-08', 1, 'boira'),
-(43, '2017-04-08 22:09:12', 1, '01975836645', '2017-04-10', 1, 'khora bosti, khulna'),
-(44, '2017-04-10 19:38:53', 0, '01987564576', '2017-04-11', 1, 'khaba holer pisone'),
-(45, '2017-04-10 23:10:45', 0, '01943567434', '2017-04-12', 1, 'gollamari,green road'),
-(46, '2017-04-16 11:23:06', 1, '01973852628', '2017-04-17', 1, 'boira'),
-(47, '2017-04-16 12:44:33', 1, '01963528352', '2017-04-18', 1, 'gollamari'),
-(48, '2017-08-15 20:58:01', 0, '01777777777777', '2017-09-07', 1, '\n5\n\n'),
-(49, '2017-08-15 21:00:46', 0, '466466656566565', '2018-01-01', 1, 'hdhshshdhdh\n'),
-(50, '2017-08-28 18:40:11', 0, '019262', '2017-01-01', 1, 'dasdad'),
-(51, '2017-08-28 18:45:11', 0, '0868', '2017-01-01', 1, 'dgdh'),
-(52, '2017-08-28 18:46:16', 0, '121', '2019-08-18', 1, 'sff');
+INSERT INTO `orderdetails` (`id`, `orderid`, `restaurantfoodid`, `foodprice`, `quantity`) VALUES
+(1, 1, 2, 80, 2),
+(2, 3, 3, 60, 2),
+(3, 3, 2, 80, 1),
+(10, 9, 1, 250, 7),
+(11, 9, 2, 80, 1);
 
 -- --------------------------------------------------------
 
@@ -275,14 +262,16 @@ ALTER TABLE `fooditems`
 --
 ALTER TABLE `foodorder`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `restaurantfoodid` (`restaurantfoodid`),
-  ADD KEY `orderid` (`orderid`);
+  ADD KEY `restaurantid` (`restaurantid`),
+  ADD KEY `staffid` (`staffid`);
 
 --
 -- Indexes for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orderid` (`orderid`),
+  ADD KEY `restaurantfoodid` (`restaurantfoodid`);
 
 --
 -- Indexes for table `restaurant`
@@ -331,12 +320,12 @@ ALTER TABLE `fooditems`
 -- AUTO_INCREMENT for table `foodorder`
 --
 ALTER TABLE `foodorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `restaurant`
 --
@@ -370,8 +359,14 @@ ALTER TABLE `superadmin`
 -- Constraints for table `foodorder`
 --
 ALTER TABLE `foodorder`
-  ADD CONSTRAINT `foodorder_ibfk_1` FOREIGN KEY (`restaurantfoodid`) REFERENCES `restaurantfood` (`id`),
-  ADD CONSTRAINT `foodorder_ibfk_2` FOREIGN KEY (`orderid`) REFERENCES `orderdetails` (`id`);
+  ADD CONSTRAINT `foodorder_ibfk_1` FOREIGN KEY (`restaurantid`) REFERENCES `restaurant` (`id`);
+
+--
+-- Constraints for table `orderdetails`
+--
+ALTER TABLE `orderdetails`
+  ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`orderid`) REFERENCES `foodorder` (`id`),
+  ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`restaurantfoodid`) REFERENCES `restaurantfood` (`id`);
 
 --
 -- Constraints for table `restaurantfood`

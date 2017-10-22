@@ -169,6 +169,7 @@ public class AssignSatff extends AppCompatActivity {
                 staffFoodHolder.price = (TextView) stafffoodview.findViewById(R.id.sprice);
                 staffFoodHolder.orderplace = (TextView) stafffoodview.findViewById(R.id.sorderplace);
                 staffFoodHolder.spin=(Spinner)stafffoodview.findViewById(R.id.spinner3);
+                staffFoodHolder.chefname = (TextView) stafffoodview.findViewById(R.id.chef);
                 stafffoodview.setTag(staffFoodHolder);
             } else {
                 staffFoodHolder = (StaffFoodHolder) stafffoodview.getTag();
@@ -183,6 +184,8 @@ public class AssignSatff extends AppCompatActivity {
             staffFoodHolder.isdelivery.setText("Delivery Status: "+staffFood.getIsdelivery());
             staffFoodHolder.price.setText("Price: "+staffFood.getPrice());
             staffFoodHolder.orderplace.setText("Place: "+staffFood.getOrderplace());
+            staffFoodHolder.chefname.setText("Chef: "+staffFood.getChefname());
+
             staffFoodHolder.orderdate.setVisibility(View.GONE);
             staffFoodHolder.ispaid.setVisibility(View.GONE);
             staffFoodHolder.phone.setVisibility(View.GONE);
@@ -190,6 +193,7 @@ public class AssignSatff extends AppCompatActivity {
             staffFoodHolder.isdelivery.setVisibility(View.GONE);
             staffFoodHolder.price.setVisibility(View.GONE);
             staffFoodHolder.orderplace.setVisibility(View.GONE);
+            staffFoodHolder.chefname.setVisibility(View.GONE);
             ArrayAdapter arrayAdapter=new ArrayAdapter(AssignSatff.this,android.R.layout.simple_spinner_item,ass);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             staffFoodHolder.spin.setAdapter(arrayAdapter);
@@ -238,6 +242,7 @@ public class AssignSatff extends AppCompatActivity {
                         staffFoodHolder.isdelivery.setVisibility(View.VISIBLE);
                         staffFoodHolder.price.setVisibility(View.VISIBLE);
                         staffFoodHolder.orderplace.setVisibility(View.VISIBLE);
+                        staffFoodHolder.chefname.setVisibility(View.VISIBLE);
                         show_all.setText("Hide All");
                         show_all_value =1;
                     }
@@ -250,6 +255,7 @@ public class AssignSatff extends AppCompatActivity {
                         staffFoodHolder.isdelivery.setVisibility(View.GONE);
                         staffFoodHolder.price.setVisibility(View.GONE);
                         staffFoodHolder.orderplace.setVisibility(View.GONE);
+                        staffFoodHolder.chefname.setVisibility(View.GONE);
                         show_all.setText("Show All");
                         show_all_value =0;
                     }
@@ -270,7 +276,7 @@ public class AssignSatff extends AppCompatActivity {
         }
 
         class StaffFoodHolder {
-            TextView clientname, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace;
+            TextView clientname, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace,chefname;
             Spinner spin;
         }
     }
@@ -467,10 +473,10 @@ public class AssignSatff extends AppCompatActivity {
 
     public class StaffFoodAssign {
 
-        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace;
+        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,chefname;
 
-        public StaffFoodAssign(String clientid,String clientname,String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price,String orderplace) {
-            this.clientid=clientid;
+        public StaffFoodAssign(String clientid, String clientname, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price, String orderplace, String chefname) {
+            this.clientid = clientid;
             this.clientname = clientname;
             this.orderdate = orderdate;
             this.ispaid = ispaid;
@@ -478,7 +484,16 @@ public class AssignSatff extends AppCompatActivity {
             this.deliverydate = deliverydate;
             this.isdelivery = isdelivery;
             this.price = price;
-            this.orderplace=orderplace;
+            this.orderplace = orderplace;
+            this.chefname = chefname;
+        }
+
+        public String getChefname() {
+            return chefname;
+        }
+
+        public void setChefname(String chefname) {
+            this.chefname = chefname;
         }
 
         public String getClientid() {
@@ -576,7 +591,8 @@ public class AssignSatff extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputstream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedwritter = new BufferedWriter(new OutputStreamWriter(outputstream, "UTF-8"));
-                String postdata = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(res, "UTF-8");
+                String postdata = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(res, "UTF-8")+ "&" +
+                                URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("staff", "UTF-8");
                 bufferedwritter.write(postdata);
                 bufferedwritter.flush();
                 bufferedwritter.close();
@@ -596,7 +612,7 @@ public class AssignSatff extends AppCompatActivity {
                     jsonArray = jsonObject.getJSONArray("Server_response");
 
                     int count = 0;
-                    String clienid,clientname, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom;
+                    String clienid,clientname, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom,chefname;
                     while (count < jsonArray.length()) {
                         JSONObject jo = jsonArray.getJSONObject(count);
                         clienid=jo.getString("clientid");
@@ -608,7 +624,8 @@ public class AssignSatff extends AppCompatActivity {
                         isdelivery = jo.getString("isdelivery");
                         price = jo.getString("price");
                         orderfrom = jo.getString("orderplace");
-                        StaffFoodAssign staffFood = new StaffFoodAssign(clienid,clientname,orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom);
+                        chefname = jo.getString("name");
+                        StaffFoodAssign staffFood = new StaffFoodAssign(clienid,clientname,orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom,chefname);
                         addstafffood.add(staffFood);
                         count++;
                 }
@@ -654,7 +671,7 @@ public class AssignSatff extends AppCompatActivity {
         protected void onPreExecute() {
             alert = new AlertDialog.Builder(AssignSatff.this);
             alert.setTitle("Assign Staff Status");
-            json_url="http://"+getString(R.string.ip_address)+"/FoodBank/AssignStaff.php";
+            json_url="http://"+getString(R.string.ip_address)+"/FoodBank/AssignStaffChef.php";
         }
 
         @Override
@@ -676,7 +693,8 @@ public class AssignSatff extends AppCompatActivity {
                         + "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8")
                         + "&" + URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8")
                         + "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8")
-                        + "&" + URLEncoder.encode("staff", "UTF-8") + "=" + URLEncoder.encode(staff, "UTF-8");
+                        + "&" + URLEncoder.encode("staff", "UTF-8") + "=" + URLEncoder.encode(staff, "UTF-8")
+                        + "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("staff", "UTF-8");
                 bufferedwritter.write(postdata);
                 bufferedwritter.flush();
                 bufferedwritter.close();

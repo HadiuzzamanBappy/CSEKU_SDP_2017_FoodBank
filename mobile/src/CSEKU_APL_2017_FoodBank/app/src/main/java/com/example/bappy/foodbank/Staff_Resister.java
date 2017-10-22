@@ -121,16 +121,15 @@ public class Staff_Resister extends AppCompatActivity {
         String pass=password.getText().toString();
         String repass=repassword.getText().toString();
 
-        if(rolestaff.equals("Admin") || rolestaff.equals("Staff"))
-        if(user.equals("") || restaurantpass.equals("") || pass.equals("") || repass.equals("") || res.equals("None") || rolestaff.equals("User")){
-            Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            if(pass.equals(repass)) {
-                new ResistorBackground().execute(user,res,restaurantpass,pass,rolestaff);
+        if(rolestaff.equals("Admin") || rolestaff.equals("Staff") || rolestaff.equals("Chef")) {
+            if (user.equals("") || restaurantpass.equals("") || pass.equals("") || repass.equals("") || res.equals("None")) {
+                Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
+            } else {
+                if (pass.equals(repass)) {
+                    new ResistorBackground().execute(user, res, restaurantpass, pass, rolestaff);
+                } else
+                    Toast.makeText(this, "Password Didn't Match", Toast.LENGTH_SHORT).show();
             }
-            else
-                Toast.makeText(this, "Password Didn't Match", Toast.LENGTH_SHORT).show();
         }
         else
         {

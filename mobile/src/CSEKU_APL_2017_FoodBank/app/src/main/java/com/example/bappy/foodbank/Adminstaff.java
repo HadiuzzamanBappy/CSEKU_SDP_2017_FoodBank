@@ -247,7 +247,15 @@ public class Adminstaff extends AppCompatActivity {
         if(!isNetworkAvilabe())
             nointernet();
         else {
-            new Backgroundtaskassign().execute(resname);
+            new Backgroundtaskassign().execute(resname,"staff");
+        }
+    }
+
+    public void assignchef(View view){
+        if(!isNetworkAvilabe())
+            nointernet();
+        else {
+            new Backgroundtaskassign().execute(resname,"chef");
         }
     }
 
@@ -256,7 +264,7 @@ public class Adminstaff extends AppCompatActivity {
     {
         String json_url;
         String JSON_STRING;
-        String res;
+        String res,type;
 
         @Override
         protected void onPreExecute() {
@@ -267,6 +275,7 @@ public class Adminstaff extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 res=params[0];
+                type=params[1];
                 URL url=new URL(json_url);
                 HttpURLConnection httpURLConnection=(HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -274,7 +283,8 @@ public class Adminstaff extends AppCompatActivity {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputstream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedwritter = new BufferedWriter(new OutputStreamWriter(outputstream, "UTF-8"));
-                String postdata = URLEncoder.encode("res", "UTF-8") + "=" + URLEncoder.encode(res, "UTF-8");
+                String postdata = URLEncoder.encode("res", "UTF-8") + "=" + URLEncoder.encode(res, "UTF-8")+ "&" +
+                                            URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8");
                 bufferedwritter.write(postdata);
                 bufferedwritter.flush();
                 bufferedwritter.close();
@@ -305,13 +315,26 @@ public class Adminstaff extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Intent intent=new Intent(Adminstaff.this,AssignSatff.class);
-            intent.putExtra("username",name);
-            intent.putExtra("resname",resname);
-            intent.putExtra("role",role);
-            intent.putExtra("datet",datetime);
-            intent.putExtra("assignst",result);
-            startActivity(intent);
+            if(type.equals("staff")) {
+                Intent intent = new Intent(Adminstaff.this, AssignSatff.class);
+                intent.putExtra("username", name);
+                intent.putExtra("resname", resname);
+                intent.putExtra("role", role);
+                intent.putExtra("datet", datetime);
+                intent.putExtra("assignst", result);
+                startActivity(intent);
+            }
+            else if(type.equals("chef"))
+            {
+                Intent intent = new Intent(Adminstaff.this, AssignChef.class);
+                intent.putExtra("username", name);
+                intent.putExtra("resname", resname);
+                intent.putExtra("role", role);
+                intent.putExtra("datet", datetime);
+                intent.putExtra("assignchef", result);
+                startActivity(intent);
+                //Toast.makeText(Adminstaff.this, type, Toast.LENGTH_SHORT).show();
+            }
             finish();
         }
     }
