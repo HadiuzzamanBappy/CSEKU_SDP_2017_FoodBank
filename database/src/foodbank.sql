@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2017 at 10:50 PM
+-- Generation Time: Oct 22, 2017 at 09:13 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -81,17 +81,19 @@ CREATE TABLE `foodorder` (
   `ishomedelivery` tinyint(10) DEFAULT '0',
   `ispaid` int(10) DEFAULT '0',
   `price` varchar(25) DEFAULT NULL,
-  `staffid` int(11) DEFAULT '0'
+  `staffid` int(11) DEFAULT '0',
+  `chefid` int(11) NOT NULL,
+  `foodstate` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `foodorder`
 --
 
-INSERT INTO `foodorder` (`id`, `name`, `phonenumber`, `orderfrom`, `orderdate`, `deliverydate`, `restaurantid`, `ishomedelivery`, `ispaid`, `price`, `staffid`) VALUES
-(1, 'foysal', '01932089409', 'gollamari', '2017-10-11 00:04:58', '2017-10-17', 1, 1, 1, '160', 10),
-(3, 'arju', '01765987643', 'Gollamary,khulna', '2017-10-11 12:12:17', '2017-10-11', 1, 1, 0, '200', 10),
-(9, 'sabbir', '9885', 'fncv', '2017-10-15 22:43:46', '2017-10-15', 1, 1, 0, '1830', 0);
+INSERT INTO `foodorder` (`id`, `name`, `phonenumber`, `orderfrom`, `orderdate`, `deliverydate`, `restaurantid`, `ishomedelivery`, `ispaid`, `price`, `staffid`, `chefid`, `foodstate`) VALUES
+(1, 'foysal', '01932089409', 'gollamari', '2017-10-11 00:04:58', '2017-10-17', 1, 1, 1, '160', 10, 39, 1),
+(3, 'arju', '01765987643', 'Gollamary,khulna', '2017-10-11 12:12:17', '2017-10-11', 1, 1, 0, '200', 0, 39, 0),
+(9, 'sabbir', '9885', 'fncv', '2017-10-15 22:43:46', '2017-10-15', 1, 1, 0, '1830', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -206,7 +208,8 @@ INSERT INTO `staffdetails` (`id`, `name`, `restaurantid`, `activerole`, `roletyp
 (35, 'baby', NULL, 1, 1, 'baby'),
 (36, 'sabbir', 1, 1, 2, 'sabbir'),
 (37, 'sabbir', NULL, 1, 1, 'sabbir'),
-(38, 'gghf', 4, 0, 2, 'fgfg');
+(38, 'gghf', 4, 0, 2, 'fgfg'),
+(39, 'lotif', 1, 1, 4, 'lotif');
 
 -- --------------------------------------------------------
 
@@ -226,7 +229,8 @@ CREATE TABLE `staffrole` (
 INSERT INTO `staffrole` (`id`, `role`) VALUES
 (1, 'User'),
 (2, 'Admin'),
-(3, 'Staff');
+(3, 'Staff'),
+(4, 'Chef');
 
 -- --------------------------------------------------------
 
@@ -263,7 +267,8 @@ ALTER TABLE `fooditems`
 ALTER TABLE `foodorder`
   ADD PRIMARY KEY (`id`),
   ADD KEY `restaurantid` (`restaurantid`),
-  ADD KEY `staffid` (`staffid`);
+  ADD KEY `staffid` (`staffid`),
+  ADD KEY `chefid` (`chefid`);
 
 --
 -- Indexes for table `orderdetails`
@@ -340,12 +345,12 @@ ALTER TABLE `restaurantfood`
 -- AUTO_INCREMENT for table `staffdetails`
 --
 ALTER TABLE `staffdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `staffrole`
 --
 ALTER TABLE `staffrole`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `superadmin`
 --
