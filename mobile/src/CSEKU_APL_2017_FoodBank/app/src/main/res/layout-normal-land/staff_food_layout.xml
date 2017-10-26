@@ -13,13 +13,28 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp">
-        <TextView
-            android:id="@+id/sname"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="name"
-            android:textSize="20sp"
-            />
+            android:weightSum="10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/sname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textSize="20sp"
+                android:layout_weight="6"/>
+
+            <TextView
+                android:id="@+id/scondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="condition"
+                android:textSize="15sp"
+                android:layout_weight="4"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

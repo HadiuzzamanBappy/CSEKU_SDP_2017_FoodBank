@@ -46,7 +46,7 @@ public class Staff_Resister extends AppCompatActivity {
     ArrayList<String> ass=new ArrayList<String>();
     String res,rolestaff;
 
-    String[] role={"User","Staff","Admin"};
+    String[] role={"User","Staff","Admin","Chef"};
 
     Spinner spinnerrole,spinnerres;
     LinearLayout linearLayout;
@@ -98,7 +98,7 @@ public class Staff_Resister extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView mytext=(TextView)view;
                 rolestaff=(String)mytext.getText();
-                if(rolestaff.equals("Staff") || rolestaff.equals("Admin")) {
+                if(rolestaff.equals("Staff") || rolestaff.equals("Admin") || rolestaff.equals("Chef")) {
                     linearLayout.setVisibility(View.VISIBLE);
                     restaurantpassword.setVisibility(View.VISIBLE);
                 }
