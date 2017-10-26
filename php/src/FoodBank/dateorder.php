@@ -7,10 +7,10 @@ $res_name=$_POST["resname"];
 $role=$_POST["role"];
 $date=$_POST["date"];
 
-// $type="D";
-// $name="fahim";
+// $type="A";
+// $name="bappy";
 // $res_name="BISTRO-C";
-// $role="Staff";
+// $role="Admin";
 // $date="2017-10-11";
 
 
@@ -121,21 +121,26 @@ while($row3=$result3->fetch_assoc()){
      $result6=mysqli_query($conn,$mysql_qry6);
      if($row6=$result6->fetch_assoc())
          $chefrole=$row6['name'];
+
+     if($row3['foodstate']=="0")
+        $foodstate="Not Ready";
+    else
+        $foodstate="Ready";
             if($row3['ispaid']=="0" && $row3['ishomedelivery']=="0"){
                 array_push($response,array("clientid"=>$row3['id'],"clientname"=>$row3['name'],"orderdate"=>$row3['orderdate'],"ispaid"=>"Not Paid","phonenumber"=>$row3['phonenumber'],"deliverydate"=>$row3['deliverydate'],"isdelivery"=>"Just Cook","price"=>$row3['price'],
-                    "orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole));
+                    "orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole,"foodstate"=>$foodstate));
             }
             else if($row3['ispaid']=="0" && $row3['ishomedelivery']=="1"){
                 array_push($response,array("clientid"=>$row3['id'],"clientname"=>$row3['name'],"orderdate"=>$row3['orderdate'],"ispaid"=>"Not Paid","phonenumber"=>$row3['phonenumber'],"deliverydate"=>$row3['deliverydate'],"isdelivery"=>"Home Delivery","price"=>$row3['price'],
-                    "orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole));
+                    "orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole,"foodstate"=>$foodstate));
             }
             else if($row3['ispaid']=="1" && $row3['ishomedelivery']=="0"){
                 array_push($response,array("clientid"=>$row3['id'],"clientname"=>$row3['name'],"orderdate"=>$row3['orderdate'],"ispaid"=>"Paid","phonenumber"=>$row3['phonenumber'],"deliverydate"=>$row3['deliverydate'],"isdelivery"=>"Just Cook","price"=>$row3['price'],
-                    "orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole));
+                    "orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole,"foodstate"=>$foodstate));
             }
             else if($row3['ispaid']=="1" && $row3['ishomedelivery']=="1"){
                 array_push($response,array("clientid"=>$row3['id'],"clientname"=>$row3['name'],"orderdate"=>$row3['orderdate'],"ispaid"=>"Paid","phonenumber"=>$row3['phonenumber'],"deliverydate"=>$row3['deliverydate'],"isdelivery"=>"Home Delivery","price"=>$row3['price'],
-                    "orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole));
+                    "orderplace"=>$row3['orderfrom'],"staffrole"=>$staffrole,"chefname"=>$chefrole,"foodstate"=>$foodstate));
             }
 }
 

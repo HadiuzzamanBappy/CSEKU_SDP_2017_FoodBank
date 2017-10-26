@@ -8,17 +8,24 @@ $pass=$_POST["pass"];
 $role=$_POST["role"];
 
 // $name="f";
-// $res_name="No";
-// $respass="No";
+// $res_name="BISTRO-C";
+// $respass="bistro";
 // $pass="f";
-// $role="User";
+// $role="Chef";
 
 if($role=='User')
 {
+    $mysql_qry4="SELECT * from staffdetails where name like '$name' and password like '$pass'";
+    $result4=mysqli_query($conn,$mysql_qry4);
+    if($row=$result4->fetch_assoc()){
+        echo "Your Username And Password Already Exist...Try For Another";
+    }
+    else{
     $mysql_qry3="INSERT into staffdetails(name,activerole,roletype,password)
                         values('$name','1','1','$pass')";
      if($result=mysqli_query($conn,$mysql_qry3))
         echo 'Your Registration Request As User Approved..plz Re-login';
+}
 }
 else
 {
@@ -32,11 +39,11 @@ else if($role=="Staff")
 else
     $id4="4";
 
-$mysql_qry4="SELECT * from staffdetails where name like '$name' and password like '$pass'";
+$mysql_qry4="SELECT * from staffdetails where name like '$name' and password like '$pass' and roletype like '$id4'";
 $result4=mysqli_query($conn,$mysql_qry4);
 if($row=$result4->fetch_assoc()){
     if($row2=$result2->fetch_assoc()){
-        if($row['restaurantid']==$row2['id'] && $row['roletype']==$id4){
+        if($row['restaurantid']==$row2['id']){
             if($row['activerole']=="0")
                 echo "you have already Registrate but pending";
             else
