@@ -65,6 +65,8 @@ public class StaffFoodOrder extends AppCompatActivity {
 
     ArrayList<FoodOrderListClass> addfoodorder;
 
+    ArrayList<StaffFood> addstaffood;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,7 @@ public class StaffFoodOrder extends AppCompatActivity {
         editor=sharedPreferences.edit();
 
         addfoodorder=new ArrayList<FoodOrderListClass>();
+        addstaffood=new ArrayList<>();
 
         type=getIntent().getExtras().getString("type");
         name=getIntent().getExtras().getString("username");
@@ -84,14 +87,14 @@ public class StaffFoodOrder extends AppCompatActivity {
         txt=(TextView)findViewById(R.id.txtviw);
         txt.setText(name+"\n"+role+"\n"+datet);
         listView=(ListView)findViewById(R.id.foodstafflist);
-        staffFoodAdapter=new StaffFoodAdapter(this,R.layout.staff_food_layout);
+        staffFoodAdapter=new StaffFoodAdapter(this,R.layout.staff_food_layout,addstaffood);
         listView.setAdapter(staffFoodAdapter);
         try {
             jsonObject=new JSONObject(foodorder);
             jsonArray=jsonObject.getJSONArray("Server_response");
 
             int count=0;
-            String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef,condition;
+            String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff,chef,condition;
             while(count<jsonArray.length())
             {
                 JSONObject jo=jsonArray.getJSONObject(count);
@@ -103,17 +106,18 @@ public class StaffFoodOrder extends AppCompatActivity {
                 deliverydate=jo.getString("deliverydate");
                 isdelivery=jo.getString("isdelivery");
                 price=jo.getString("price");
-                orderfrom=jo.getString("orderplace");
+                orderplace=jo.getString("orderplace");
                 staff=jo.getString("staffrole");
                 chef=jo.getString("chefname");
                 condition=jo.getString("foodstate");
-                StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef,condition);
-                staffFoodAdapter.add(staffFood);
+                StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff,chef,condition);
+                addstaffood.add(staffFood);
                 count++;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        staffFoodAdapter.notifyDataSetChanged();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -148,20 +152,19 @@ public class StaffFoodOrder extends AppCompatActivity {
 
 
     public class StaffFoodAdapter extends ArrayAdapter {
-        List list = new ArrayList();
+        ArrayList<StaffFood> list = new ArrayList();
         Context ct;
-        String username, price, quantity, phone, address, deliverydate;
-        int quantityy, fullprice;
+        String username, price, phone, address, deliverydate;
 
-        public StaffFoodAdapter(@NonNull Context context, @LayoutRes int resource) {
+        public StaffFoodAdapter(@NonNull Context context, @LayoutRes int resource,ArrayList<StaffFood> lis) {
             super(context, resource);
             ct = context;
+            list=lis;
         }
 
         @Override
         public void add(@Nullable Object object) {
             super.add(object);
-            list.add(object);
         }
 
         @Override
@@ -213,7 +216,7 @@ public class StaffFoodOrder extends AppCompatActivity {
             staffFoodHolder.orderplace.setText(staffFood.getOrderplace());
             staffFoodHolder.staffrole.setText(staffFood.getStaff());
             staffFoodHolder.chefname.setText(staffFood.getChef());
-            staffFoodHolder.condition.setText(staffFood.getCondition());
+            staffFoodHolder.condition.setText(staffFood.getFoodcondition());
 
             staffFoodHolder.orderdate.setVisibility(View.GONE);
             staffFoodHolder.ispaid.setVisibility(View.GONE);
@@ -229,7 +232,43 @@ public class StaffFoodOrder extends AppCompatActivity {
                     //setting the alertdialog title
                     paidbuilder.setTitle("Attention");
                     //setting the body message
-                    if(role.equals("Admin") || role.equals("Staff")) {
+                    if(role.equals("Chef"))
+                    {
+                        if(staffFood.getFoodcondition().equals("Not Ready"))
+                        {
+                            paidbuilder.setMessage("Do You Want To Update It by Ready?");
+                            //set state for cancelling state
+                            paidbuilder.setCancelable(true);
+
+                            //setting activity for positive state button
+                            paidbuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    username = staffFood.getClientname();
+                                    price = staffFood.getPrice();
+                                    phone = staffFood.getPhone();
+                                    address = staffFood.getOrderplace();
+                                    deliverydate = staffFood.getOrderdate();
+                                    staffFoodHolder.condition.setText("Ready");
+                                    new BackgroundTask2().execute(username, price, phone, address, deliverydate,"R");
+                                }
+                            });
+                            //setting activity for negative state button
+                            paidbuilder.setNegativeButton("NO, Later", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            //alertdialog create
+                            AlertDialog mydialog = paidbuilder.create();
+                            //for working the alertdialog state
+                            mydialog.show();
+                        }
+                        else
+                            Toast.makeText(getContext(), "Clicked on " + staffFood.getClientname() + "\nit is Readied...", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
                         if (staffFood.getIspaid().equals("Not Paid")) {
                             if (role.equals("Admin") && type.equals("D")) {
                                 paidbuilder.setMessage("Do You Want To Make It Paid?");
@@ -245,7 +284,6 @@ public class StaffFoodOrder extends AppCompatActivity {
                                         phone = staffFood.getPhone();
                                         address = staffFood.getOrderplace();
                                         deliverydate = staffFood.getOrderdate();
-                                        quantityy = Integer.parseInt(quantity);
                                         staffFoodHolder.ispaid.setText("Paid");
                                         new BackgroundTask2().execute(username, price, phone, address, deliverydate,"P");
                                     }
@@ -268,43 +306,6 @@ public class StaffFoodOrder extends AppCompatActivity {
                         } else {
                             Toast.makeText(getContext(), "Clicked on " + staffFood.getClientname() + "\nit is paided...", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                    else
-                    {
-                        if(staffFood.getCondition().equals("Not Ready"))
-                        {
-                            paidbuilder.setMessage("Do You Want To Make It Ready?");
-                            //set state for cancelling state
-                            paidbuilder.setCancelable(true);
-
-                            //setting activity for positive state button
-                            paidbuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    username = staffFood.getClientname();
-                                    price = staffFood.getPrice();
-                                    phone = staffFood.getPhone();
-                                    address = staffFood.getOrderplace();
-                                    deliverydate = staffFood.getOrderdate();
-                                    quantityy = Integer.parseInt(quantity);
-                                    staffFoodHolder.condition.setText("Ready");
-                                    new BackgroundTask2().execute(username, price, phone, address, deliverydate,"R");
-                                }
-                            });
-                            //setting activity for negative state button
-                            paidbuilder.setNegativeButton("NO, Later", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                            //alertdialog create
-                            AlertDialog mydialog = paidbuilder.create();
-                            //for working the alertdialog state
-                            mydialog.show();
-                        }
-                        else
-                            Toast.makeText(getContext(), "Clicked on " + staffFood.getClientname() + "\nit is Ready...", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -567,7 +568,7 @@ public class StaffFoodOrder extends AppCompatActivity {
                     String phone=params[2];
                     String address=params[3];
                     String deliveryrdate=params[4];
-                    String type=params[5];
+                    String actiontype=params[5];
                     URL url = new URL(json_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -580,7 +581,7 @@ public class StaffFoodOrder extends AppCompatActivity {
                             + "&" + URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8")
                             + "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8")
                             + "&" + URLEncoder.encode("deliveryrdate", "UTF-8") + "=" + URLEncoder.encode(deliveryrdate, "UTF-8")
-                            + "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8");
+                            + "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(actiontype, "UTF-8");
                     bufferedwritter.write(postdata);
                     bufferedwritter.flush();
                     bufferedwritter.close();
@@ -610,7 +611,7 @@ public class StaffFoodOrder extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Boolean result) {
-                if(result.equals("true")) {
+                if(result) {
                     alert.setMessage(res);
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -629,9 +630,9 @@ public class StaffFoodOrder extends AppCompatActivity {
 
     public class StaffFood {
 
-        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff,chef,condition;
+        String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderplace,staff,chef,foodcondition;
 
-        public StaffFood(String clientid, String clientname, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price, String orderplace, String staff, String chef, String condition) {
+        public StaffFood(String clientid, String clientname, String orderdate, String ispaid, String phone, String deliverydate, String isdelivery, String price, String orderplace, String staff, String chef, String foodcondition) {
             this.clientid = clientid;
             this.clientname = clientname;
             this.orderdate = orderdate;
@@ -643,15 +644,15 @@ public class StaffFoodOrder extends AppCompatActivity {
             this.orderplace = orderplace;
             this.staff = staff;
             this.chef = chef;
-            this.condition = condition;
+            this.foodcondition = foodcondition;
         }
 
-        public String getCondition() {
-            return condition;
+        public String getFoodcondition() {
+            return foodcondition;
         }
 
-        public void setCondition(String condition) {
-            this.condition = condition;
+        public void setFoodcondition(String foodcondition) {
+            this.foodcondition = foodcondition;
         }
 
         public String getChef() {
