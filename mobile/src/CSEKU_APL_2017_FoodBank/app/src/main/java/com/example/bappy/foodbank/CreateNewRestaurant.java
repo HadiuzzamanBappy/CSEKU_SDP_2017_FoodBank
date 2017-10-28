@@ -1,11 +1,13 @@
 package com.example.bappy.foodbank;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,10 +26,15 @@ public class CreateNewRestaurant extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_restaurant_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
@@ -64,6 +71,7 @@ public class CreateNewRestaurant extends AppCompatActivity {
         if(!isNetworkAvilabe())
             nointernet();
         else {
+
             name = tname.getText().toString();
             street = tstreet.getText().toString();
             town = ttown.getText().toString();
@@ -83,16 +91,26 @@ public class CreateNewRestaurant extends AppCompatActivity {
                     alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(CreateNewRestaurant.this, CreateNewRestaurantStaff.class);
-                            //sending data to another intent
-                            intent.putExtra("name", name);
-                            intent.putExtra("street", street);
-                            intent.putExtra("town", town);
-                            intent.putExtra("type", type);
-                            intent.putExtra("phone", phone);
-                            intent.putExtra("password", password);
-                            startActivity(intent);
-                            finish();
+                            progressDialog.setMessage("Please Wait For a While....");
+                            progressDialog.show();
+                            Runnable progressrunnable2 = new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent intent = new Intent(CreateNewRestaurant.this, CreateNewRestaurantStaff.class);
+                                    //sending data to another intent
+                                    intent.putExtra("name", name);
+                                    intent.putExtra("street", street);
+                                    intent.putExtra("town", town);
+                                    intent.putExtra("type", type);
+                                    intent.putExtra("phone", phone);
+                                    intent.putExtra("password", password);
+                                    progressDialog.cancel();
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            };
+                            Handler handler2 = new Handler();
+                            handler2.postDelayed(progressrunnable2, 6000);
                         }
                     });
                     alert.setNegativeButton("No,Wait", new DialogInterface.OnClickListener() {

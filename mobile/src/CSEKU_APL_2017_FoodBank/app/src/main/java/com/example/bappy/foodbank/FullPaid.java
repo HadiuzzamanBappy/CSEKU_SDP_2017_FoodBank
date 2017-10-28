@@ -2,11 +2,15 @@ package com.example.bappy.foodbank;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -84,11 +88,15 @@ public class FullPaid extends AppCompatActivity {
 
     ArrayList<FoodOrderListClass> addfoodorder;
     FoodOrderListAdapter foodOrderListAdapter;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.full_paid_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
@@ -186,21 +194,78 @@ public class FullPaid extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    editor.clear();
+                    editor.commit();
+                    progressDialog.setMessage("Logging Out.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(FullPaid.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(progressrunnable, 6000);
+                }
                 return true;
             case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable3 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(FullPaid.this, ShowProfile.class));
+                        }
+                    };
+                    Handler handler3 = new Handler();
+                    handler3.postDelayed(progressrunnable3, 6000);
+                }
                 return true;
             case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable4 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(FullPaid.this, CreateNewRestaurant.class));
+                        }
+                    };
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(progressrunnable4, 6000);
+                }
                 return true;
             case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable5 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            Intent intent = new Intent(FullPaid.this, EditChangeProfile.class);
+                            intent.putExtra("op_type", "Edit");
+                            startActivity(intent);
+                        }
+                    };
+                    Handler handler5 = new Handler();
+                    handler5.postDelayed(progressrunnable5, 6000);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -374,6 +439,8 @@ public class FullPaid extends AppCompatActivity {
                 @Override
                 public void onClick(View v)
                 {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
                     String id=staffFood.getClientid();
                     new FoodOrderList().execute(id);
                 }
@@ -456,31 +523,34 @@ public class FullPaid extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            if(result) {
+                progressDialog.cancel();
+                ListView listViewOrder = new ListView(FullPaid.this);
+                foodOrderListAdapter = new FoodOrderListAdapter(FullPaid.this, R.layout.food_order_list_layout, addfoodorder);
+                listViewOrder.setAdapter(foodOrderListAdapter);
+                //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
+                orderbuilder = new AlertDialog.Builder(FullPaid.this);
+                orderbuilder.setCancelable(true);
+                orderbuilder.setTitle("Order List");
+                if (addfoodorder.isEmpty())
+                    orderbuilder.setMessage("it can't read any read any item");
+                else
+                    orderbuilder.setView(listViewOrder);
 
-            ListView listViewOrder = new ListView(FullPaid.this);
-            foodOrderListAdapter = new FoodOrderListAdapter(FullPaid.this, R.layout.food_order_list_layout, addfoodorder);
-            listViewOrder.setAdapter(foodOrderListAdapter);
-            //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
-            orderbuilder = new AlertDialog.Builder(FullPaid.this);
-            orderbuilder.setCancelable(true);
-            orderbuilder.setTitle("Order List");
-            if (addfoodorder.isEmpty())
-                orderbuilder.setMessage("it can't read any read any item");
+                orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        addfoodorder.clear();
+                        dialog.cancel();
+                    }
+                });
+                //alertdialog create
+                mydialog = orderbuilder.create();
+                //for working the alertdialog state
+                mydialog.show();
+            }
             else
-                orderbuilder.setView(listViewOrder);
-
-            orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    addfoodorder.clear();
-                    dialog.cancel();
-                }
-            });
-            //alertdialog create
-            mydialog = orderbuilder.create();
-            //for working the alertdialog state
-            mydialog.show();
-
+                Toast.makeText(FullPaid.this, "Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -690,16 +760,18 @@ public class FullPaid extends AppCompatActivity {
             Toast.makeText(this, "Please Select Date Range", Toast.LENGTH_SHORT).show();
         }
         else {
+            progressDialog.setMessage("Loading.Please Wait....");
+            progressDialog.show();
             Toast.makeText(this, datetime + datetime2, Toast.LENGTH_SHORT).show();
             new BackgroundtaskOrderlist().execute(datetime, datetime2);
         }
     }
 
 
-    public class BackgroundtaskOrderlist extends AsyncTask<String,Void,String>
+    public class BackgroundtaskOrderlist extends AsyncTask<String,Void,Boolean>
     {
 
-        String json_url;
+        String json_url,resu;
         String JSON_STRING;
 
         @Override
@@ -708,7 +780,7 @@ public class FullPaid extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Boolean doInBackground(String... params) {
             try {
                 String date1=params[0];
                 String date2=params[1];
@@ -735,14 +807,15 @@ public class FullPaid extends AppCompatActivity {
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                return stringBuilder.toString().trim();
+                resu=stringBuilder.toString().trim();
+                return true;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return false;
         }
 
         @Override
@@ -751,44 +824,48 @@ public class FullPaid extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String result) {
-           // Toast.makeText(FullPaid.this, result, Toast.LENGTH_SHORT).show();
-            price2=0;
-            listView=(ListView)findViewById(R.id.foodstafflist);
-            staffFoodAdapter=new StaffFoodAdapter(FullPaid.this,R.layout.staff_food_layout);
-            listView.setAdapter(staffFoodAdapter);
-            try {
-                jsonObject=new JSONObject(result);
-                jsonArray=jsonObject.getJSONArray("Server_response");
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                progressDialog.cancel();
+                // Toast.makeText(FullPaid.this, result, Toast.LENGTH_SHORT).show();
+                price2 = 0;
+                listView = (ListView) findViewById(R.id.foodstafflist);
+                staffFoodAdapter = new StaffFoodAdapter(FullPaid.this, R.layout.staff_food_layout);
+                listView.setAdapter(staffFoodAdapter);
+                try {
+                    jsonObject = new JSONObject(resu);
+                    jsonArray = jsonObject.getJSONArray("Server_response");
 
-                int count=0;
-                String clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef;
-                while(count<jsonArray.length())
-                {
-                    JSONObject jo=jsonArray.getJSONObject(count);
-                    clientid=jo.getString("clientid");
-                    clientname=jo.getString("clientname");
-                    orderdate=jo.getString("orderdate");
-                    ispaid=jo.getString("ispaid");
-                    phone=jo.getString("phonenumber");
-                    deliverydate=jo.getString("deliverydate");
-                    isdelivery=jo.getString("isdelivery");
-                    price=jo.getString("price");
-                    orderfrom=jo.getString("orderplace");
-                    staff=jo.getString("staffrole");
-                    chef=jo.getString("chefname");
-                    int price3=Integer.parseInt(price);
-                    price2=price2+price3;
+                    int count = 0;
+                    String clientid, clientname, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom, staff, chef;
+                    while (count < jsonArray.length()) {
+                        JSONObject jo = jsonArray.getJSONObject(count);
+                        clientid = jo.getString("clientid");
+                        clientname = jo.getString("clientname");
+                        orderdate = jo.getString("orderdate");
+                        ispaid = jo.getString("ispaid");
+                        phone = jo.getString("phonenumber");
+                        deliverydate = jo.getString("deliverydate");
+                        isdelivery = jo.getString("isdelivery");
+                        price = jo.getString("price");
+                        orderfrom = jo.getString("orderplace");
+                        staff = jo.getString("staffrole");
+                        chef = jo.getString("chefname");
+                        int price3 = Integer.parseInt(price);
+                        price2 = price2 + price3;
 
-                    StaffFood staffFood=new StaffFood(clientid,clientname,orderdate,ispaid,phone,deliverydate,isdelivery,price,orderfrom,staff,chef);
-                    staffFoodAdapter.add(staffFood);
-                    count++;
+                        StaffFood staffFood = new StaffFood(clientid, clientname, orderdate, ispaid, phone, deliverydate, isdelivery, price, orderfrom, staff, chef);
+                        staffFoodAdapter.add(staffFood);
+                        count++;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+                price3 = Integer.toString(price2);
+                txt2.setText(price3);
             }
-            price3=Integer.toString(price2);
-            txt2.setText(price3);
+            else
+                Toast.makeText(FullPaid.this, "Failed", Toast.LENGTH_SHORT).show();
         }
     }
     @Override
@@ -799,6 +876,44 @@ public class FullPaid extends AppCompatActivity {
         intent.putExtra("role", role);
         startActivity(intent);
         finish();
+    }
+
+    private boolean isNetworkAvilabe()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
+
+    public void nointernet() {
+        //Creating an Alertdialog
+        AlertDialog.Builder CheckBuild = new AlertDialog.Builder(FullPaid.this);
+        CheckBuild.setIcon(R.drawable.no);
+        CheckBuild.setTitle("Error!");
+        CheckBuild.setMessage("Check Your Internet Connection");
+
+        //Builder Retry Button
+
+        CheckBuild.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                //Restart The Activity
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+
+        });
+        CheckBuild.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                //Exit The Activity
+                finish();
+            }
+
+        });
+        AlertDialog alertDialog = CheckBuild.create();
+        alertDialog.show();
     }
 
 }

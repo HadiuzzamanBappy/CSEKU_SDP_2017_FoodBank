@@ -1,6 +1,7 @@
 package com.example.bappy.foodbank;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,11 +48,15 @@ public class Order extends Activity{
     SharedPreferences.Editor editor;
     Boolean save_login;
     String name,resname,pass,type;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order2);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
         save_login=sharedPreferences.getBoolean(getString(R.string.SAVE_LOGIN),false);
@@ -148,141 +153,6 @@ public class Order extends Activity{
         });
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater=getMenuInflater();
-        if(save_login)
-            menuInflater.inflate(R.menu.menu_item_super,menu);
-        else
-            menuInflater.inflate(R.menu.menu_main2,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
-                return true;
-            case R.id.LogIn:
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
-                return true;
-            case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
-                return true;
-            case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
-                return true;
-            case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
-                return true;
-            case R.id.delete_profile:
-                AlertDialog.Builder alert =new AlertDialog.Builder(this);
-                alert.setTitle("Attention");
-                alert.setMessage("Are You Sure??");
-                alert.setCancelable(true);
-                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        new BackgroundTask3().execute("Delete",name,name,resname,type,pass,pass);
-                    }
-                });
-                alert.setNegativeButton("No,later", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog al=alert.create();
-                al.show();
-                return true;
-            case R.id.myorder:
-                startActivity(new Intent(this,UserFoodDetails.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    class BackgroundTask3 extends AsyncTask<String,Void,Boolean> {
-        String json_url;
-        String JSON_STRING;
-        String newpass, newname, op_type, resul, res_name, role;
-
-        @Override
-        protected void onPreExecute() {
-            json_url = "http://" + getString(R.string.ip_address) + "/FoodBank/ProfileEditDelete.php";
-        }
-
-        @Override
-        protected Boolean doInBackground(String... params) {
-            try {
-                op_type = params[0];
-                String oldname = params[1];
-                newname = params[2];
-                res_name = params[3];
-                role = params[4];
-                String oldpass = params[5];
-                newpass = params[6];
-                URL url = new URL(json_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoOutput(true);
-                httpURLConnection.setDoInput(true);
-                OutputStream outputstream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedwritter = new BufferedWriter(new OutputStreamWriter(outputstream, "UTF-8"));
-                String postdata = URLEncoder.encode("op_type", "UTF-8") + "=" + URLEncoder.encode(op_type, "UTF-8")
-                        + "&" + URLEncoder.encode("oldname", "UTF-8") + "=" + URLEncoder.encode(oldname, "UTF-8")
-                        + "&" + URLEncoder.encode("newname", "UTF-8") + "=" + URLEncoder.encode(newname, "UTF-8")
-                        + "&" + URLEncoder.encode("res_name", "UTF-8") + "=" + URLEncoder.encode(res_name, "UTF-8")
-                        + "&" + URLEncoder.encode("role", "UTF-8") + "=" + URLEncoder.encode(role, "UTF-8")
-                        + "&" + URLEncoder.encode("oldpass", "UTF-8") + "=" + URLEncoder.encode(oldpass, "UTF-8")
-                        + "&" + URLEncoder.encode("newpass", "UTF-8") + "=" + URLEncoder.encode(newpass, "UTF-8");
-                bufferedwritter.write(postdata);
-                bufferedwritter.flush();
-                bufferedwritter.close();
-                outputstream.close();
-                InputStream inputstream = httpURLConnection.getInputStream();
-                BufferedReader bufferdreader = new BufferedReader(new InputStreamReader(inputstream, "iso-8859-1"));
-                resul = "";
-                String line = "";
-                while ((line = bufferdreader.readLine()) != null) {
-                    resul += line;
-                }
-                bufferdreader.close();
-                inputstream.close();
-                httpURLConnection.disconnect();
-                return true;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return false;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            editor.clear();
-            editor.commit();
-            Intent intent = new Intent(Order.this, staff_login_resistor.class);
-            startActivity(intent);
-            finish();
-        }
-    }
     public void rbclick(View v){
         int radiobuttonid=rg.getCheckedRadioButtonId();
         rb=(RadioButton)findViewById(radiobuttonid);
@@ -306,6 +176,8 @@ public class Order extends Activity{
         if(phone.equals("") || addrs.equals(""))
             Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
         else {
+            progressDialog.setMessage("Ordering.Please Wait....");
+            progressDialog.show();
             new OrderBackground().execute(type, client, phone, date, addrs, deliverytype,quan);
         }
     }
@@ -426,10 +298,10 @@ public class Order extends Activity{
                 intent.putExtra("delitype",delitype);
                 intent.putExtra("price",oprice);
                 intent.putExtra("resfood", resfood);
+                progressDialog.cancel();
                 startActivity(intent);
                 finish();
             } else {
-                if(result.equals("false"))
                     Toast.makeText(Order.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
             }
         }

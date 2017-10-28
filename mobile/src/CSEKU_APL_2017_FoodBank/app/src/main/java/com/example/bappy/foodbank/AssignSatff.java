@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -77,10 +78,15 @@ public class AssignSatff extends AppCompatActivity {
 
     AlertDialog.Builder orderbuilder;
     AlertDialog mydialog;
+
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.assign_staff_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
@@ -98,6 +104,8 @@ public class AssignSatff extends AppCompatActivity {
         ass.add("None");
         txt.setText(name+"\n"+role+"\n"+datet);
 
+        progressDialog.setMessage("Loading.Please Wait....");
+        progressDialog.show();
         new BackgroundtaskOrderlist2().execute(resname);
 
         listView=(ListView)findViewById(R.id.foodstafflist);
@@ -267,6 +275,8 @@ public class AssignSatff extends AppCompatActivity {
                 @Override
                 public void onClick(View v)
                 {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
                     String id=staffFood.getClientid();
                     new FoodOrderList().execute(id);
                 }
@@ -351,18 +361,19 @@ public class AssignSatff extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-
-            ListView listViewOrder = new ListView(AssignSatff.this);
-            foodOrderListAdapter = new FoodOrderListAdapter(AssignSatff.this, R.layout.food_order_list_layout, addfoodorder);
-            listViewOrder.setAdapter(foodOrderListAdapter);
-            //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
-            orderbuilder = new AlertDialog.Builder(AssignSatff.this);
-            orderbuilder.setCancelable(true);
-            orderbuilder.setTitle("Order List");
-            if (addfoodorder.isEmpty())
-                orderbuilder.setMessage("it can't read any read any item");
-            else
-                orderbuilder.setView(listViewOrder);
+            if(result) {
+                progressDialog.cancel();
+                ListView listViewOrder = new ListView(AssignSatff.this);
+                foodOrderListAdapter = new FoodOrderListAdapter(AssignSatff.this, R.layout.food_order_list_layout, addfoodorder);
+                listViewOrder.setAdapter(foodOrderListAdapter);
+                //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
+                orderbuilder = new AlertDialog.Builder(AssignSatff.this);
+                orderbuilder.setCancelable(true);
+                orderbuilder.setTitle("Order List");
+                if (addfoodorder.isEmpty())
+                    orderbuilder.setMessage("it can't read any read any item");
+                else
+                    orderbuilder.setView(listViewOrder);
 
                 orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
@@ -371,10 +382,13 @@ public class AssignSatff extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-            //alertdialog create
-            mydialog = orderbuilder.create();
-            //for working the alertdialog state
-            mydialog.show();
+                //alertdialog create
+                mydialog = orderbuilder.create();
+                //for working the alertdialog state
+                mydialog.show();
+            }
+            else
+                Toast.makeText(AssignSatff.this, "Failed", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -648,8 +662,12 @@ public class AssignSatff extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            staffFoodAdapter.notifyDataSetChanged();
-            if(result.equals("false"))
+            if(result)
+            {
+                progressDialog.cancel();
+                staffFoodAdapter.notifyDataSetChanged();
+            }
+            else
                 Toast.makeText(AssignSatff.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
         }
     }
@@ -657,8 +675,11 @@ public class AssignSatff extends AppCompatActivity {
     public void goassign(View v,String staff,String username,String price,String phone,String address){
         if(!isNetworkAvilabe())
             nointernet();
-        else
-            new BackgroundTask2().execute(username,price,phone,address,staff);
+        else {
+            progressDialog.setMessage("Assigning.Please Wait....");
+            progressDialog.show();
+            new BackgroundTask2().execute(username, price, phone, address, staff);
+        }
     }
 
     class BackgroundTask2 extends AsyncTask<String,Void,Boolean>
@@ -732,6 +753,7 @@ public class AssignSatff extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = getIntent();
+                        progressDialog.cancel();
                         startActivity(intent);
                         finish();
                     }
@@ -788,21 +810,78 @@ public class AssignSatff extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    editor.clear();
+                    editor.commit();
+                    progressDialog.setMessage("Logging Out.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(AssignSatff.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(progressrunnable, 6000);
+                }
                 return true;
             case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable3 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(AssignSatff.this, ShowProfile.class));
+                        }
+                    };
+                    Handler handler3 = new Handler();
+                    handler3.postDelayed(progressrunnable3, 6000);
+                }
                 return true;
             case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable4 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(AssignSatff.this, CreateNewRestaurant.class));
+                        }
+                    };
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(progressrunnable4, 6000);
+                }
                 return true;
             case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable5 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            Intent intent = new Intent(AssignSatff.this, EditChangeProfile.class);
+                            intent.putExtra("op_type", "Edit");
+                            startActivity(intent);
+                        }
+                    };
+                    Handler handler5 = new Handler();
+                    handler5.postDelayed(progressrunnable5, 6000);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

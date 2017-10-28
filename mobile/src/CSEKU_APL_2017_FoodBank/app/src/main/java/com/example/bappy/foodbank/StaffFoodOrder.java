@@ -1,10 +1,14 @@
 package com.example.bappy.foodbank;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -67,10 +71,14 @@ public class StaffFoodOrder extends AppCompatActivity {
 
     ArrayList<StaffFood> addstaffood;
 
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_food_order);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
@@ -129,25 +137,119 @@ public class StaffFoodOrder extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    editor.clear();
+                    editor.commit();
+                    progressDialog.setMessage("Logging Out.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(StaffFoodOrder.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(progressrunnable, 6000);
+                }
                 return true;
             case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable3 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(StaffFoodOrder.this, ShowProfile.class));
+                        }
+                    };
+                    Handler handler3 = new Handler();
+                    handler3.postDelayed(progressrunnable3, 6000);
+                }
                 return true;
             case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable4 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(StaffFoodOrder.this, CreateNewRestaurant.class));
+                        }
+                    };
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(progressrunnable4, 6000);
+                }
                 return true;
             case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable5 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            Intent intent = new Intent(StaffFoodOrder.this, EditChangeProfile.class);
+                            intent.putExtra("op_type", "Edit");
+                            startActivity(intent);
+                        }
+                    };
+                    Handler handler5 = new Handler();
+                    handler5.postDelayed(progressrunnable5, 6000);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    private boolean isNetworkAvilabe()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
+
+    public void nointernet() {
+        //Creating an Alertdialog
+        AlertDialog.Builder CheckBuild = new AlertDialog.Builder(StaffFoodOrder.this);
+        CheckBuild.setIcon(R.drawable.no);
+        CheckBuild.setTitle("Error!");
+        CheckBuild.setMessage("Check Your Internet Connection");
+
+        //Builder Retry Button
+
+        CheckBuild.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                //Restart The Activity
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+
+        });
+        CheckBuild.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                //Exit The Activity
+                finish();
+            }
+
+        });
+        AlertDialog alertDialog = CheckBuild.create();
+        alertDialog.show();
     }
 
 
@@ -364,6 +466,8 @@ public class StaffFoodOrder extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Loading.Please Wait....");
+            progressDialog.show();
             json_url="http://"+getString(R.string.ip_address)+"/FoodBank/FoodOrderList.php";
         }
 
@@ -426,31 +530,34 @@ public class StaffFoodOrder extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            if(result) {
+                progressDialog.cancel();
+                ListView listViewOrder = new ListView(StaffFoodOrder.this);
+                foodOrderListAdapter = new FoodOrderListAdapter(StaffFoodOrder.this, R.layout.food_order_list_layout, addfoodorder);
+                listViewOrder.setAdapter(foodOrderListAdapter);
+                //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
+                orderbuilder = new AlertDialog.Builder(StaffFoodOrder.this);
+                orderbuilder.setCancelable(true);
+                orderbuilder.setTitle("Order List");
+                if (addfoodorder.isEmpty())
+                    orderbuilder.setMessage("it can't read any item");
+                else
+                    orderbuilder.setView(listViewOrder);
 
-            ListView listViewOrder = new ListView(StaffFoodOrder.this);
-            foodOrderListAdapter = new FoodOrderListAdapter(StaffFoodOrder.this, R.layout.food_order_list_layout, addfoodorder);
-            listViewOrder.setAdapter(foodOrderListAdapter);
-            //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
-            orderbuilder = new AlertDialog.Builder(StaffFoodOrder.this);
-            orderbuilder.setCancelable(true);
-            orderbuilder.setTitle("Order List");
-            if (addfoodorder.isEmpty())
-                orderbuilder.setMessage("it can't read any item");
+                orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        addfoodorder.clear();
+                        dialog.cancel();
+                    }
+                });
+                //alertdialog create
+                mydialog = orderbuilder.create();
+                //for working the alertdialog state
+                mydialog.show();
+            }
             else
-                orderbuilder.setView(listViewOrder);
-
-            orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    addfoodorder.clear();
-                    dialog.cancel();
-                }
-            });
-            //alertdialog create
-            mydialog = orderbuilder.create();
-            //for working the alertdialog state
-            mydialog.show();
-
+                Toast.makeText(StaffFoodOrder.this, "Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -555,6 +662,8 @@ public class StaffFoodOrder extends AppCompatActivity {
 
             @Override
             protected void onPreExecute() {
+                progressDialog.setMessage("Paiding.Please Wait....");
+                progressDialog.show();
                 alert = new AlertDialog.Builder(StaffFoodOrder.this);
                 alert.setTitle("Paid Status");
                 json_url="http://"+getString(R.string.ip_address)+"/FoodBank/PaidReady.php";
@@ -612,6 +721,7 @@ public class StaffFoodOrder extends AppCompatActivity {
             @Override
             protected void onPostExecute(Boolean result) {
                 if(result) {
+                    progressDialog.cancel();
                     alert.setMessage(res);
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override

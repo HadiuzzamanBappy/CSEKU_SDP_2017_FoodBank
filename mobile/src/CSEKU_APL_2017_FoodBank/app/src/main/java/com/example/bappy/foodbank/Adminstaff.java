@@ -3,6 +3,7 @@ package com.example.bappy.foodbank;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,10 +52,15 @@ public class Adminstaff extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adminstaff_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
@@ -173,6 +180,8 @@ public class Adminstaff extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Loading.Please Wait....");
+            progressDialog.show();
             json_url="http://"+getString(R.string.ip_address)+"/FoodBank/dateorder.php";
         }
 
@@ -227,7 +236,7 @@ public class Adminstaff extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            if(result.equals("false"))
+            if(!result)
                 Toast.makeText(Adminstaff.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
             else {
                 Intent intent = new Intent(Adminstaff.this, StaffFoodOrder.class);
@@ -238,6 +247,7 @@ public class Adminstaff extends AppCompatActivity {
                 intent.putExtra("datet", datet);
                 intent.putExtra("order_details", resu);
                 intent.putExtra("staff_admin", "1");
+                progressDialog.cancel();
                 startActivity(intent);
                 finish();
             }
@@ -268,6 +278,8 @@ public class Adminstaff extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Loading.Please Wait....");
+            progressDialog.show();
             json_url="http://"+getString(R.string.ip_address)+"/FoodBank/ReadStaff.php";
         }
 
@@ -315,6 +327,7 @@ public class Adminstaff extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            progressDialog.cancel();
             if(type.equals("staff")) {
                 Intent intent = new Intent(Adminstaff.this, AssignSatff.class);
                 intent.putExtra("username", name);
@@ -356,6 +369,8 @@ public class Adminstaff extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Loading.Please Wait....");
+            progressDialog.show();
             json_url="http://"+getString(R.string.ip_address)+"/FoodBank/FullPaid.php";
         }
 
@@ -413,6 +428,7 @@ public class Adminstaff extends AppCompatActivity {
                 intent.putExtra("datet", datet);
                 intent.putExtra("res", res);
                 intent.putExtra("order_details", resu);
+                progressDialog.cancel();
                 startActivity(intent);
                 finish();
             }
@@ -479,21 +495,78 @@ public class Adminstaff extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    editor.clear();
+                    editor.commit();
+                    progressDialog.setMessage("Logging Out.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(Adminstaff.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(progressrunnable, 6000);
+                }
                 return true;
             case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable3 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(Adminstaff.this, ShowProfile.class));
+                        }
+                    };
+                    Handler handler3 = new Handler();
+                    handler3.postDelayed(progressrunnable3, 6000);
+                }
                 return true;
             case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable4 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(Adminstaff.this, CreateNewRestaurant.class));
+                        }
+                    };
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(progressrunnable4, 6000);
+                }
                 return true;
             case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable5 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            Intent intent = new Intent(Adminstaff.this, EditChangeProfile.class);
+                            intent.putExtra("op_type", "Edit");
+                            startActivity(intent);
+                        }
+                    };
+                    Handler handler5 = new Handler();
+                    handler5.postDelayed(progressrunnable5, 6000);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

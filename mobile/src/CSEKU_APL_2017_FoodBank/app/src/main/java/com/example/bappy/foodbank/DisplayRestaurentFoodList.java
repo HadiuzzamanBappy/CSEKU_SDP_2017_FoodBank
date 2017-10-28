@@ -1,5 +1,6 @@
 package com.example.bappy.foodbank;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -74,9 +76,14 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
     AlertDialog mydialog;
 
     FloatingActionButton floatingActionButton;
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         setContentView(R.layout.display_restaurent_foodlist_layout);
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
@@ -279,45 +286,127 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    editor.clear();
+                    editor.commit();
+                    progressDialog.setMessage("Logging Out.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(DisplayRestaurentFoodList.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(progressrunnable, 6000);
+                }
                 return true;
             case R.id.LogIn:
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable2 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(DisplayRestaurentFoodList.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+                    Handler handler2 = new Handler();
+                    handler2.postDelayed(progressrunnable2, 6000);
+                }
                 return true;
             case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable3 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(DisplayRestaurentFoodList.this, ShowProfile.class));
+                        }
+                    };
+                    Handler handler3 = new Handler();
+                    handler3.postDelayed(progressrunnable3, 6000);
+                }
                 return true;
             case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable4 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(DisplayRestaurentFoodList.this, CreateNewRestaurant.class));
+                        }
+                    };
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(progressrunnable4, 6000);
+                }
                 return true;
             case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable5 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            Intent intent = new Intent(DisplayRestaurentFoodList.this, EditChangeProfile.class);
+                            intent.putExtra("op_type", "Edit");
+                            startActivity(intent);
+                        }
+                    };
+                    Handler handler5 = new Handler();
+                    handler5.postDelayed(progressrunnable5, 6000);
+                }
                 return true;
             case R.id.delete_profile:
-                AlertDialog.Builder alert =new AlertDialog.Builder(this);
-                alert.setTitle("Attention");
-                alert.setMessage("Are You Sure??");
-                alert.setCancelable(true);
-                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        new BackgroundTask3().execute("Delete",name,name,resname,type,pass,pass);
-                    }
-                });
-                alert.setNegativeButton("No,later", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog al=alert.create();
-                al.show();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                    alert.setTitle("Attention");
+                    alert.setMessage("Are You Sure??");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            new BackgroundTask3().execute("Delete", name, name, resname, type, pass, pass);
+                        }
+                    });
+                    alert.setNegativeButton("No,later", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog al = alert.create();
+                    al.show();
+                }
+                return true;
+            case R.id.myorder:
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    startActivity(new Intent(this, UserFoodDetails.class));
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -331,6 +420,8 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Performing.Please Wait....");
+            progressDialog.show();
             json_url = "http://" + getString(R.string.ip_address) + "/FoodBank/ProfileEditDelete.php";
         }
 
@@ -389,11 +480,16 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(Boolean result) {
-            editor.clear();
-            editor.commit();
-            Intent intent = new Intent(DisplayRestaurentFoodList.this, staff_login_resistor.class);
-            startActivity(intent);
-            finish();
+            if(result){
+                editor.clear();
+                editor.commit();
+                Intent intent = new Intent(DisplayRestaurentFoodList.this, staff_login_resistor.class);
+                progressDialog.cancel();
+                startActivity(intent);
+                finish();
+            }
+            else
+                Toast.makeText(DisplayRestaurentFoodList.this, "Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -561,6 +657,8 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
         String name;
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Loading.Please Wait....");
+            progressDialog.show();
             json_url="http://"+getString(R.string.ip_address)+"/FoodBank/RestaurentFood.php";
         }
 
@@ -625,9 +723,13 @@ public class DisplayRestaurentFoodList extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(Boolean result) {
-            if(result.equals("false"))
+            if(result)
+            {
+                progressDialog.cancel();
+                restaurentfoodAdapter.notifyDataSetChanged();
+            }
+            else
                 Toast.makeText(DisplayRestaurentFoodList.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
-            restaurentfoodAdapter.notifyDataSetChanged();
         }
     }
 

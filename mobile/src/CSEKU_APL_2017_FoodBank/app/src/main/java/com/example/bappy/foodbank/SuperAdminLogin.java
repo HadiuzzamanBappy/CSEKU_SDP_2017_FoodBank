@@ -1,5 +1,6 @@
 package com.example.bappy.foodbank;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -32,10 +33,14 @@ public class SuperAdminLogin extends AppCompatActivity {
     String user,pass;
     SharedPreferences loginPreferences;
     SharedPreferences.Editor loginPrefsEditor;
+
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.super_admin_login_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
 
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayUseLogoEnabled(true);
@@ -53,8 +58,11 @@ public class SuperAdminLogin extends AppCompatActivity {
         pass=password.getText().toString();
         if(user.equals("") || pass.equals(""))
             Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
-        else
-            new LoginBackground().execute("login",user,pass);
+        else {
+            progressDialog.setMessage("Logging In.Please Wait....");
+            progressDialog.show();
+            new LoginBackground().execute("login", user, pass);
+        }
     }
 
     public class LoginBackground extends AsyncTask<String,Void,String> {
@@ -118,6 +126,7 @@ public class SuperAdminLogin extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            progressDialog.cancel();
             if (result.equals("true")) {
                 loginPrefsEditor.putBoolean(getString(R.string.SAVE_LOGIN), true);
                 loginPrefsEditor.putString(getString(R.string.NAME), name);

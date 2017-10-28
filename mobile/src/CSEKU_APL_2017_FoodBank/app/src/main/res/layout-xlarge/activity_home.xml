@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,6 +6,10 @@
     android:background="@drawable/food_app"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/home_app">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +32,7 @@
         android:layout_width="450dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="170dp"
         android:text="Restaurant"
         android:textSize="45sp"
         android:onClick="parsejsonrestaurent"
@@ -43,7 +47,7 @@
         android:layout_width="450dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:text="I Am Hungry For"
         android:textSize="45sp"
         android:padding="15dp"
@@ -53,21 +57,42 @@
         app:cornerRadius="9dp"
         app:buttonColor="@color/buttoncolor"
         />
+    </LinearLayout>
+    <!--<info.hoang8f.widget.FButton-->
+        <!--android:id="@+id/exit"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="90dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="160dp"-->
+        <!--android:text="Exit"-->
+        <!--android:textSize="45sp"-->
+        <!--android:background="#aeee"-->
+        <!--android:padding="15dp"-->
+        <!--app:shadowEnabled="true"-->
+        <!--app:shadowHeight="5dp"-->
+        <!--app:cornerRadius="9dp"-->
+        <!--app:buttonColor="@color/buttoncolor"-->
+        <!--/>-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/email2"
+        android:layout_marginRight="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_facebook"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/facebook"
+        android:layout_marginRight="51dp"
+        android:layout_marginEnd="51dp"
+        android:layout_alignTop="@+id/profile_image"
+        android:layout_toLeftOf="@+id/profile_image"
+        android:layout_toStartOf="@+id/profile_image" />
 
-    <info.hoang8f.widget.FButton
-        android:id="@+id/exit"
-        android:layout_width="250dp"
-        android:layout_height="90dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="160dp"
-        android:text="Exit"
-        android:textSize="45sp"
-        android:background="#aeee"
-        android:padding="15dp"
-        app:shadowEnabled="true"
-        app:shadowHeight="5dp"
-        app:cornerRadius="9dp"
-        app:buttonColor="@color/buttoncolor"
-        />
-
-</LinearLayout>
+</RelativeLayout>

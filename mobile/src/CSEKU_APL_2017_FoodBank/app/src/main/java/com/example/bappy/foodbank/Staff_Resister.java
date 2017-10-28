@@ -1,6 +1,7 @@
 package com.example.bappy.foodbank;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -50,11 +51,17 @@ public class Staff_Resister extends AppCompatActivity {
 
     Spinner spinnerrole,spinnerres;
     LinearLayout linearLayout;
+
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.staff__resister_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
 
+        progressDialog.setMessage("Loading.Please Wait....");
+        progressDialog.show();
         new BackgroundTask().execute("http://"+getString(R.string.ip_address)+"/FoodBank/ReadRestaurantOnly.php");
 
         resistor=(Button) findViewById(R.id.resistor);
@@ -126,6 +133,8 @@ public class Staff_Resister extends AppCompatActivity {
                 Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
             } else {
                 if (pass.equals(repass)) {
+                    progressDialog.setMessage("Registration processing.\nPlease Wait....");
+                    progressDialog.show();
                     new ResistorBackground().execute(user, res, restaurantpass, pass, rolestaff);
                 } else
                     Toast.makeText(this, "Password Didn't Match", Toast.LENGTH_SHORT).show();
@@ -138,6 +147,8 @@ public class Staff_Resister extends AppCompatActivity {
             }
             else {
                 if(pass.equals(repass)) {
+                    progressDialog.setMessage("Registration processing.\nPlease Wait....");
+                    progressDialog.show();
                     new ResistorBackground().execute(user,"No","No",pass,rolestaff);
                 }
                 else
@@ -210,7 +221,13 @@ public class Staff_Resister extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-
+            if(result)
+                progressDialog.cancel();
+            else {
+                Toast.makeText(Staff_Resister.this, "please try again later", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Staff_Resister.this,staff_login_resistor.class));
+                finish();
+            }
         }
     }
 
@@ -278,6 +295,7 @@ public class Staff_Resister extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent=new Intent(Staff_Resister.this,staff_login_resistor.class);
+                        progressDialog.cancel();
                         startActivity(intent);
                         finish();
                     }

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -77,10 +78,15 @@ public class AssignChef extends AppCompatActivity {
 
     AlertDialog.Builder orderbuilder;
     AlertDialog mydialog;
+
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.assign_chef_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
@@ -98,6 +104,8 @@ public class AssignChef extends AppCompatActivity {
         ass.add("None");
         txt.setText(name+"\n"+role+"\n"+datet);
 
+        progressDialog.setMessage("Loading.Please Wait....");
+        progressDialog.show();
         new BackgroundtaskOrderlist2().execute(resname);
 
         listView=(ListView)findViewById(R.id.foodstafflist);
@@ -267,6 +275,8 @@ public class AssignChef extends AppCompatActivity {
                 @Override
                 public void onClick(View v)
                 {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
                     String id=staffFood.getClientid();
                     new FoodOrderList().execute(id);
                 }
@@ -351,30 +361,34 @@ public class AssignChef extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            if(result) {
+                progressDialog.cancel();
+                ListView listViewOrder = new ListView(AssignChef.this);
+                foodOrderListAdapter = new FoodOrderListAdapter(AssignChef.this, R.layout.food_order_list_layout, addfoodorder);
+                listViewOrder.setAdapter(foodOrderListAdapter);
+                //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
+                orderbuilder = new AlertDialog.Builder(AssignChef.this);
+                orderbuilder.setCancelable(true);
+                orderbuilder.setTitle("Order List");
+                if (addfoodorder.isEmpty())
+                    orderbuilder.setMessage("it can't read any read any item");
+                else
+                    orderbuilder.setView(listViewOrder);
 
-            ListView listViewOrder = new ListView(AssignChef.this);
-            foodOrderListAdapter = new FoodOrderListAdapter(AssignChef.this, R.layout.food_order_list_layout, addfoodorder);
-            listViewOrder.setAdapter(foodOrderListAdapter);
-            //Toast.makeText(this, "cart ok", Toast.LENGTH_SHORT).show();
-            orderbuilder = new AlertDialog.Builder(AssignChef.this);
-            orderbuilder.setCancelable(true);
-            orderbuilder.setTitle("Order List");
-            if (addfoodorder.isEmpty())
-                orderbuilder.setMessage("it can't read any read any item");
+                orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        addfoodorder.clear();
+                        dialog.cancel();
+                    }
+                });
+                //alertdialog create
+                mydialog = orderbuilder.create();
+                //for working the alertdialog state
+                mydialog.show();
+            }
             else
-                orderbuilder.setView(listViewOrder);
-
-            orderbuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    addfoodorder.clear();
-                    dialog.cancel();
-                }
-            });
-            //alertdialog create
-            mydialog = orderbuilder.create();
-            //for working the alertdialog state
-            mydialog.show();
+                Toast.makeText(AssignChef.this, "Failed", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -648,8 +662,12 @@ public class AssignChef extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            staffFoodAdapter.notifyDataSetChanged();
-            if(result.equals("false"))
+            if(result)
+            {
+                progressDialog.cancel();
+                staffFoodAdapter.notifyDataSetChanged();
+            }
+            else
                 Toast.makeText(AssignChef.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
         }
     }
@@ -658,7 +676,11 @@ public class AssignChef extends AppCompatActivity {
         if(!isNetworkAvilabe())
             nointernet();
         else
+        {
+            progressDialog.setMessage("Assigning.Please Wait....");
+            progressDialog.show();
             new BackgroundTask2().execute(username,price,phone,address,staff);
+        }
     }
 
     class BackgroundTask2 extends AsyncTask<String,Void,Boolean>
@@ -724,9 +746,10 @@ public class AssignChef extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            if(result.equals("false"))
+            if(!result)
                 Toast.makeText(AssignChef.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
             else {
+                progressDialog.cancel();
                 alert.setMessage(st);
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -788,21 +811,78 @@ public class AssignChef extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    editor.clear();
+                    editor.commit();
+                    progressDialog.setMessage("Logging Out.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(AssignChef.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(progressrunnable, 6000);
+                }
                 return true;
             case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable3 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(AssignChef.this, ShowProfile.class));
+                        }
+                    };
+                    Handler handler3 = new Handler();
+                    handler3.postDelayed(progressrunnable3, 6000);
+                }
                 return true;
             case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable4 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(AssignChef.this, CreateNewRestaurant.class));
+                        }
+                    };
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(progressrunnable4, 6000);
+                }
                 return true;
             case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable5 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            Intent intent = new Intent(AssignChef.this, EditChangeProfile.class);
+                            intent.putExtra("op_type", "Edit");
+                            startActivity(intent);
+                        }
+                    };
+                    Handler handler5 = new Handler();
+                    handler5.postDelayed(progressrunnable5, 6000);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

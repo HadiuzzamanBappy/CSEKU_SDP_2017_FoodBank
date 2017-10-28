@@ -1,7 +1,14 @@
 package com.example.bappy.foodbank;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,11 +26,15 @@ public class ShowProfile extends AppCompatActivity {
     TextView tname,tresname,tpass,ttype;
     LinearLayout linearLayout;
     SharedPreferences.Editor editor;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_profile_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE),0);
         editor=sharedPreferences.edit();
 
@@ -72,28 +83,133 @@ public class ShowProfile extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    editor.clear();
+                    editor.commit();
+                    progressDialog.setMessage("Logging Out.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(ShowProfile.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(progressrunnable, 6000);
+                }
+                return true;
+            case R.id.LogIn:
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable2 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(ShowProfile.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+                    Handler handler2 = new Handler();
+                    handler2.postDelayed(progressrunnable2, 6000);
+                }
                 return true;
             case R.id.my_profile:
-                Toast.makeText(this, "Your Are Already Seeing Your Profile Dear "+name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Your Are Already in Your Profile Dear "+name, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable4 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(ShowProfile.this, CreateNewRestaurant.class));
+                            finish();
+                        }
+                    };
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(progressrunnable4, 6000);
+                }
                 return true;
             case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable5 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            Intent intent = new Intent(ShowProfile.this, EditChangeProfile.class);
+                            intent.putExtra("op_type", "Edit");
+                            startActivity(intent);
+                            finish();
+                        }
+                    };
+                    Handler handler5 = new Handler();
+                    handler5.postDelayed(progressrunnable5, 6000);
+                }
                 return true;
             case R.id.myorder:
-                startActivity(new Intent(this,UserFoodDetails.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    startActivity(new Intent(this, UserFoodDetails.class));
+                    finish();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private boolean isNetworkAvilabe()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
+
+    public void nointernet() {
+        //Creating an Alertdialog
+        AlertDialog.Builder CheckBuild = new AlertDialog.Builder(ShowProfile.this);
+        CheckBuild.setIcon(R.drawable.no);
+        CheckBuild.setTitle("Error!");
+        CheckBuild.setMessage("Check Your Internet Connection");
+
+        //Builder Retry Button
+
+        CheckBuild.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                //Restart The Activity
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+
+        });
+        CheckBuild.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                //Exit The Activity
+                finish();
+            }
+
+        });
+        AlertDialog alertDialog = CheckBuild.create();
+        alertDialog.show();
     }
 }

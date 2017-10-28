@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,6 +6,10 @@
     android:background="@drawable/food_app"
     android:id="@+id/home_app"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,19 +59,41 @@
         app:cornerRadius="9dp"
         />
 
-    <info.hoang8f.widget.FButton
-        android:id="@+id/exit"
-        android:layout_width="200dp"
+    <!--<info.hoang8f.widget.FButton-->
+        <!--android:id="@+id/exit"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:text="Exit"-->
+        <!--android:textSize="25sp"-->
+        <!--app:buttonColor="@color/buttoncolor"-->
+        <!--android:padding="15dp"-->
+        <!--android:shadowColor="@color/shadowcolor"-->
+        <!--app:shadowEnabled="true"-->
+        <!--app:shadowHeight="5dp"-->
+        <!--app:cornerRadius="9dp"-->
+        <!--/>-->
+    </LinearLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:text="Exit"
-        android:textSize="25sp"
-        app:buttonColor="@color/buttoncolor"
-        android:padding="15dp"
-        android:shadowColor="@color/shadowcolor"
-        app:shadowEnabled="true"
-        app:shadowHeight="5dp"
-        app:cornerRadius="9dp"
-        />
-</LinearLayout>
+        android:src="@drawable/email2"
+        android:layout_marginRight="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_facebook"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/facebook"
+        android:layout_marginRight="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_alignTop="@+id/profile_image"
+        android:layout_toLeftOf="@+id/profile_image"
+        android:layout_toStartOf="@+id/profile_image" />
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.bappy.foodbank;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,10 +45,15 @@ public class CreateNewRestaurantStaff extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_new_restaurant_staff_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
@@ -75,6 +81,8 @@ public class CreateNewRestaurantStaff extends AppCompatActivity {
                 Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
             } else {
                 if (pass.equals(repass)) {
+                    progressDialog.setMessage("Please Wait For Registration....");
+                    progressDialog.show();
                     new ResistorBackground().execute(tname, tstreet, ttown, ttype, tphone, tpassword, user, pass);
                 }
                 else
@@ -156,6 +164,7 @@ public class CreateNewRestaurantStaff extends AppCompatActivity {
                         finish();
                     }
                 });
+                progressDialog.cancel();
                 AlertDialog mydialog = alert.create();
                 mydialog.show();
             }

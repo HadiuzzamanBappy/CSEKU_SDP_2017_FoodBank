@@ -1,5 +1,6 @@
 package com.example.bappy.foodbank;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -62,10 +64,15 @@ public class DisplayFoodList extends AppCompatActivity {
     Boolean save_login;
     String name,resname,pass,type;
     EditText search;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        progressDialog=new ProgressDialog(this);
+        //progressDialog.setTitle("Attention");
+        progressDialog.setCancelable(false);
+
         setContentView(R.layout.display_foodlist_layout);
         search=(EditText)findViewById(R.id.search_food);
         search.setVisibility(View.GONE);
@@ -102,89 +109,168 @@ public class DisplayFoodList extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(DisplayFoodList.this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    editor.clear();
+                    editor.commit();
+                    progressDialog.setMessage("Logging Out.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(DisplayFoodList.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(progressrunnable, 6000);
+                }
+
                 return true;
             case R.id.LogIn:
-                startActivity(new Intent(DisplayFoodList.this, staff_login_resistor.class));
-                finish();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable2 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(DisplayFoodList.this, staff_login_resistor.class));
+                            finish();
+                        }
+                    };
+                    Handler handler2 = new Handler();
+                    handler2.postDelayed(progressrunnable2, 6000);
+                }
                 return true;
             case R.id.my_profile:
-                startActivity(new Intent(this, ShowProfile.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable3 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(DisplayFoodList.this, ShowProfile.class));
+                        }
+                    };
+                    Handler handler3 = new Handler();
+                    handler3.postDelayed(progressrunnable3, 6000);
+                }
                 return true;
             case R.id.new_restaurant:
-                startActivity(new Intent(this, CreateNewRestaurant.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable4 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            startActivity(new Intent(DisplayFoodList.this, CreateNewRestaurant.class));
+                        }
+                    };
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(progressrunnable4, 6000);
+                }
                 return true;
             case R.id.edit_profile:
-                Intent intent=new Intent(this, EditChangeProfile.class);
-                intent.putExtra("op_type","Edit");
-                startActivity(intent);
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    progressDialog.setMessage("Loading.Please Wait....");
+                    progressDialog.show();
+                    Runnable progressrunnable5 = new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.cancel();
+                            Intent intent = new Intent(DisplayFoodList.this, EditChangeProfile.class);
+                            intent.putExtra("op_type", "Edit");
+                            startActivity(intent);
+                        }
+                    };
+                    Handler handler5 = new Handler();
+                    handler5.postDelayed(progressrunnable5, 6000);
+                }
                 return true;
             case R.id.delete_profile:
-                AlertDialog.Builder alert =new AlertDialog.Builder(this);
-                alert.setTitle("Attention");
-                alert.setMessage("Are You Sure??");
-                alert.setCancelable(true);
-                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        new BackgroundTask2().execute("Delete",name,name,resname,type,pass,pass);
-                    }
-                });
-                alert.setNegativeButton("No,later", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog al=alert.create();
-                al.show();
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                    alert.setTitle("Attention");
+                    alert.setMessage("Are You Sure??");
+                    alert.setCancelable(true);
+                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            new BackgroundTask2().execute("Delete", name, name, resname, type, pass, pass);
+                        }
+                    });
+                    alert.setNegativeButton("No,later", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog al = alert.create();
+                    al.show();
+                }
                 return true;
             case R.id.search:
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    search.setVisibility(View.VISIBLE);
+                    search.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                search.setVisibility(View.VISIBLE);
-                search.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        }
 
-                    }
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        }
 
-                    }
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            String newText = search.getText().toString().toLowerCase(Locale.getDefault());
+                            if (newText != null && !newText.isEmpty()) {
 
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        String newText=search.getText().toString().toLowerCase(Locale.getDefault());
-                        if(newText != null && !newText.isEmpty())
-                        {
-
-                            isFound = new ArrayList<Food>();
-                            for(Food item:addfood)
-                            {
-                                Log.d(item.toString(), newText);
-                                if(item.getName().toLowerCase().contains(newText.toString().toLowerCase()))
-                                {
-                                    isFound.add(item);
+                                isFound = new ArrayList<Food>();
+                                for (Food item : addfood) {
+                                    Log.d(item.toString(), newText);
+                                    if (item.getName().toLowerCase().contains(newText.toString().toLowerCase())) {
+                                        isFound.add(item);
+                                    }
                                 }
+                                foodAdapter = new FoodAdapter(DisplayFoodList.this, R.layout.food_layout, isFound);
+                                //seeting adapter in the listview
+                                listView.setAdapter(foodAdapter);
+                            } else if (newText == null || newText.isEmpty()) {
+                                foodAdapter = new FoodAdapter(DisplayFoodList.this, R.layout.food_layout, addfood);
+                                //seeting adapter in the listview
+                                listView.setAdapter(foodAdapter);
                             }
-                            foodAdapter=new FoodAdapter(DisplayFoodList.this,R.layout.food_layout,isFound);
-                            //seeting adapter in the listview
-                            listView.setAdapter(foodAdapter);
                         }
-                        else if(newText == null || newText.isEmpty())
-                        {
-                            foodAdapter=new FoodAdapter(DisplayFoodList.this,R.layout.food_layout,addfood);
-                            //seeting adapter in the listview
-                            listView.setAdapter(foodAdapter);
-                        }
-                    }
-                });
+                    });
+                }
+                return true;
             case R.id.myorder:
-                startActivity(new Intent(this,UserFoodDetails.class));
+                if(!isNetworkAvilabe())
+                    nointernet();
+                else {
+                    startActivity(new Intent(this, UserFoodDetails.class));
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -198,6 +284,9 @@ public class DisplayFoodList extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Performing.Please Wait....");
+            progressDialog.show();
+
             json_url = "http://" + getString(R.string.ip_address) + "/FoodBank/ProfileEditDelete.php";
         }
 
@@ -256,11 +345,16 @@ public class DisplayFoodList extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            editor.clear();
-            editor.commit();
-            Intent intent = new Intent(DisplayFoodList.this, staff_login_resistor.class);
-            startActivity(intent);
-            finish();
+            if(result) {
+                editor.clear();
+                editor.commit();
+                Intent intent = new Intent(DisplayFoodList.this, staff_login_resistor.class);
+                progressDialog.cancel();
+                startActivity(intent);
+                finish();
+            }
+            else
+                Toast.makeText(DisplayFoodList.this, "Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -362,6 +456,8 @@ public class DisplayFoodList extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Loading.Please Wait....");
+            progressDialog.show();
             //making a link to php file for reading data from database
             json_url="http://"+getString(R.string.ip_address)+"/FoodBank/ReadFood.php";
         }
@@ -428,10 +524,12 @@ public class DisplayFoodList extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            if(result.equals("false"))
-                Toast.makeText(DisplayFoodList.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
-            foodAdapter.notifyDataSetChanged();
-
+            if(result) {
+                progressDialog.cancel();
+                foodAdapter.notifyDataSetChanged();
+            }
+            else
+                Toast.makeText(DisplayFoodList.this, "Failed", Toast.LENGTH_SHORT).show();
         }
     }
 

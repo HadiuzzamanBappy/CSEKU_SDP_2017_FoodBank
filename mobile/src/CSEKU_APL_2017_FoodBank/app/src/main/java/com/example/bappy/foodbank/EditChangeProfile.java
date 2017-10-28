@@ -1,5 +1,6 @@
 package com.example.bappy.foodbank;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,11 +37,14 @@ public class EditChangeProfile extends AppCompatActivity {
     EditText tname,tpass,tnewpass,tnewrepass;
 
     SharedPreferences.Editor editor;
-
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_change_profile_layout);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE),0);
         editor=sharedPreferences.edit();
 
@@ -90,6 +94,8 @@ public class EditChangeProfile extends AppCompatActivity {
                     alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            progressDialog.setMessage("Editing.Please Wait....");
+                            progressDialog.show();
                             if (type.equals("User") || type.equals("SuperAdmin"))
                                 new BackgroundTask2().execute(op_type, name, tname2, "None", type, pass, newpass2);
                             else
@@ -178,7 +184,9 @@ public class EditChangeProfile extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-                if(op_type.equals("Edit")) {
+            if(result) {
+                progressDialog.cancel();
+                if (op_type.equals("Edit")) {
                     Toast.makeText(EditChangeProfile.this, resul, Toast.LENGTH_SHORT).show();
                     editor.clear();
                     editor.commit();
@@ -191,15 +199,16 @@ public class EditChangeProfile extends AppCompatActivity {
                     Intent intent = new Intent(EditChangeProfile.this, ShowProfile.class);
                     startActivity(intent);
                     finish();
-                }
-                else
-                {
+                } else {
                     editor.clear();
                     editor.commit();
-                   Intent intent=new Intent(EditChangeProfile.this,staff_login_resistor.class);
+                    Intent intent = new Intent(EditChangeProfile.this, staff_login_resistor.class);
                     startActivity(intent);
                     finish();
                 }
+            }
+            else
+                Toast.makeText(EditChangeProfile.this, "Failed", Toast.LENGTH_SHORT).show();
         }
     }
 }

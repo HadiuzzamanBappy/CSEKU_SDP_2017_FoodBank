@@ -1,6 +1,7 @@
 package com.example.bappy.foodbank;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -54,13 +55,20 @@ public class StaffLogIn extends AppCompatActivity{
     SharedPreferences.Editor editor;
 
     String[] role={"User","Admin","Staff","Chef"};
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_log_in);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
+        progressDialog.setMessage("Loading.Please Wait....");
+        progressDialog.show();
         new BackgroundTask2().execute();
 
         login=(Button) findViewById(R.id.login);
@@ -180,7 +188,8 @@ public class StaffLogIn extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(Boolean result) {
-            if(result.equals("false"))
+            progressDialog.cancel();
+            if(!result)
                 Toast.makeText(StaffLogIn.this, "can't connect to the database\ncan't load the restaurant name", Toast.LENGTH_SHORT).show();
         }
     }
@@ -266,12 +275,15 @@ public class StaffLogIn extends AppCompatActivity{
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Logging In.Please Wait....");
+            progressDialog.show();
             alert = new AlertDialog.Builder(StaffLogIn.this).create();
             alert.setTitle("Login Status");
         }
 
         @Override
         protected void onPostExecute(String result) {
+            progressDialog.cancel();
             if (result.equals("true")) {
                 if(rolestaff.equals("Admin")) {
                     Intent intent = new Intent(StaffLogIn.this, Adminstaff.class);
