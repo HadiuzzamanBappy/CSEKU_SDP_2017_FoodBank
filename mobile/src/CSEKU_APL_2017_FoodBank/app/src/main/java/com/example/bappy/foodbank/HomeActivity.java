@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -43,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    Boolean save_login;
+    Boolean save_login,skip;
     String name,resname,pass,type;
     ProgressDialog progressDialog;
 
@@ -62,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         name=sharedPreferences.getString(getString(R.string.NAME),"None");
         pass=sharedPreferences.getString(getString(R.string.PASSWORD),"None");
         resname=sharedPreferences.getString(getString(R.string.RESTAURANT_NAME),"None");
+        skip=sharedPreferences.getBoolean(getString(R.string.SKIP),true);
 
         logger =(TextView)findViewById(R.id.logger);
         if(type.equals("User"))
@@ -151,6 +153,7 @@ public class HomeActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             progressDialog.cancel();
+                            editor.putBoolean(getString(R.string.SKIP),false);
                             startActivity(new Intent(HomeActivity.this, staff_login_resistor.class));
                             finish();
                         }
@@ -262,6 +265,20 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(this, UserFoodDetails.class));
                 }
                 return true;
+            case R.id.about:
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("About");
+            alert.setMessage(getString(R.string.about));
+            alert.setCancelable(true);
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog al = alert.create();
+            al.show();
+            return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -344,6 +361,49 @@ public class HomeActivity extends AppCompatActivity {
             else
                 Toast.makeText(HomeActivity.this, "Sorry,Unfortunately Failed...", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void FacebookPage(View view)
+    {
+        Intent facebookIntent = openFacebook(HomeActivity.this);
+        startActivity(facebookIntent);
+    }
+
+    public static Intent openFacebook(Context context) {
+
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.facebook.katana", 0);
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("fb://page/751710388354961"));
+        } catch (Exception e) {
+
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.facebook.com/Food-Bank-751710388354961"));
+        }
+    }
+
+    public void send(View view)
+    {
+        progressDialog.setMessage("Loading.Please Wait....");
+        progressDialog.show();
+        Runnable progressrunnable4 = new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.cancel();
+                //String problem = text.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setData(Uri.parse("mailto:"));
+                String[] to = {"arjumansreashtho@gmail.com", "hbappy79@gmail.com"};
+                intent.putExtra(intent.EXTRA_EMAIL,to);
+                intent.putExtra(intent.EXTRA_SUBJECT,"Complain About Your App");
+                intent.putExtra(intent.EXTRA_TEXT,"");
+                intent.setType("message/rfc822");
+                startActivity(Intent.createChooser(intent,"Send Email"));
+            }
+        };
+        Handler handler4 = new Handler();
+        handler4.postDelayed(progressrunnable4, 4000);
     }
         //creating activity for back pressing from phone
         public void onBackPressed() {

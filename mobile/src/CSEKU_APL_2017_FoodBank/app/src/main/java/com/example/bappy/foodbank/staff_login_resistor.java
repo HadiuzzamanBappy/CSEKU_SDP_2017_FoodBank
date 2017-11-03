@@ -38,13 +38,6 @@ public class staff_login_resistor extends AppCompatActivity {
         actionBar.setDisplayUseLogoEnabled(true);
     }
 
-//    public void resitornewrestaurant(View view){
-//        //set the next Page when it will pressed(Intent)
-//        Intent intent=new Intent(staff_login_resistor.this,CreateNewRestaurant.class);
-//        //initial the intent activity
-//        startActivity(intent);
-//    }
-
     public void registeryou(View view){
         //set the next Page when it will pressed(Intent)
         Intent intent=new Intent(staff_login_resistor.this,Staff_Resister.class);

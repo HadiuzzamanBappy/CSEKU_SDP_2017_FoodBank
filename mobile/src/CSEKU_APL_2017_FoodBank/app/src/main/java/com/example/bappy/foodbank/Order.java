@@ -173,7 +173,7 @@ public class Order extends Activity{
         String addrs=address.getText().toString();
         String date=y+"-"+m+"-"+d;
         String type ="order";
-        if(phone.equals("") || addrs.equals(""))
+        if(phone.equals("") || addrs.equals("") || y.equals("YYYY") || m.equals("MM") || d.equals("DD") || quan.equals("Quantity"))
             Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
         else {
             progressDialog.setMessage("Ordering.Please Wait....");

@@ -218,24 +218,4 @@ public class CreateNewRestaurantStaff extends AppCompatActivity {
         startActivity(new Intent(this,CreateNewRestaurant.class));
         finish();
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater=getMenuInflater();
-        menuInflater.inflate(R.menu.menu_item,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(CreateNewRestaurantStaff.this, staff_login_resistor.class));
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

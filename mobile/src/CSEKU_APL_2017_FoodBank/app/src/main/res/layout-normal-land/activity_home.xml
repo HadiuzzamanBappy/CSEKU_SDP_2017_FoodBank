@@ -85,7 +85,8 @@
         android:layout_marginBottom="17dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="send"/>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_facebook"
         android:layout_width="40dp"
@@ -95,5 +96,6 @@
         android:layout_marginEnd="23dp"
         android:layout_alignTop="@+id/profile_image"
         android:layout_toLeftOf="@+id/profile_image"
-        android:layout_toStartOf="@+id/profile_image" />
+        android:layout_toStartOf="@+id/profile_image"
+        android:onClick="FacebookPage"/>
 </RelativeLayout>

@@ -179,7 +179,7 @@ public class OrderMultiple extends AppCompatActivity {
             full += (price * quantityy);
         }
         fullprice=full;
-        if(phonenumber.getText().toString().equals("") || address.getText().toString().equals(""))
+        if(phonenumber.getText().toString().equals("") || address.getText().toString().equals("") || yyyy.equals("YYYY") || mm.equals("MM") || dd.equals("DD"))
             Toast.makeText(this, "Please Fill All The Field", Toast.LENGTH_SHORT).show();
         else {
             String client = name;

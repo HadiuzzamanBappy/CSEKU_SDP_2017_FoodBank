@@ -174,6 +174,20 @@ public class PendingStaff extends AppCompatActivity {
                     handler5.postDelayed(progressrunnable5, 6000);
                 }
                 return true;
+            case R.id.about:
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("About");
+                alert.setMessage(getString(R.string.about));
+                alert.setCancelable(true);
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog al = alert.create();
+                al.show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -450,6 +464,7 @@ public class PendingStaff extends AppCompatActivity {
                 progressDialog.cancel();
                 pendingAdapter.notifyDataSetChanged();
             }
+            else
                 Toast.makeText(PendingStaff.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
         }
     }

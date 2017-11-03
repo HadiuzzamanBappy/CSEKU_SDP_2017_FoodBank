@@ -78,6 +78,8 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
 
         food=getIntent().getExtras().getString("food_name");
         addFoodRestaurant=new ArrayList<>();
+        progressDialog.setMessage("Loading.Please Wait....");
+        progressDialog.show();
         new BackgroundTask().execute(food);
 
         foodrestaurent=(TextView)findViewById(R.id.txtview);
@@ -105,6 +107,7 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                 else {
                     editor.clear();
                     editor.commit();
+                    editor.putBoolean(getString(R.string.SKIP),false);
                     progressDialog.setMessage("Logging Out.Please Wait....");
                     progressDialog.show();
                     Runnable progressrunnable = new Runnable() {
@@ -221,6 +224,20 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                 else {
                     startActivity(new Intent(this, UserFoodDetails.class));
                 }
+                return true;
+            case R.id.about:
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("About");
+                alert.setMessage(getString(R.string.about));
+                alert.setCancelable(true);
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog al = alert.create();
+                al.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -520,6 +537,7 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            progressDialog.cancel();
             if(result.equals("false"))
                 Toast.makeText(DisplayFoodRestaurentList.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
             foodRestaurentAdapter.notifyDataSetChanged();

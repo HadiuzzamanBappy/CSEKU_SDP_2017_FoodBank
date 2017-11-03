@@ -114,6 +114,7 @@ public class DisplayFoodList extends AppCompatActivity {
                 else {
                     editor.clear();
                     editor.commit();
+                    editor.putBoolean(getString(R.string.SKIP),false);
                     progressDialog.setMessage("Logging Out.Please Wait....");
                     progressDialog.show();
                     Runnable progressrunnable = new Runnable() {
@@ -271,6 +272,20 @@ public class DisplayFoodList extends AppCompatActivity {
                 else {
                     startActivity(new Intent(this, UserFoodDetails.class));
                 }
+                return true;
+            case R.id.about:
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("About");
+                alert.setMessage(getString(R.string.about));
+                alert.setCancelable(true);
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog al = alert.create();
+                al.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

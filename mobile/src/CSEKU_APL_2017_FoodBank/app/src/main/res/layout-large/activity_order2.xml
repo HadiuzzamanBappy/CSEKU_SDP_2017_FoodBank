@@ -109,12 +109,6 @@
         android:inputType="number"
         android:textSize="25sp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#757575"
-        android:layout_marginTop="17dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -122,33 +116,25 @@
             android:textSize="25sp"
             android:textColor="@drawable/red_color"
             android:layout_marginLeft="7dp"
-            android:layout_gravity="center"
+            android:layout_gravity="start"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DD:"
-            android:textSize="25sp"
-            android:textColor="#fff"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center"
-            />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#757575"
+        android:layout_marginTop="17dp">
+
+
         <Spinner
-            android:layout_width="80dp"
+            android:layout_width="160dp"
             android:layout_height="40dp"
             android:id="@+id/spinnerday"
             android:textAlignment="center"
             ></Spinner>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MM:"
-            android:textSize="25sp"
-            android:textColor="#fff"
-            android:layout_gravity="center"
-            />
+
         <Spinner
-            android:layout_width="80dp"
+            android:layout_width="160dp"
             android:layout_height="40dp"
             android:id="@+id/spinnermonth"
             android:textAlignment="center"
@@ -170,7 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColorHint="@drawable/red_color"
-        android:hint="Enter Your Food Quantity"
+        android:hint="Food Quantity"
         android:gravity="center"
         android:textColor="#fff"
         android:textSize="25sp"/>

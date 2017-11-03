@@ -47,26 +47,6 @@ public class CreateNewRestaurant extends AppCompatActivity {
         tpasswordagain=(EditText) findViewById(R.id.passwordagain);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater=getMenuInflater();
-        menuInflater.inflate(R.menu.menu_item,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Logout:
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(CreateNewRestaurant.this, staff_login_resistor.class));
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     public void onrestaurentresistor(View view){
         if(!isNetworkAvilabe())
             nointernet();

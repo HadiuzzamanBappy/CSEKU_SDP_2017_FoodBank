@@ -181,6 +181,7 @@ public class UserFoodDetails extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
            // Toast.makeText(UserFoodDetails.this, OrderList, Toast.LENGTH_SHORT).show();
             userOrderAdapter.notifyDataSetChanged();
+            progressDialog.cancel();
         }
     }
 
@@ -203,6 +204,7 @@ public class UserFoodDetails extends AppCompatActivity {
                 else {
                     editor.clear();
                     editor.commit();
+                    editor.putBoolean(getString(R.string.SKIP),false);
                     progressDialog.setMessage("Logging Out.Please Wait....");
                     progressDialog.show();
                     Runnable progressrunnable = new Runnable() {
@@ -315,6 +317,20 @@ public class UserFoodDetails extends AppCompatActivity {
                 return true;
             case R.id.myorder:
                 Toast.makeText(this, "You are Already in it", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.about:
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("About");
+                alert.setMessage(getString(R.string.about));
+                alert.setCancelable(true);
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog al = alert.create();
+                al.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -587,7 +603,7 @@ public class UserFoodDetails extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-
+            progressDialog.cancel();
             if(result) {
                 ListView listViewOrder = new ListView(UserFoodDetails.this);
                 foodOrderListAdapter = new FoodOrderListAdapter(UserFoodDetails.this, R.layout.food_order_list_layout, addfoodorder);
@@ -608,7 +624,6 @@ public class UserFoodDetails extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-                progressDialog.cancel();
                 //alertdialog create
                 mydialog = orderbuilder.create();
                 //for working the alertdialog state
