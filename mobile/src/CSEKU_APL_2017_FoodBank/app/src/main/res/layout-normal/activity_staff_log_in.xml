@@ -31,6 +31,8 @@
         android:textColor="#fff"
         android:textColorHint="#fff"
         android:textSize="15sp"
+        android:inputType="text"
+        android:maxLines="1"
         />
 
     <LinearLayout
@@ -89,7 +91,8 @@
         android:textColorHint="#fff"
         android:layout_marginTop="20dp"
         android:textSize="15sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:maxLines="1"/>
     </LinearLayout>
 
     <info.hoang8f.widget.FButton

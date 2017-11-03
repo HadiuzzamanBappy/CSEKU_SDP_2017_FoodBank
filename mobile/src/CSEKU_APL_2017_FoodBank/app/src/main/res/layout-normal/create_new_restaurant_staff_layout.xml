@@ -38,7 +38,9 @@
         android:textColorHint="#fff"
         android:layout_marginTop="10dp"
         android:textColor="#fff"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        android:inputType="text"
+        android:maxLines="1"/>
 
 
     <EditText
@@ -51,7 +53,8 @@
         android:textColorHint="#fff"
         android:layout_marginTop="35dp"
         android:textColor="#fff"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        android:maxLines="1"/>
     <EditText
         android:id="@+id/repassword"
         android:inputType="textPassword"
@@ -62,7 +65,8 @@
         android:textColorHint="#fff"
         android:layout_marginTop="35dp"
         android:textColor="#fff"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        android:maxLines="1"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

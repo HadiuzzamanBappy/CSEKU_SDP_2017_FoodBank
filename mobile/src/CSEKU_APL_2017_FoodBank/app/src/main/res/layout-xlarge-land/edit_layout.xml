@@ -25,7 +25,9 @@
         android:layout_marginTop="60dp"
         android:id="@+id/foodname"
         android:textColor="#fff"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:inputType="text"
+        android:maxLines="1"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +38,8 @@
         android:inputType="number"
         android:id="@+id/foodprice"
         android:textColorHint="#fff"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:maxLines="1"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"

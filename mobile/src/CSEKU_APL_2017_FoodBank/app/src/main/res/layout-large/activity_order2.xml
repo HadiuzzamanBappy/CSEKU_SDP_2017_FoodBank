@@ -107,7 +107,8 @@
         android:id="@+id/cphone"
         android:textColor="#fff"
         android:inputType="number"
-        android:textSize="25sp"/>
+        android:textSize="25sp"
+        android:maxLines="1"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -177,7 +178,9 @@
         android:hint="Enter Your Exact Address\nlike Gollamari,2/3 road,3 no house."
         android:textColor="#fff"
         android:textColorHint="#fff"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:inputType="text"
+        android:maxLines="1"/>
 
     </LinearLayout>
 

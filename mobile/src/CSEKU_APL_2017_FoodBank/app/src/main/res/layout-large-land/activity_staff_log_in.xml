@@ -25,7 +25,9 @@
         android:textAlignment="center"
         android:textColorHint="#fff"
         android:textSize="25sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:inputType="text"
+        android:maxLines="1"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,7 +84,8 @@
         android:textColorHint="#fff"
         android:layout_marginTop="20dp"
         android:textSize="25sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:maxLines="1"/>
 
     <info.hoang8f.widget.FButton
         android:id="@+id/login"

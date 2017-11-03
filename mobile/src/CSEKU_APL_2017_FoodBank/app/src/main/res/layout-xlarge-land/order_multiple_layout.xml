@@ -75,7 +75,8 @@
         android:id="@+id/cphone"
         android:textColor="#fff"
         android:inputType="number"
-        android:textSize="33sp"/>
+        android:textSize="33sp"
+        android:maxLines="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -145,7 +146,9 @@
         android:layout_marginTop="7dp"
         android:id="@+id/caddress"
         android:textColor="#fff"
-        android:textSize="33sp"/>
+        android:textSize="33sp"
+        android:inputType="text"
+        android:maxLines="1"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -44,6 +44,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SuperAdminRestaurant extends AppCompatActivity {
 
     String name,type;
@@ -58,6 +60,8 @@ public class SuperAdminRestaurant extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private ProgressDialog progressDialog;
+
+    Boolean show_value=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,7 +260,7 @@ public class SuperAdminRestaurant extends AppCompatActivity {
 
             View restaurentview;
             restaurentview = convertView;
-            RestaurentHolder restaurentHolder;
+            final RestaurentHolder restaurentHolder;
             if (restaurentview == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 restaurentview = layoutInflater.inflate(R.layout.restaurent_layout, parent, false);
@@ -266,6 +270,7 @@ public class SuperAdminRestaurant extends AppCompatActivity {
                 restaurentHolder.street = (TextView) restaurentview.findViewById(R.id.tstreet);
                 restaurentHolder.phone = (TextView) restaurentview.findViewById(R.id.tphone);
                 restaurentHolder.type = (TextView) restaurentview.findViewById(R.id.ttype);
+                restaurentHolder.circleImageView=(CircleImageView)restaurentview.findViewById(R.id.circleImageView);
                 restaurentview.setTag(restaurentHolder);
             } else {
                 restaurentHolder = (RestaurentHolder) restaurentview.getTag();
@@ -285,11 +290,31 @@ public class SuperAdminRestaurant extends AppCompatActivity {
                     gointent(st);
                 }
             });
+            restaurentHolder.circleImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!show_value)
+                    {
+                        restaurentHolder.town.setVisibility(View.VISIBLE);
+                        restaurentHolder.street.setVisibility(View.VISIBLE);
+                        restaurentHolder.phone.setVisibility(View.VISIBLE);
+                        show_value=true;
+                    }
+                    else
+                    {
+                        restaurentHolder.town.setVisibility(View.GONE);
+                        restaurentHolder.street.setVisibility(View.GONE);
+                        restaurentHolder.phone.setVisibility(View.GONE);
+                        show_value=false;
+                    }
+                }
+            });
             return restaurentview;
         }
 
         class RestaurentHolder {
             TextView name, town, street, phone, type;
+            CircleImageView circleImageView;
         }
 
         public void gointent(String result) {

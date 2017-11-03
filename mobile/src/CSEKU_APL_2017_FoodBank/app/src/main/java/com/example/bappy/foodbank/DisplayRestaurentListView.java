@@ -45,6 +45,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class DisplayRestaurentListView extends AppCompatActivity {
 
 
@@ -61,6 +63,8 @@ public class DisplayRestaurentListView extends AppCompatActivity {
 
     String name,resname,pass,type;
     ProgressDialog progressDialog;
+
+    Boolean show_value=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -358,7 +362,7 @@ public class DisplayRestaurentListView extends AppCompatActivity {
 
             View restaurentview;
             restaurentview=convertView;
-            RestaurentHolder restaurentHolder;
+            final RestaurentHolder restaurentHolder;
             if(restaurentview==null)
             {
                 LayoutInflater layoutInflater=(LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -369,6 +373,7 @@ public class DisplayRestaurentListView extends AppCompatActivity {
                 restaurentHolder.street=(TextView)restaurentview.findViewById(R.id.tstreet);
                 restaurentHolder.phone=(TextView)restaurentview.findViewById(R.id.tphone);
                 restaurentHolder.type=(TextView)restaurentview.findViewById(R.id.ttype);
+                restaurentHolder.circleImageView=(CircleImageView)restaurentview.findViewById(R.id.circleImageView);
                 restaurentview.setTag(restaurentHolder);
             }
             else
@@ -382,6 +387,11 @@ public class DisplayRestaurentListView extends AppCompatActivity {
             restaurentHolder.street.setText("Place: "+restaurent1.getStreet()+" , ");
             restaurentHolder.phone.setText("Contact Us: "+restaurent1.getPhone());
             restaurentHolder.type.setText("( "+restaurent1.getType()+")");
+
+            restaurentHolder.town.setVisibility(View.GONE);
+            restaurentHolder.street.setVisibility(View.GONE);
+            restaurentHolder.phone.setVisibility(View.GONE);
+
             restaurentview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -391,12 +401,33 @@ public class DisplayRestaurentListView extends AppCompatActivity {
                     }
                 }
             });
+
+            restaurentHolder.circleImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!show_value)
+                    {
+                        restaurentHolder.town.setVisibility(View.VISIBLE);
+                        restaurentHolder.street.setVisibility(View.VISIBLE);
+                        restaurentHolder.phone.setVisibility(View.VISIBLE);
+                        show_value=true;
+                    }
+                    else
+                    {
+                        restaurentHolder.town.setVisibility(View.GONE);
+                        restaurentHolder.street.setVisibility(View.GONE);
+                        restaurentHolder.phone.setVisibility(View.GONE);
+                        show_value=false;
+                    }
+                }
+            });
             return restaurentview;
         }
 
         class RestaurentHolder
         {
             TextView name,town,street,phone,type;
+            CircleImageView circleImageView;
         }
         public void gointent(String result){
             if(!isNetworkAvilabe())

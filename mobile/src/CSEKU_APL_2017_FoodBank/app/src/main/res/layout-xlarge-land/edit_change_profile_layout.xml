@@ -71,7 +71,9 @@
             android:textColorHint="#fff"
             android:textColor="#fff"
             android:gravity="center"
-            android:textSize="45sp"/>
+            android:textSize="45sp"
+            android:inputType="text"
+            android:maxLines="1"/>
     </LinearLayout>
         <EditText
             android:id="@+id/old_password"
@@ -82,7 +84,9 @@
             android:textColorHint="#fff"
             android:gravity="center"
             android:textSize="45sp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:maxLines="1"/>
     <EditText
         android:id="@+id/new_password"
         android:layout_width="match_parent"
@@ -92,7 +96,9 @@
         android:textColorHint="#fff"
         android:gravity="center"
         android:textSize="45sp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"
+        android:maxLines="1"/>
     <EditText
         android:id="@+id/new_password2"
         android:layout_width="match_parent"
@@ -102,7 +108,9 @@
         android:textColorHint="#fff"
         android:gravity="center"
         android:textSize="45sp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"
+        android:maxLines="1"/>
 
     <info.hoang8f.widget.FButton
         android:layout_width="match_parent"

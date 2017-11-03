@@ -26,12 +26,14 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:hint="Input Your Username"
         android:textAlignment="center"
-        android:textColorHint="#fff"
-        android:layout_marginTop="30dp"
         android:textColor="#fff"
-        android:textSize="25dp"/>
+        android:textColorHint="#fff"
+        android:textSize="25dp"
+        android:inputType="text"
+        android:maxLines="1"/>
 
 
     <EditText
@@ -44,7 +46,8 @@
         android:textColorHint="#fff"
         android:layout_marginTop="10dp"
         android:textColor="#fff"
-        android:textSize="25dp"/>
+        android:textSize="25dp"
+        android:maxLines="1"/>
     <EditText
         android:id="@+id/repassword"
         android:inputType="textPassword"
@@ -55,7 +58,8 @@
         android:textColorHint="#fff"
         android:layout_marginTop="10dp"
         android:textColor="#fff"
-        android:textSize="25dp"/>
+        android:textSize="25dp"
+        android:maxLines="1"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

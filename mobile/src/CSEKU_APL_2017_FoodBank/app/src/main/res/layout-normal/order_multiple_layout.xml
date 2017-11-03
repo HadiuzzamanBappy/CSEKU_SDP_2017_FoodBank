@@ -75,7 +75,8 @@
         android:inputType="number"
         android:textColor="#fff"
         android:textColorHint="#fff"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:maxLines="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -147,7 +148,9 @@
         android:hint="Enter Your Exact Address\nlike Gollamari,2/3 road,3 no house."
         android:textColor="#fff"
         android:textColorHint="#fff"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:inputType="text"
+        android:maxLines="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"

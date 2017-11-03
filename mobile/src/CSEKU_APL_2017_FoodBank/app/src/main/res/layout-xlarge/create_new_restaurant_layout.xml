@@ -30,7 +30,9 @@
         android:textAlignment="center"
         android:textColorHint="#fff"
         android:textSize="35sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:inputType="textCapWords"
+        android:maxLines="1"/>
 
     <EditText
         android:id="@+id/street"
@@ -41,7 +43,9 @@
         android:textColorHint="#fff"
         android:layout_marginTop="30dp"
         android:textSize="35sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:inputType="text"
+        android:maxLines="1"/>
     <EditText
         android:id="@+id/town"
         android:layout_width="match_parent"
@@ -51,7 +55,9 @@
         android:textColorHint="#fff"
         android:layout_marginTop="30dp"
         android:textSize="35sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:inputType="text"
+        android:maxLines="1"/>
 
     <EditText
         android:id="@+id/type"
@@ -62,7 +68,9 @@
         android:textColorHint="#fff"
         android:layout_marginTop="30dp"
         android:textSize="35sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:inputType="text"
+        android:maxLines="1"/>
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
@@ -72,7 +80,9 @@
         android:textColorHint="#fff"
         android:layout_marginTop="30dp"
         android:textSize="35sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:inputType="phone"
+        android:maxLines="1"/>
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
@@ -82,7 +92,9 @@
         android:textColorHint="#fff"
         android:layout_marginTop="30dp"
         android:textSize="35sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:inputType="textPassword"
+        android:maxLines="1"/>
     <EditText
         android:id="@+id/passwordagain"
         android:layout_width="match_parent"
@@ -92,7 +104,9 @@
         android:textColorHint="#fff"
         android:layout_marginTop="30dp"
         android:textSize="35sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:inputType="textPassword"
+        android:maxLines="1"/>
 
     <info.hoang8f.widget.FButton
         android:layout_width="match_parent"
