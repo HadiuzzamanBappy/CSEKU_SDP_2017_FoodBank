@@ -12,9 +12,9 @@ $result2=mysqli_query($conn,$mysql_qry2);
 
 $id="0";
 $id2="3";
+$id4="4";
 
-
-$mysql_qry="SELECT name FROM staffdetails where activerole like '$id' and roletype like '$id2' and restaurantid like $id3";
+$mysql_qry="SELECT * FROM staffdetails where activerole like '$id' and restaurantid like $id3";
 
 $response=array();
 
@@ -22,7 +22,8 @@ $result=mysqli_query($conn,$mysql_qry);
 
 while($row=mysqli_fetch_array($result))
 {
-    array_push($response,array("name"=>$row[0]));
+	if($row['roletype']=="3" || $row['roletype']=="4")
+    array_push($response,array("name"=>$row['name'],"typerole"=>$row['roletype']));
 }
 
 echo json_encode(array("Server_response"=>$response));

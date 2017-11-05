@@ -14,7 +14,7 @@ if($row=$result->fetch_assoc()){
  }
 
 if($person_type=="staff")
-$mysql_qry2="SELECT * from foodorder where restaurantid like '$id' and staffid like '0' and chefid not like '0'";
+$mysql_qry2="SELECT * from foodorder where restaurantid like '$id' and staffid like '0' and chefid not like '0' and foodstate like '1'";
 else
 $mysql_qry2="SELECT * from foodorder where restaurantid like '$id' and staffid like '0' and chefid like '0'";
 

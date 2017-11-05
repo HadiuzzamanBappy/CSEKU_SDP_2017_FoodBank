@@ -8,9 +8,9 @@ $role=$_POST["role"];
 $date=$_POST["date"];
 
 // $type="A";
-// $name="bappy";
+// $name="lotif";
 // $res_name="BISTRO-C";
-// $role="Admin";
+// $role="Chef";
 // $date="2017-10-11";
 
 
@@ -121,6 +121,8 @@ while($row3=$result3->fetch_assoc()){
      $result6=mysqli_query($conn,$mysql_qry6);
      if($row6=$result6->fetch_assoc())
          $chefrole=$row6['name'];
+     else
+        $chefrole="Not Set Yet";
 
      if($row3['foodstate']=="0")
         $foodstate="Not Ready";

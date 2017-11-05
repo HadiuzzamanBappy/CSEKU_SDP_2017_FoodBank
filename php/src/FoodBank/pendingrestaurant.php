@@ -2,7 +2,7 @@
 require "connectiontest.php";
 
 $name=$_POST["name"];
-// $name="Pending";
+ // $name="Pending";
 
 if($name=='Pending')
 {
