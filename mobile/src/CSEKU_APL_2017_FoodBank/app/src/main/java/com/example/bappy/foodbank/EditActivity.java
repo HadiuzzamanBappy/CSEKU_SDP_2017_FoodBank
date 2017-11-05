@@ -39,7 +39,7 @@ public class EditActivity extends AppCompatActivity {
 
     EditText name,price;
     Spinner spinnertype;
-    String getname,gettype,getprice,getresname;
+    String getname,gettype,getprice,getresname,getusername,getrole;
     String newname,newprice,newtype;
     String alltype[]={"Spicy","General","Soft Drinks","Meals","Desert","Drinks"};
 
@@ -58,7 +58,9 @@ public class EditActivity extends AppCompatActivity {
         sharedPreferences=getSharedPreferences(getString(R.string.PREF_FILE), 0);
         editor=sharedPreferences.edit();
 
+        getusername=getIntent().getExtras().getString("username");
         getresname=getIntent().getExtras().getString("resname");
+        getrole=getIntent().getExtras().getString("role");
         getname=getIntent().getExtras().getString("name");
         gettype=getIntent().getExtras().getString("type");
         getprice=getIntent().getExtras().getString("price");
@@ -125,7 +127,7 @@ public class EditActivity extends AppCompatActivity {
                     };
 
                     Handler handler = new Handler();
-                    handler.postDelayed(progressrunnable, 6000);
+                    handler.postDelayed(progressrunnable, 3500);
                 }
                 return true;
             case R.id.my_profile:
@@ -142,7 +144,7 @@ public class EditActivity extends AppCompatActivity {
                         }
                     };
                     Handler handler3 = new Handler();
-                    handler3.postDelayed(progressrunnable3, 6000);
+                    handler3.postDelayed(progressrunnable3, 3500);
                 }
                 return true;
             case R.id.new_restaurant:
@@ -159,7 +161,7 @@ public class EditActivity extends AppCompatActivity {
                         }
                     };
                     Handler handler4 = new Handler();
-                    handler4.postDelayed(progressrunnable4, 6000);
+                    handler4.postDelayed(progressrunnable4, 3500);
                 }
                 return true;
             case R.id.edit_profile:
@@ -178,7 +180,7 @@ public class EditActivity extends AppCompatActivity {
                         }
                     };
                     Handler handler5 = new Handler();
-                    handler5.postDelayed(progressrunnable5, 6000);
+                    handler5.postDelayed(progressrunnable5, 3500);
                 }
                 return true;
             case R.id.about:
@@ -241,7 +243,9 @@ public class EditActivity extends AppCompatActivity {
     //creating activity for back pressing from phone
     public void onBackPressed() {
         Intent intent=new Intent(EditActivity.this,DecorateRestaurant.class);
-        intent.putExtra("resname",getresname);
+        intent.putExtra("username", getusername);
+        intent.putExtra("resname", getresname);
+        intent.putExtra("role", getrole);
         startActivity(intent);
         finish();
     }
@@ -266,6 +270,7 @@ public class EditActivity extends AppCompatActivity {
                     progressDialog.setMessage("Processing.Please Wait....");
                     progressDialog.show();
                     new BackgroundTask2().execute("Edit");
+                    //Toast.makeText(EditActivity.this, getresname+newname+newtype+newprice+getname, Toast.LENGTH_SHORT).show();
                 }
             });
             //setting activity for negative state button
@@ -284,7 +289,7 @@ public class EditActivity extends AppCompatActivity {
     class BackgroundTask2 extends AsyncTask<String,Void,Boolean> {
         AlertDialog.Builder alert;
         String json_url;
-        String JSON_STRING;
+        String JSON_STRING,resu;
 
         @Override
         protected void onPreExecute() {
@@ -314,6 +319,16 @@ public class EditActivity extends AppCompatActivity {
                 bufferedwritter.flush();
                 bufferedwritter.close();
                 outputstream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((JSON_STRING = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(JSON_STRING + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                resu= stringBuilder.toString().trim();
                 return true;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -334,8 +349,11 @@ public class EditActivity extends AppCompatActivity {
             if(!result)
                 Toast.makeText(EditActivity.this, "can't connect to the database", Toast.LENGTH_SHORT).show();
             else {
+                Toast.makeText(EditActivity.this, resu, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EditActivity.this, DecorateRestaurant.class);
+                intent.putExtra("username", getusername);
                 intent.putExtra("resname", getresname);
+                intent.putExtra("role", getrole);
                 progressDialog.cancel();
                 startActivity(intent);
                 finish();

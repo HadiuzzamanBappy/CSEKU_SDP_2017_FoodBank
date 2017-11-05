@@ -55,6 +55,7 @@
                 android:id="@+id/ttown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="town"
                 android:textSize="15sp"
                 />
@@ -67,13 +68,14 @@
             android:text="phone number"
             android:textSize="15sp" />
 
-        <android.support.v4.widget.CircleImageView
-            android:id="@+id/circleImageView"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_more_horiz_black_24dp"
-            android:onClick="showdetails"
-            android:layout_marginTop="4dp"/>
+        <!--<Button-->
+            <!--android:id="@+id/circleImageView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:text=". . ."-->
+            <!--android:textSize="15sp"-->
+            <!--android:background="#fff"/>-->
 
     </LinearLayout>
 

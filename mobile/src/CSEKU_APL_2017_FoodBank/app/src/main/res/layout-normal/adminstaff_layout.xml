@@ -191,7 +191,7 @@
             android:layout_height="30dp"
             android:background="#aeee"
             android:textAlignment="center"
-            android:text="Pending Staff"
+            android:text="Pending Staff Chef"
             android:textSize="12sp"
             android:layout_gravity="end"
             android:layout_marginTop="10dp"

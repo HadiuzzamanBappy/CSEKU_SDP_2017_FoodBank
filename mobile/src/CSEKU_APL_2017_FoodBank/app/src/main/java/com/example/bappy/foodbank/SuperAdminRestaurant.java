@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -270,7 +271,7 @@ public class SuperAdminRestaurant extends AppCompatActivity {
                 restaurentHolder.street = (TextView) restaurentview.findViewById(R.id.tstreet);
                 restaurentHolder.phone = (TextView) restaurentview.findViewById(R.id.tphone);
                 restaurentHolder.type = (TextView) restaurentview.findViewById(R.id.ttype);
-                restaurentHolder.circleImageView=(CircleImageView)restaurentview.findViewById(R.id.circleImageView);
+                //restaurentHolder.button=(Button)restaurentview.findViewById(R.id.circleImageView);
                 restaurentview.setTag(restaurentHolder);
             } else {
                 restaurentHolder = (RestaurentHolder) restaurentview.getTag();
@@ -282,6 +283,10 @@ public class SuperAdminRestaurant extends AppCompatActivity {
             restaurentHolder.street.setText("Place: "+restaurent1.getStreet()+" , ");
             restaurentHolder.phone.setText("Contact Us: "+restaurent1.getPhone());
             restaurentHolder.type.setText("( "+restaurent1.getType()+")");
+ //                       restaurentHolder.town.setVisibility(View.GONE);
+//                        restaurentHolder.street.setVisibility(View.GONE);
+//                        restaurentHolder.phone.setVisibility(View.GONE);
+
             restaurentview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -290,31 +295,31 @@ public class SuperAdminRestaurant extends AppCompatActivity {
                     gointent(st);
                 }
             });
-            restaurentHolder.circleImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(!show_value)
-                    {
-                        restaurentHolder.town.setVisibility(View.VISIBLE);
-                        restaurentHolder.street.setVisibility(View.VISIBLE);
-                        restaurentHolder.phone.setVisibility(View.VISIBLE);
-                        show_value=true;
-                    }
-                    else
-                    {
-                        restaurentHolder.town.setVisibility(View.GONE);
-                        restaurentHolder.street.setVisibility(View.GONE);
-                        restaurentHolder.phone.setVisibility(View.GONE);
-                        show_value=false;
-                    }
-                }
-            });
+//            restaurentHolder.button.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if(!show_value)
+//                    {
+//                        restaurentHolder.town.setVisibility(View.VISIBLE);
+//                        restaurentHolder.street.setVisibility(View.VISIBLE);
+//                        restaurentHolder.phone.setVisibility(View.VISIBLE);
+//                        show_value=true;
+//                    }
+//                    else
+//                    {
+//                        restaurentHolder.town.setVisibility(View.GONE);
+//                        restaurentHolder.street.setVisibility(View.GONE);
+//                        restaurentHolder.phone.setVisibility(View.GONE);
+//                        show_value=false;
+//                    }
+//                }
+//            });
             return restaurentview;
         }
 
         class RestaurentHolder {
             TextView name, town, street, phone, type;
-            CircleImageView circleImageView;
+            Button button;
         }
 
         public void gointent(String result) {

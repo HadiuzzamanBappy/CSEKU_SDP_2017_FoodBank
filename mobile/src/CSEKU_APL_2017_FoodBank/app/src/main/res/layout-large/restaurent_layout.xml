@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#3E2723"
                 android:text="Restaurent"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:layout_marginLeft="5dp"/>
 
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="type"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:gravity="start"
                 android:layout_gravity="left"
                 android:paddingLeft="5dp"/>
@@ -49,13 +49,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="street"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
             <TextView
                 android:id="@+id/ttown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="town"
-                android:textSize="15sp"
+                android:layout_marginLeft="5dp"
+                android:textSize="20sp"
                 />
 
         <TextView
@@ -64,14 +65,15 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="phone number"
-            android:textSize="15sp" />
-        <android.support.v4.widget.CircleImageView
-            android:id="@+id/circleImageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_more_horiz_black_24dp"
-            android:onClick="showdetails"
-            android:layout_marginTop="4dp"/>
+            android:textSize="20sp" />
+        <!--<Button-->
+            <!--android:id="@+id/circleImageView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:text=". . ."-->
+            <!--android:textSize="20sp"-->
+            <!--android:background="#fff"/>-->
 
     </LinearLayout>
 

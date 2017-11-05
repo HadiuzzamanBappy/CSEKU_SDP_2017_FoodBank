@@ -217,7 +217,7 @@ public class UserFoodDetails extends AppCompatActivity {
                     };
 
                     Handler handler = new Handler();
-                    handler.postDelayed(progressrunnable, 6000);
+                    handler.postDelayed(progressrunnable, 3500);
                 }
                 return true;
             case R.id.LogIn:
@@ -235,7 +235,7 @@ public class UserFoodDetails extends AppCompatActivity {
                         }
                     };
                     Handler handler2 = new Handler();
-                    handler2.postDelayed(progressrunnable2, 6000);
+                    handler2.postDelayed(progressrunnable2, 3500);
                 }
                 return true;
             case R.id.my_profile:
@@ -252,7 +252,7 @@ public class UserFoodDetails extends AppCompatActivity {
                         }
                     };
                     Handler handler3 = new Handler();
-                    handler3.postDelayed(progressrunnable3, 6000);
+                    handler3.postDelayed(progressrunnable3, 3500);
                 }
                 return true;
             case R.id.new_restaurant:
@@ -269,7 +269,7 @@ public class UserFoodDetails extends AppCompatActivity {
                         }
                     };
                     Handler handler4 = new Handler();
-                    handler4.postDelayed(progressrunnable4, 6000);
+                    handler4.postDelayed(progressrunnable4, 3500);
                 }
                 return true;
             case R.id.edit_profile:
@@ -288,7 +288,7 @@ public class UserFoodDetails extends AppCompatActivity {
                         }
                     };
                     Handler handler5 = new Handler();
-                    handler5.postDelayed(progressrunnable5, 6000);
+                    handler5.postDelayed(progressrunnable5, 3500);
                 }
                 return true;
             case R.id.delete_profile:

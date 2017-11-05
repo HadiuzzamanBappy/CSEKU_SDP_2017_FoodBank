@@ -118,7 +118,7 @@ public class PendingStaff extends AppCompatActivity {
                     };
 
                     Handler handler = new Handler();
-                    handler.postDelayed(progressrunnable, 6000);
+                    handler.postDelayed(progressrunnable, 3500);
                 }
                 return true;
             case R.id.my_profile:
@@ -135,7 +135,7 @@ public class PendingStaff extends AppCompatActivity {
                         }
                     };
                     Handler handler3 = new Handler();
-                    handler3.postDelayed(progressrunnable3, 6000);
+                    handler3.postDelayed(progressrunnable3, 3500);
                 }
                 return true;
             case R.id.new_restaurant:
@@ -152,7 +152,7 @@ public class PendingStaff extends AppCompatActivity {
                         }
                     };
                     Handler handler4 = new Handler();
-                    handler4.postDelayed(progressrunnable4, 6000);
+                    handler4.postDelayed(progressrunnable4, 3500);
                 }
                 return true;
             case R.id.edit_profile:
@@ -171,7 +171,7 @@ public class PendingStaff extends AppCompatActivity {
                         }
                     };
                     Handler handler5 = new Handler();
-                    handler5.postDelayed(progressrunnable5, 6000);
+                    handler5.postDelayed(progressrunnable5, 3500);
                 }
                 return true;
             case R.id.about:
@@ -232,10 +232,19 @@ public class PendingStaff extends AppCompatActivity {
     }
 
     public class Pending {
-        String name;
+        String name,typerole;
 
-        public Pending(String name) {
+        public Pending(String name, String typerole) {
             this.name = name;
+            this.typerole = typerole;
+        }
+
+        public String getTyperole() {
+            return typerole;
+        }
+
+        public void setTyperole(String typerole) {
+            this.typerole = typerole;
         }
 
         public String getName() {
@@ -295,7 +304,12 @@ public class PendingStaff extends AppCompatActivity {
 
             final Pending pend1 = (Pending) this.getItem(position);
             pendingHolder.name.setText(pend1.getName());
-            pendingHolder.type.setText(role);
+            if(pend1.getTyperole().equals("3"))
+                pendingHolder.type.setText("Staff");
+            else if(pend1.getTyperole().equals("4"))
+                pendingHolder.type.setText("Chef");
+            else
+                pendingHolder.type.setText("Admin");
             pend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -307,14 +321,28 @@ public class PendingStaff extends AppCompatActivity {
             approve.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    approveitstaff(v,pend1.getName());
+                    String rolet;
+                    if(pend1.getTyperole().equals("3"))
+                        rolet="Staff";
+                    else if(pend1.getTyperole().equals("4"))
+                        rolet="Chef";
+                    else
+                        rolet="Admin";
+                    approveitstaff(v,pend1.getName(),rolet);
                 }
             });
             Button delete=(Button)pend.findViewById(R.id.delete);
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    delete(v,pend1.getName());
+                    String rolet;
+                    if(pend1.getTyperole().equals("3"))
+                        rolet="Staff";
+                    else if(pend1.getTyperole().equals("4"))
+                        rolet="Chef";
+                    else
+                        rolet="Admin";
+                    delete(v,pend1.getName(),rolet);
                 }
             });
 
@@ -325,7 +353,7 @@ public class PendingStaff extends AppCompatActivity {
             TextView name,type;
         }
     }
-    public void approveitstaff(View view, final String st){
+    public void approveitstaff(View view, final String st, final String rolet){
         AlertDialog.Builder paidbuilder = new AlertDialog.Builder(PendingStaff.this);
         //setting the alertdialog title
         paidbuilder.setTitle("Attention");
@@ -340,7 +368,7 @@ public class PendingStaff extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 progressDialog.setMessage("Approving.Please Wait....");
                 progressDialog.show();
-                new BackgroundTask2().execute("Approve",st);
+                new BackgroundTask2().execute("Approve",st,rolet);
             }
         });
         //setting activity for negative state button
@@ -355,7 +383,7 @@ public class PendingStaff extends AppCompatActivity {
         //for working the alertdialog state
         mydialog.show();
     }
-    public void delete(View view, final String st){
+    public void delete(View view, final String st, final String rolet){
         AlertDialog.Builder paidbuilder = new AlertDialog.Builder(PendingStaff.this);
         //setting the alertdialog title
         paidbuilder.setTitle("Attention");
@@ -370,7 +398,7 @@ public class PendingStaff extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 progressDialog.setMessage("Deleting.Please Wait....");
                 progressDialog.show();
-                new BackgroundTask2().execute("Delete",st);
+                new BackgroundTask2().execute("Delete",st,rolet);
             }
         });
         //setting activity for negative state button
@@ -431,11 +459,12 @@ public class PendingStaff extends AppCompatActivity {
                 jsonArray = jsonObject.getJSONArray("Server_response");
 
                 int count = 0;
-                String name;
+                String name,typerole;
                 while (count < jsonArray.length()) {
                     JSONObject jo = jsonArray.getJSONObject(count);
                     name = jo.getString("name");
-                    Pending pending = new Pending(name);
+                    typerole = jo.getString("typerole");
+                    Pending pending = new Pending(name,typerole);
                     addpending.add(pending);
                     count++;
                 }
@@ -483,6 +512,7 @@ public class PendingStaff extends AppCompatActivity {
             try {
                 String type = params[0];
                 String username = params[1];
+                String rolet = params[2];
                 URL url = new URL(json_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -493,7 +523,7 @@ public class PendingStaff extends AppCompatActivity {
                 String postdata = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8")
                         + "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8")
                         + "&" + URLEncoder.encode("resname", "UTF-8") + "=" + URLEncoder.encode(res_name, "UTF-8")
-                        + "&" + URLEncoder.encode("role", "UTF-8") + "=" + URLEncoder.encode(role, "UTF-8");
+                        + "&" + URLEncoder.encode("role", "UTF-8") + "=" + URLEncoder.encode(rolet, "UTF-8");
                 bufferedwritter.write(postdata);
                 bufferedwritter.flush();
                 bufferedwritter.close();

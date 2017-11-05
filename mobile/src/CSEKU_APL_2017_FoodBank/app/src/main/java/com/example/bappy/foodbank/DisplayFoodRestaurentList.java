@@ -120,7 +120,7 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                     };
 
                     Handler handler = new Handler();
-                    handler.postDelayed(progressrunnable, 6000);
+                    handler.postDelayed(progressrunnable, 3500);
                 }
                 return true;
             case R.id.LogIn:
@@ -138,7 +138,7 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                         }
                     };
                     Handler handler2 = new Handler();
-                    handler2.postDelayed(progressrunnable2, 6000);
+                    handler2.postDelayed(progressrunnable2, 3500);
                 }
                 return true;
             case R.id.my_profile:
@@ -155,7 +155,7 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                         }
                     };
                     Handler handler3 = new Handler();
-                    handler3.postDelayed(progressrunnable3, 6000);
+                    handler3.postDelayed(progressrunnable3, 3500);
                 }
                 return true;
             case R.id.new_restaurant:
@@ -172,7 +172,7 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                         }
                     };
                     Handler handler4 = new Handler();
-                    handler4.postDelayed(progressrunnable4, 6000);
+                    handler4.postDelayed(progressrunnable4, 3500);
                 }
                 return true;
             case R.id.edit_profile:
@@ -191,7 +191,7 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                         }
                     };
                     Handler handler5 = new Handler();
-                    handler5.postDelayed(progressrunnable5, 6000);
+                    handler5.postDelayed(progressrunnable5, 3500);
                 }
                 return true;
             case R.id.delete_profile:
@@ -381,6 +381,7 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
             foodrestaurentview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(save_login) {
                     frestarant=foodrestaurent.getName();
                     fprice=foodrestaurent.getPrice();
                     AlertDialog.Builder paidbuilder = new AlertDialog.Builder(ct);
@@ -398,7 +399,6 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                             if(!isNetworkAvilabe())
                                 nointernet();
                             else {
-                                if(save_login) {
                                     Intent intent = new Intent(ct, Order.class);
                                     intent.putExtra("restaurant", frestarant);
                                     intent.putExtra("food", ffood);
@@ -407,9 +407,6 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                                     ct.startActivity(intent);
                                     finish();
                                 }
-                                else
-                                    Toast.makeText(ct, "OPPS Sorry,U didn't SIGN IN as User", Toast.LENGTH_SHORT).show();
-                            }
                         }
                     });
                     //setting activity for negative state button
@@ -423,6 +420,9 @@ public class DisplayFoodRestaurentList extends AppCompatActivity {
                     AlertDialog mydialog = paidbuilder.create();
                     //for working the alertdialog state
                     mydialog.show();
+                }
+                    else
+                        Toast.makeText(ct, "OPPS Sorry,U didn't SIGN IN as User", Toast.LENGTH_SHORT).show();
                 }
             });
             return foodrestaurentview;

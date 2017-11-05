@@ -90,7 +90,7 @@ public class CreateNewRestaurant extends AppCompatActivity {
                                 }
                             };
                             Handler handler2 = new Handler();
-                            handler2.postDelayed(progressrunnable2, 6000);
+                            handler2.postDelayed(progressrunnable2, 3500);
                         }
                     });
                     alert.setNegativeButton("No,Wait", new DialogInterface.OnClickListener() {

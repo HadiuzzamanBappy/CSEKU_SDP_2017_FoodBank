@@ -180,7 +180,7 @@
         android:layout_height="70dp"
         android:background="#aeee"
         android:textAlignment="center"
-        android:text="pending staff"
+        android:text="pending staff Chef"
         android:textSize="35sp"
         android:layout_gravity="end"
         android:layout_marginTop="20dp"

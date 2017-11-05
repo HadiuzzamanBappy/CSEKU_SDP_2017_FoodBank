@@ -155,7 +155,7 @@ public class StaffFoodOrder extends AppCompatActivity {
                     };
 
                     Handler handler = new Handler();
-                    handler.postDelayed(progressrunnable, 6000);
+                    handler.postDelayed(progressrunnable, 3500);
                 }
                 return true;
             case R.id.my_profile:
@@ -172,7 +172,7 @@ public class StaffFoodOrder extends AppCompatActivity {
                         }
                     };
                     Handler handler3 = new Handler();
-                    handler3.postDelayed(progressrunnable3, 6000);
+                    handler3.postDelayed(progressrunnable3, 3500);
                 }
                 return true;
             case R.id.new_restaurant:
@@ -189,7 +189,7 @@ public class StaffFoodOrder extends AppCompatActivity {
                         }
                     };
                     Handler handler4 = new Handler();
-                    handler4.postDelayed(progressrunnable4, 6000);
+                    handler4.postDelayed(progressrunnable4, 3500);
                 }
                 return true;
             case R.id.edit_profile:
@@ -208,7 +208,7 @@ public class StaffFoodOrder extends AppCompatActivity {
                         }
                     };
                     Handler handler5 = new Handler();
-                    handler5.postDelayed(progressrunnable5, 6000);
+                    handler5.postDelayed(progressrunnable5, 3500);
                 }
                 return true;
             case R.id.about:
@@ -735,9 +735,9 @@ public class StaffFoodOrder extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Boolean result) {
+                progressDialog.cancel();
                 if(result) {
-                    progressDialog.cancel();
-                    alert.setMessage(res);
+                    alert.setMessage("Product Ready");
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -878,7 +878,7 @@ public class StaffFoodOrder extends AppCompatActivity {
             intent.putExtra("role", role);
             startActivity(intent);
         }
-        if(staff_admin.equals("3")) {
+        else if(staff_admin.equals("3")) {
             Intent intent = new Intent(StaffFoodOrder.this, ChefWork.class);
             intent.putExtra("username", name);
             intent.putExtra("resname", res);

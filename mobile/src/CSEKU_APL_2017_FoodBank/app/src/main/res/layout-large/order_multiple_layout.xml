@@ -95,34 +95,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="#757575">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DD:"
-                android:textSize="25sp"
-                android:textColor="#fff"
-                android:layout_marginLeft="2dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                />
             <Spinner
-                android:layout_width="150dp"
+                android:layout_width="170dp"
                 android:layout_height="35dp"
                 android:id="@+id/spinnerday"
                 android:textAlignment="center"
                 android:gravity="center"
                 ></Spinner>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MM:"
-                android:textSize="25sp"
-                android:textColor="#fff"
-                android:gravity="center"
-                android:layout_gravity="center"
-                />
             <Spinner
-                android:layout_width="150dp"
+                android:layout_width="170dp"
                 android:layout_height="35dp"
                 android:id="@+id/spinnermonth"
                 android:textAlignment="center"

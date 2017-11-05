@@ -193,7 +193,7 @@ public class OrderMultiple extends AppCompatActivity {
             allprice = Integer.toString(fullprice);
            // Toast.makeText(this, client+" "+phone+" "+date+" "+addrs+" "+allprice, Toast.LENGTH_SHORT).show();
 
-            progressDialog.setMessage("Logging Out.Please Wait....");
+            progressDialog.setMessage("Please Wait....");
             progressDialog.show();
 
             new OrderBackground().execute(type,client,phone,date,addrs,deliverytype,allprice);
