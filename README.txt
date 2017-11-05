@@ -4,17 +4,19 @@ Project Description:
 	Programming Language:  Java & PHP
 	Database            :  Mysql
 
+Project Manager : Dr. Kazi Masudul Alam Sir
+		  Associate Professor
+		  Computer Science & Engineering Discipline
+		  Khulna University,Khulna
+			&
+		  Dr. Manishankar Mondal Sir
+		  Assistant Professor
+		  Computer Science & Engineering Discipline
+		  Khulna University,Khulna
 
 Developed By:
 		Md. Hadiuzzaman Bappy (160219)
-		Rakib Raihan (160220)-(2_1 Term)
-		Arjuman Sreashtho (160214) - (2_2 Term)
-
-Project Manager : Kazi Masudul Alam Sir
-			&
-		  Sarfaraz Newaz Sir(2_1 Term)
-		  	&
-		  Manishankar Mondal Sir(2_2 Term)
+		Arjuman Sreashtho (160214)
 
 Project Details:
 		>>FoodBank is an Android Application that deals with 
