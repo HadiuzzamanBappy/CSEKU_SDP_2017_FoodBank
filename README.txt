@@ -1,3 +1,9 @@
+It is a CSEKU SDP 2017 Project
+
+Term : 2-2
+
+Batch : 16
+
 Project Title : FoodBank
 
 Project Description:
