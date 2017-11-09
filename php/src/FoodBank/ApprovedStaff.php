@@ -6,10 +6,10 @@ $name=$_POST["username"];
 $res_name=$_POST["resname"];
 $role=$_POST["role"];
 
-// $type="Delete";
-// $name="fahi";
+// $type="Approve";
+// $name="f";
 // $res_name="BISTRO-C";
-// $role="Staff";
+// $role="Admin";
 
 $mysql_qry2="SELECT * from restaurant where name like '$res_name'";
 $result2=mysqli_query($conn,$mysql_qry2);
@@ -23,17 +23,15 @@ $result3=mysqli_query($conn,$mysql_qry3);
         $id4=$row3['id'];
         
 if($type=="Approve"){
-$mysql_qry="SELECT * FROM staffdetails where name like '$name' and restaurantid like '$id2'";
+$mysql_qry="SELECT * FROM staffdetails where name like '$name' and restaurantid like '$id2' and roletype like '$id4'";
 $result=mysqli_query($conn,$mysql_qry);
 if($row=$result->fetch_assoc()){
     if($row['activerole']=="0"){
     $id=$row['id'];
     $mysql_qry="UPDATE staffdetails SET activerole='1' where id like '$id'";
         if($result=mysqli_query($conn,$mysql_qry))
-            echo "Approvement Successed!! Re login to confirm this...";
+            echo "Approvement Successed!!";
         }
-    else
-        echo "already registered";
  }
 }
 else if($type=="Delete")
@@ -43,7 +41,7 @@ else if($type=="Delete")
     if($row=$result->fetch_assoc()){
     $mysql_qry="DELETE FROM staffdetails WHERE name like '$name' and restaurantid like '$id2'";
         if($result=mysqli_query($conn,$mysql_qry))
-            echo "Successfully deleted!! Re login to confirm this...";
+            echo "Successfully deleted!!";
     }
 }
 

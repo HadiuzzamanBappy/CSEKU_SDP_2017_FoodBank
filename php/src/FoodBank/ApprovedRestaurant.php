@@ -31,7 +31,7 @@ if($type=="Add"){
         $mysql_qry="UPDATE restaurant SET activity='1' where id like '$id2'";
         if($result=mysqli_query($conn,$mysql_qry))
             if($result1=mysqli_query($conn,$mysql_qry1))
-                echo "Approvement Successed!! Re login to confirm this...";
+                echo "Approvement Successed!!";
     }
     else
     echo "Already Approved";
@@ -42,7 +42,7 @@ else if($type=="Delete")
     $mysql_qry="DELETE FROM restaurant WHERE id like '$id2'";
         if($result=mysqli_query($conn,$mysql_qry1))
             if($result=mysqli_query($conn,$mysql_qry))
-                echo "Successfully deleted!! Re login to confirm this...";
+                echo "Successfully deleted!!";
 }
 else if($type=="Merge")
 {
@@ -52,13 +52,7 @@ $mysql_qry2="DELETE FROM restaurant WHERE id like '$id2'";
 if($result=mysqli_query($conn,$mysql_qry))
     if($result2=mysqli_query($conn,$mysql_qry2))
         if($result3=mysqli_query($conn,$mysql_qry3))
-            echo "Successfully Merged!! Re login to confirm this...";
+            echo "Successfully Merged!!";
 }
-}
-else {
-    if($type=="Delete")
-        echo "Already Deleted";
-    else
-        echo "Already Merged";
 }
 ?>

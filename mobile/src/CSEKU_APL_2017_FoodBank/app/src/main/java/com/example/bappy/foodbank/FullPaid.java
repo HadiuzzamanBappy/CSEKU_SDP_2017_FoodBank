@@ -10,13 +10,13 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,9 +47,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import static com.example.bappy.foodbank.R.id.phone;
-import static com.example.bappy.foodbank.R.id.showall;
 
 public class FullPaid extends AppCompatActivity {
 
@@ -388,6 +385,7 @@ public class FullPaid extends AppCompatActivity {
                 staffFoodHolder.orderplace = (TextView) stafffoodview.findViewById(R.id.sorderplace);
                 staffFoodHolder.staffrole = (TextView) stafffoodview.findViewById(R.id.staff);
                 staffFoodHolder.chef = (TextView) stafffoodview.findViewById(R.id.chef);
+                staffFoodHolder.condition = (TextView) stafffoodview.findViewById(R.id.scondition);
                 stafffoodview.setTag(staffFoodHolder);
             } else {
                 staffFoodHolder = (StaffFoodHolder) stafffoodview.getTag();
@@ -412,6 +410,7 @@ public class FullPaid extends AppCompatActivity {
             staffFoodHolder.isdelivery.setVisibility(View.GONE);
             staffFoodHolder.price.setVisibility(View.GONE);
             staffFoodHolder.orderplace.setVisibility(View.GONE);
+            staffFoodHolder.condition.setVisibility(View.GONE);
 
             stafffoodview.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -464,7 +463,7 @@ public class FullPaid extends AppCompatActivity {
         }
 
         class StaffFoodHolder {
-            TextView clientname,  orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace,staffrole,chef;
+            TextView clientname,  orderdate, ispaid, phone, deliverydate, isdelivery, price, orderplace,staffrole,chef,condition;
         }
     }
 

@@ -8,13 +8,13 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,8 +26,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.bappy.foodbank.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +43,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.bappy.foodbank.R.id.showall;
 
@@ -677,7 +674,7 @@ public class StaffFoodOrder extends AppCompatActivity {
 
             @Override
             protected void onPreExecute() {
-                progressDialog.setMessage("Paiding.Please Wait....");
+                progressDialog.setMessage("Please Wait....");
                 progressDialog.show();
                 alert = new AlertDialog.Builder(StaffFoodOrder.this);
                 alert.setTitle("Paid Status");
@@ -737,7 +734,10 @@ public class StaffFoodOrder extends AppCompatActivity {
             protected void onPostExecute(Boolean result) {
                 progressDialog.cancel();
                 if(result) {
-                    alert.setMessage("Product Ready");
+                    if(role.equals("Chef"))
+                        alert.setMessage("Product Ready");
+                    else
+                        alert.setMessage("Product Paaided");
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

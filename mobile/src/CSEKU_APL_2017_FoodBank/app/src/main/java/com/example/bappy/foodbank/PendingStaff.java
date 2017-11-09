@@ -8,13 +8,13 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,7 +43,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PendingStaff extends AppCompatActivity {
     String res_name,role,name,adminstaff;
@@ -304,12 +303,12 @@ public class PendingStaff extends AppCompatActivity {
 
             final Pending pend1 = (Pending) this.getItem(position);
             pendingHolder.name.setText(pend1.getName());
-            if(pend1.getTyperole().equals("3"))
+            if(pend1.getTyperole().equals("2"))
+                pendingHolder.type.setText("Admin");
+            else if(pend1.getTyperole().equals("3"))
                 pendingHolder.type.setText("Staff");
             else if(pend1.getTyperole().equals("4"))
                 pendingHolder.type.setText("Chef");
-            else
-                pendingHolder.type.setText("Admin");
             pend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -504,7 +503,7 @@ public class PendingStaff extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            json_url = "http://" + getString(R.string.ip_address) + "/FoodBank/Approved.php";
+            json_url = "http://" + getString(R.string.ip_address) + "/FoodBank/ApprovedStaff.php";
         }
 
         @Override
@@ -568,7 +567,7 @@ public class PendingStaff extends AppCompatActivity {
             Intent intent = new Intent(PendingStaff.this, Adminstaff.class);
             intent.putExtra("username", name);
             intent.putExtra("resname", res_name);
-            intent.putExtra("role", role);
+            intent.putExtra("role", "Admin");
             startActivity(intent);
         }
         else
