@@ -127,7 +127,7 @@
         android:maxLines="1"/>
     </LinearLayout>
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

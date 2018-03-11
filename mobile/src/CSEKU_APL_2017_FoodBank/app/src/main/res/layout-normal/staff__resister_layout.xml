@@ -125,7 +125,7 @@
         android:maxLines="1"/>
     </LinearLayout>
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:id="@+id/resistor"
         android:layout_width="match_parent"
         android:layout_height="31dp"

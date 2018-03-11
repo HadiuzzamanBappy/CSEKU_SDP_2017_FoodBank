@@ -59,7 +59,7 @@
         android:layout_marginBottom="15dp"
         android:id="@+id/linearLayout">
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:id="@+id/login"
             android:layout_width="0dp"
             android:layout_height="65dp"
@@ -76,7 +76,7 @@
             app:shadowEnabled="true"
             android:textColor="#ffffff"/>
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:layout_width="0dp"
             android:layout_height="65dp"
             android:text="Sign Up"

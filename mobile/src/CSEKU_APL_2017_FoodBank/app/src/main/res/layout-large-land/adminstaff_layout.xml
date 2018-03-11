@@ -33,7 +33,7 @@
                 android:id="@+id/name"
                 android:layout_weight="0.59" />
 
-            <info.hoang8f.widget.FButton
+            <com.example.bappy.foodbank.FButton
                 android:id="@+id/button6"
                 android:layout_width="307dp"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:textColor="#fff"
             android:textSize="25sp" />
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:id="@+id/getdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"/>
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -97,7 +97,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"/>
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -115,7 +115,7 @@
             android:layout_marginLeft="20dp"
             />
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:onClick="getfullprice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="15dp">
 
-            <info.hoang8f.widget.FButton
+            <com.example.bappy.foodbank.FButton
                 android:id="@+id/assignstaff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                 android:layout_weight="5"
                 />
 
-            <info.hoang8f.widget.FButton
+            <com.example.bappy.foodbank.FButton
                 android:id="@+id/assignchef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                 app:shadowHeight="4dp" />
         </LinearLayout>
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:id="@+id/pendingstaff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"/>
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:id="@+id/decorate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

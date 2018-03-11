@@ -28,7 +28,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/home_icon" />
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:id="@+id/restaurent"
         android:layout_width="507dp"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         app:buttonColor="@color/buttoncolor"
         android:layout_weight="0.06" />
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:id="@+id/findfood"
         android:layout_width="507dp"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         app:buttonColor="@color/buttoncolor"
         android:layout_weight="0.06" />
     </LinearLayout>
-    <!--<info.hoang8f.widget.FButton-->
+    <!--<com.example.bappy.foodbank.FButton-->
         <!--android:id="@+id/exit"-->
         <!--android:layout_width="150dp"-->
         <!--android:layout_height="60dp"-->

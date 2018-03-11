@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.example.bappy.foodbank"
         minSdkVersion 15
@@ -34,9 +34,8 @@ dependencies {
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:23.1.0'
+    compile 'com.android.support:design:25.2.0'
     compile 'com.github.HotBitmapGG:RingProgressBar:V1.2.2'
-    compile 'info.hoang8f:fbutton:1.0.5'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     testCompile 'junit:junit:4.12'
     compile files('libs/CircleImageView-master/gradle/wrapper/gradle-wrapper.jar')

@@ -63,7 +63,7 @@
 
     </LinearLayout>
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:layout_width="200dp"
         android:layout_height="35dp"
         android:text="ADD"

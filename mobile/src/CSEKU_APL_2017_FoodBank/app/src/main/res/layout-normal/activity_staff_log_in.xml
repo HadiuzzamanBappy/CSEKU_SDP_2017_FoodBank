@@ -95,7 +95,7 @@
         android:maxLines="1"/>
     </LinearLayout>
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="27dp"
@@ -116,7 +116,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:layout_width="180dp"
         android:layout_height="27dp"
         android:text="i am superadmin"

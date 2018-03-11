@@ -135,7 +135,7 @@
             android:weightSum="10"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp">
-            <info.hoang8f.widget.FButton
+            <com.example.bappy.foodbank.FButton
                 android:layout_weight="5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:textAllCaps="false"/>
-            <info.hoang8f.widget.FButton
+            <com.example.bappy.foodbank.FButton
                 android:textAllCaps="false"
                 android:layout_weight="5"
                 android:layout_width="wrap_content"

@@ -68,7 +68,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@drawable/blue_color"/>
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:id="@+id/resistor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

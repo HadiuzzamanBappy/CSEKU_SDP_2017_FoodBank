@@ -1,7 +1,7 @@
 <resources>
     //app details info
     <string name="app_name">Food Bank</string>
-    <string name="ip_address">restaurant.dgted.com</string>
+    <string name="ip_address"></string>
 
 
     //food edit delete context menu
@@ -25,10 +25,10 @@
 
     //about
     <string name="about">FoodBank is an Android Application
-        that deals with ordering food from various restaurant./n
+        that deals with ordering food from various restaurant.
         Coustomer can order food from the restaurant which will
-        register the app./nCoustomer can do multi order from the app.
-        The main purpose of the app is to home /ndelivery of ordering food.</string>
+        register the app.Coustomer can do multi order from the app.
+        The main purpose of the app is to home delivery of ordering food.</string>
 
     //order date request
     <string-array name="quantity">

@@ -110,7 +110,7 @@
         android:inputType="textPassword"
         android:maxLines="1"/>
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:text="Next"

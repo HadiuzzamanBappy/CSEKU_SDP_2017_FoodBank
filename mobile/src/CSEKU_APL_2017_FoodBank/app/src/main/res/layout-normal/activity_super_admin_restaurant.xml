@@ -16,7 +16,7 @@
         android:text="bappy"
         android:textSize="15sp" />
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:layout_width="194dp"
         android:layout_height="34dp"
         android:text="Pending restaurent"

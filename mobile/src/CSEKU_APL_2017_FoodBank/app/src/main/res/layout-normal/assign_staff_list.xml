@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="10">
-            <info.hoang8f.widget.FButton
+            <com.example.bappy.foodbank.FButton
                 android:layout_weight="5"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -122,7 +122,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:textAllCaps="false"/>
-            <info.hoang8f.widget.FButton
+            <com.example.bappy.foodbank.FButton
                 android:textAllCaps="false"
                 android:layout_weight="5"
                 android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:text="Assign"

@@ -27,7 +27,7 @@
         android:layout_marginTop="35dp"
         />
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:id="@+id/restaurent"
         android:layout_width="190dp"
         android:layout_height="40dp"
@@ -43,7 +43,7 @@
         app:cornerRadius="6dp"
         />
 
-    <info.hoang8f.widget.FButton
+    <com.example.bappy.foodbank.FButton
         android:id="@+id/findfood"
         android:layout_width="190dp"
         android:layout_height="40dp"

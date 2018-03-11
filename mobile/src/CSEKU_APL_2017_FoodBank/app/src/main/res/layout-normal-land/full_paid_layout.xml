@@ -65,7 +65,7 @@
             android:gravity="center"
             android:id="@+id/startdateview"
             />
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Start date"
@@ -93,7 +93,7 @@
             android:text="29-6-17"
             android:textSize="15sp" />
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="End date"
@@ -107,7 +107,7 @@
     </LinearLayout>
     </LinearLayout>
 
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:id="@+id/getprice"
             app:buttonColor="#aeee"
             app:cornerRadius="17dp"

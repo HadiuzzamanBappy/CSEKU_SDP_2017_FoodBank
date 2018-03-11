@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:id="@+id/admintext"/>
-        <info.hoang8f.widget.FButton
+        <com.example.bappy.foodbank.FButton
             android:layout_width="551dp"
             android:layout_height="wrap_content"
             android:text="Pending restaurent"
